@@ -1,0 +1,19 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Eliminar evento{% endblock %}
+
+{% block content %}
+  <section class="dashboard-confirm">
+    <p class="dashboard-eyebrow">Acción permanente</p>
+    <span class="dashboard-confirm-icon" aria-hidden="true">×</span>
+    <h1>¿Eliminar {{ event.full_date_label }}?</h1>
+    <p>La fecha dejará de aparecer en la tarjeta principal y en el calendario.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <a href="{% url 'dashboard:event_list' %}">Cancelar</a>
+      <button type="submit">Sí, eliminar evento</button>
+    </form>
+  </section>
+{% endblock %}
+

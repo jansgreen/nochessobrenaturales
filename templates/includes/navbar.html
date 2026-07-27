@@ -1,0 +1,54 @@
+{% load static %}
+  <nav id="mainNav" class="navbar navbar-dark navbar-expand-lg fixed-top" aria-label="Navegación principal">
+    <div class="container">
+      <a class="navbar-brand brand" href="{% url 'home' %}#inicio" aria-label="Noches Sobrenaturales, inicio">
+        <span class="brand-logo">
+          <img src="{% static 'assets/logo.jpeg' %}" alt="">
+        </span>
+        <span class="brand-copy">
+          <strong>Noches Sobrenaturales</strong>
+          <small>Iglesia Milagros Hoy</small>
+        </span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#experiencia">La experiencia</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#calendario">Fechas</a></li>
+          <li class="nav-item">
+            <a class="nav-link{% if page_name == 'events' %} active{% endif %}" href="{% url 'events:gallery' %}">Eventos</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#comunidad">Comunidad</a></li>
+          {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:home' %}">Mi panel</a></li>
+            <li class="nav-item">
+              <form class="nav-inline-form" method="post" action="{% url 'accounts:logout' %}">
+                {% csrf_token %}
+                <button class="nav-link nav-logout" type="submit">Salir</button>
+              </form>
+            </li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Ingresar</a></li>
+          {% endif %}
+          {% if donation_url %}
+            <li class="nav-item ms-lg-2">
+              <a
+                class="btn btn-nav btn-donation"
+                href="{{ donation_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Donaciones</a>
+            </li>
+          {% endif %}
+          <li class="nav-item ms-lg-3">
+            <a class="btn btn-nav" href="{% url 'home' %}#contacto">Quiero asistir</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

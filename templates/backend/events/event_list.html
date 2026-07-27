@@ -1,0 +1,64 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Eventos{% endblock %}
+
+{% block content %}
+  <header class="dashboard-section-heading">
+    <div>
+      <p class="dashboard-eyebrow">Calendario del sitio</p>
+      <h1>Eventos</h1>
+      <p>Administra las fechas y elige cuál ocupa la tarjeta de próximo encuentro.</p>
+    </div>
+    <a class="dashboard-primary-link" href="{% url 'dashboard:event_create' %}">
+      Crear evento <span aria-hidden="true">+</span>
+    </a>
+  </header>
+
+  {% if events %}
+    <div class="event-admin-list">
+      {% for event in events %}
+        <article class="event-admin-row{% if next_event.pk == event.pk %} featured{% endif %}">
+          <div class="event-admin-date">
+            <strong>{{ event.day_number }}</strong>
+            <span>{{ event.month_name }}<small>{{ event.local_start.year }}</small></span>
+          </div>
+
+          <div class="event-admin-content">
+            <small>{{ event.eyebrow }}</small>
+            <h2>{{ event.full_date_label }}</h2>
+            <p>{{ event.time_label }} · {{ event.admission_text }}</p>
+          </div>
+
+          <div class="event-admin-status">
+            {% if next_event.pk == event.pk %}
+              <span class="banner-status active">Próximo</span>
+            {% elif event.is_published %}
+              <span class="banner-status active">Publicado</span>
+            {% else %}
+              <span class="banner-status">Oculto</span>
+            {% endif %}
+          </div>
+
+          <div class="event-admin-actions">
+            {% if next_event.pk != event.pk %}
+              <form method="post" action="{% url 'dashboard:event_feature' event.pk %}">
+                {% csrf_token %}
+                <button type="submit">Elegir como próximo</button>
+              </form>
+            {% endif %}
+            <a href="{% url 'dashboard:event_update' event.pk %}">Editar</a>
+            <a class="danger" href="{% url 'dashboard:event_delete' event.pk %}">Eliminar</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <section class="dashboard-empty-state">
+      <span aria-hidden="true">◷</span>
+      <h2>Todavía no hay eventos</h2>
+      <p>Crea una fecha para mostrarla en la tarjeta principal y el calendario.</p>
+      <a href="{% url 'dashboard:event_create' %}">Crear el primer evento</a>
+    </section>
+  {% endif %}
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Eliminar banner{% endblock %}
+
+{% block content %}
+  <section class="dashboard-confirm">
+    <p class="dashboard-eyebrow">Acción permanente</p>
+    <span class="dashboard-confirm-icon" aria-hidden="true">×</span>
+    <h1>¿Eliminar “{{ banner.title }}”?</h1>
+    <p>El banner dejará de aparecer en el sitio y no podrá recuperarse.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <a href="{% url 'dashboard:banner_list' %}">Cancelar</a>
+      <button type="submit">Sí, eliminar banner</button>
+    </form>
+  </section>
+{% endblock %}
+

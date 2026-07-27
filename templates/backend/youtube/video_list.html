@@ -1,0 +1,80 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Videos de YouTube{% endblock %}
+
+{% block content %}
+  <header class="dashboard-section-heading">
+    <div>
+      <p class="dashboard-eyebrow">Galería pública</p>
+      <h1>Videos de YouTube</h1>
+      <p>Pega enlaces de YouTube y decide cuáles aparecerán también en el inicio.</p>
+    </div>
+    <a class="dashboard-primary-link" href="{% url 'dashboard:youtube_video_create' %}">
+      Agregar video <span aria-hidden="true">+</span>
+    </a>
+  </header>
+
+  {% if not youtube_api_configured %}
+    <div class="dashboard-api-notice" role="status">
+      <span aria-hidden="true">i</span>
+      <p>
+        <strong>API pendiente de configurar.</strong>
+        Los videos funcionan con su miniatura de respaldo. Agrega
+        <code>YOUTUBE_API_KEY</code> al archivo <code>.env</code> para importar
+        automáticamente título, canal y fecha.
+      </p>
+    </div>
+  {% endif %}
+
+  {% if videos %}
+    <div class="youtube-admin-list">
+      {% for video in videos %}
+        <article class="youtube-admin-row">
+          <div class="youtube-admin-thumb">
+            <img src="{{ video.display_thumbnail_url }}" alt="" loading="lazy">
+            <span aria-hidden="true">▶</span>
+          </div>
+
+          <div class="youtube-admin-content">
+            <small>{{ video.display_channel }}</small>
+            <h2>{{ video.display_title }}</h2>
+            <p>
+              Posición {{ video.position }}
+              {% if video.api_synced_at %} · Sincronizado {{ video.api_synced_at|date:"d/m/Y H:i" }}{% endif %}
+            </p>
+          </div>
+
+          <div class="youtube-admin-status">
+            {% if video.is_active %}
+              <span class="banner-status active">Publicado</span>
+            {% else %}
+              <span class="banner-status">Oculto</span>
+            {% endif %}
+            {% if video.show_on_home %}
+              <span class="banner-status home">Inicio</span>
+            {% endif %}
+          </div>
+
+          <div class="event-admin-actions">
+            {% if youtube_api_configured %}
+              <form method="post" action="{% url 'dashboard:youtube_video_sync' video.pk %}">
+                {% csrf_token %}
+                <button type="submit">Sincronizar</button>
+              </form>
+            {% endif %}
+            <a href="{% url 'dashboard:youtube_video_update' video.pk %}">Editar</a>
+            <a class="danger" href="{% url 'dashboard:youtube_video_delete' video.pk %}">Eliminar</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <section class="dashboard-empty-state">
+      <span aria-hidden="true">▶</span>
+      <h2>Todavía no hay videos</h2>
+      <p>Agrega el primer enlace para activar la galería de Eventos.</p>
+      <a href="{% url 'dashboard:youtube_video_create' %}">Agregar el primer video</a>
+    </section>
+  {% endif %}
+{% endblock %}
+

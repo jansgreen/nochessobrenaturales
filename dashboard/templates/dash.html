@@ -1,0 +1,85 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Panel principal{% endblock %}
+
+{% block content %}
+  <section class="dashboard-hero">
+    <div>
+      <p class="dashboard-eyebrow">Panel principal</p>
+      <h1>Hola, {{ user.username }}.</h1>
+      <p>Bienvenido a tu espacio de Noches Sobrenaturales.</p>
+    </div>
+    <a class="dashboard-primary-link" href="{% url 'home' %}#calendario">
+      Ver próximas fechas <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+
+  <section class="dashboard-grid" aria-label="Resumen de la cuenta">
+    <article class="dashboard-card dashboard-card-featured">
+      <span class="dashboard-card-index">01</span>
+      <p class="dashboard-card-label">Tu cuenta</p>
+      <h2>{{ user.username }}</h2>
+      <p>{{ user.email|default:"Correo no registrado" }}</p>
+      <small>Miembro desde {{ user.date_joined|date:"d/m/Y" }}</small>
+    </article>
+
+    <article class="dashboard-card">
+      <span class="dashboard-card-index">02</span>
+      <p class="dashboard-card-label">Próximo encuentro</p>
+      {% if next_event %}
+        <h2>{{ next_event.day_number }} de {{ next_event.month_name|lower }}</h2>
+        <p>{{ next_event.time_label }} · {{ next_event.admission_text }}</p>
+        <a href="{{ next_event.cta_url }}">{{ next_event.cta_text }} <span aria-hidden="true">→</span></a>
+      {% else %}
+        <h2>Próximamente</h2>
+        <p>Todavía no hay una fecha publicada.</p>
+      {% endif %}
+    </article>
+
+    <article class="dashboard-card">
+      <span class="dashboard-card-index">03</span>
+      <p class="dashboard-card-label">Comunidad</p>
+      <h2>Estamos para ti</h2>
+      <p>Comparte una petición, un testimonio o encuentra una forma de servir.</p>
+      <a href="{% url 'home' %}#comunidad">Conectar ahora <span aria-hidden="true">→</span></a>
+    </article>
+
+    {% if user.is_staff %}
+      <article class="dashboard-card dashboard-card-admin">
+        <span class="dashboard-card-index">04</span>
+        <p class="dashboard-card-label">Administración</p>
+        <h2>Gestionar banners</h2>
+        <p>{{ active_banner_count }} activos de {{ banner_count }} banners creados.</p>
+        <a href="{% url 'dashboard:banner_list' %}">Abrir administrador <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="dashboard-card dashboard-card-admin">
+        <span class="dashboard-card-index">05</span>
+        <p class="dashboard-card-label">Administración</p>
+        <h2>Gestionar eventos</h2>
+        <p>{{ upcoming_event_count }} próximos de {{ event_count }} eventos creados.</p>
+        <a href="{% url 'dashboard:event_list' %}">Administrar fechas <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="dashboard-card dashboard-card-admin">
+        <span class="dashboard-card-index">06</span>
+        <p class="dashboard-card-label">Administración</p>
+        <h2>Donaciones</h2>
+        {% if donation_url %}
+          <p>El botón público está activo y conectado con PayPal.</p>
+        {% else %}
+          <p>Agrega tu enlace de PayPal para activar el botón público.</p>
+        {% endif %}
+        <a href="{% url 'dashboard:donation_settings' %}">Configurar enlace <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="dashboard-card dashboard-card-admin">
+        <span class="dashboard-card-index">07</span>
+        <p class="dashboard-card-label">Administración</p>
+        <h2>Videos de YouTube</h2>
+        <p>{{ active_video_count }} activos de {{ video_count }} videos agregados.</p>
+        <a href="{% url 'dashboard:youtube_video_list' %}">Gestionar galería <span aria-hidden="true">→</span></a>
+      </article>
+    {% endif %}
+  </section>
+{% endblock %}

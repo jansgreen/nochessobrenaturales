@@ -1,0 +1,52 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Configurar donaciones{% endblock %}
+
+{% block content %}
+  <header class="dashboard-section-heading compact">
+    <div>
+      <p class="dashboard-eyebrow">Donaciones</p>
+      <h1>Configurar PayPal</h1>
+      <p>Indica la cuenta que recibirá las donaciones desde el sitio.</p>
+    </div>
+    {% if donation_url %}
+      <a
+        class="dashboard-secondary-link"
+        href="{{ donation_url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Probar enlace ↗
+      </a>
+    {% endif %}
+  </header>
+
+  <form method="post" class="dashboard-form" novalidate>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="dashboard-form-alert" role="alert">
+        {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="dashboard-form-grid donation-form-grid">
+      {% for field in form %}
+        <div class="dashboard-field field-wide{% if field.errors %} has-error{% endif %}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}<p class="dashboard-field-help">{{ field.help_text }}</p>{% endif %}
+          {% for error in field.errors %}<p class="dashboard-field-error">{{ error }}</p>{% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="dashboard-form-actions">
+      <a href="{% url 'dashboard:home' %}">Cancelar</a>
+      <button type="submit">
+        Guardar enlace <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </form>
+{% endblock %}
+

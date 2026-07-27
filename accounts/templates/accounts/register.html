@@ -1,0 +1,46 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Crear una cuenta{% endblock %}
+
+{% block content %}
+  <header class="auth-heading">
+    <p class="auth-kicker">Comienza aquí</p>
+    <h2>Crea tu cuenta</h2>
+    <p>Completa tus datos para formar parte de la comunidad.</p>
+  </header>
+
+  <form method="post" class="auth-form" novalidate>
+    {% csrf_token %}
+    {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+
+    {% if form.non_field_errors %}
+      <div class="auth-form-alert" role="alert">
+        {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+      </div>
+    {% endif %}
+
+    {% for field in form %}
+      <div class="auth-field{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+          <p class="auth-help">{{ field.help_text }}</p>
+        {% endif %}
+        {% for error in field.errors %}
+          <p class="auth-field-error">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="auth-submit">
+      Crear mi cuenta
+      <span aria-hidden="true">→</span>
+    </button>
+  </form>
+
+  <p class="auth-switch">
+    ¿Ya tienes una cuenta?
+    <a href="{% url 'accounts:login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Inicia sesión</a>
+  </p>
+{% endblock %}
+

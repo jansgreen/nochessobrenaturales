@@ -1,0 +1,43 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block content %}
+  <header class="auth-heading">
+    <p class="auth-kicker">Bienvenido de nuevo</p>
+    <h2>Inicia sesión</h2>
+    <p>Ingresa tus datos para acceder a tu cuenta.</p>
+  </header>
+
+  <form method="post" class="auth-form" novalidate>
+    {% csrf_token %}
+    {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+
+    {% if form.non_field_errors %}
+      <div class="auth-form-alert" role="alert">
+        {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+      </div>
+    {% endif %}
+
+    {% for field in form %}
+      <div class="auth-field{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% for error in field.errors %}
+          <p class="auth-field-error">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="auth-submit">
+      Entrar a mi cuenta
+      <span aria-hidden="true">→</span>
+    </button>
+  </form>
+
+  <p class="auth-switch">
+    ¿Todavía no tienes cuenta?
+    <a href="{% url 'accounts:register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Regístrate</a>
+  </p>
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Eliminar video{% endblock %}
+
+{% block content %}
+  <section class="dashboard-confirm">
+    <span class="dashboard-confirm-icon" aria-hidden="true">×</span>
+    <p class="dashboard-eyebrow">Acción permanente</p>
+    <h1>¿Eliminar este video?</h1>
+    <p>“{{ video.display_title }}” dejará de aparecer en el inicio y en la galería pública.</p>
+    <form method="post">
+      {% csrf_token %}
+      <a href="{% url 'dashboard:youtube_video_list' %}">Cancelar</a>
+      <button type="submit">Sí, eliminar</button>
+    </form>
+  </section>
+{% endblock %}
+

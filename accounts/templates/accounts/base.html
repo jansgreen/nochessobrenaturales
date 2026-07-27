@@ -1,0 +1,64 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080a0e">
+  <title>{% block title %}Cuenta{% endblock %} | Noches Sobrenaturales</title>
+  <meta name="description" content="Acceso a la comunidad de Noches Sobrenaturales de Iglesia Milagros Hoy.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body class="auth-page">
+  <a class="skip-link" href="#authContent">Saltar al formulario</a>
+
+  <main id="authContent" class="auth-layout">
+    <section class="auth-visual" aria-label="Noches Sobrenaturales">
+      <a class="auth-brand" href="{% url 'home' %}">
+        <img src="{% static 'assets/logo.jpeg' %}" alt="">
+        <span>
+          <strong>Noches Sobrenaturales</strong>
+          <small>Iglesia Milagros Hoy</small>
+        </span>
+      </a>
+
+      <div class="auth-visual-copy">
+        <p class="overline"><span></span> Una comunidad de fe</p>
+        <h1>Un lugar para<br><em>volver a creer.</em></h1>
+        <p>Conecta con la comunidad, administra tu participación y acompáñanos en la próxima noche sobrenatural.</p>
+      </div>
+
+      <p class="auth-scripture">
+        <q>Para Dios todo es posible.</q>
+        <span>Mateo 19:26</span>
+      </p>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-card">
+        {% if messages %}
+          <div class="auth-messages" aria-live="polite">
+            {% for message in messages %}
+              <div class="auth-message{% if message.tags %} {{ message.tags }}{% endif %}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+        <a class="auth-home-link" href="{% url 'home' %}">
+          <span aria-hidden="true">←</span> Volver al sitio
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Banners{% endblock %}
+
+{% block content %}
+  <header class="dashboard-section-heading">
+    <div>
+      <p class="dashboard-eyebrow">Contenido del sitio</p>
+      <h1>Banners</h1>
+      <p>Crea, ordena y publica los mensajes que aparecen en la página principal.</p>
+    </div>
+    <a class="dashboard-primary-link" href="{% url 'dashboard:banner_create' %}">
+      Crear banner <span aria-hidden="true">+</span>
+    </a>
+  </header>
+
+  {% if banners %}
+    <div class="banner-admin-list">
+      <div class="banner-admin-header" aria-hidden="true">
+        <span>Orden</span>
+        <span>Contenido</span>
+        <span>Estado</span>
+        <span>Acciones</span>
+      </div>
+
+      {% for banner in banners %}
+        <article class="banner-admin-row">
+          <span class="banner-position">{{ banner.position }}</span>
+          <div class="banner-admin-content">
+            <small>{{ banner.get_icon_display }}</small>
+            <h2>{{ banner.title }}</h2>
+            <p>{{ banner.description|striptags|truncatechars:125 }}</p>
+          </div>
+          <span class="banner-status{% if banner.is_active %} active{% endif %}">
+            {% if banner.is_active %}Publicado{% else %}Oculto{% endif %}
+          </span>
+          <div class="banner-admin-actions">
+            <a href="{% url 'dashboard:banner_update' banner.pk %}">Editar</a>
+            <a class="danger" href="{% url 'dashboard:banner_delete' banner.pk %}">Eliminar</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <section class="dashboard-empty-state">
+      <span aria-hidden="true">✦</span>
+      <h2>Todavía no hay banners</h2>
+      <p>Crea el primer banner para mostrarlo en la página principal.</p>
+      <a href="{% url 'dashboard:banner_create' %}">Crear mi primer banner</a>
+    </section>
+  {% endif %}
+{% endblock %}

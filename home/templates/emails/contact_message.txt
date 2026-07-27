@@ -1,0 +1,11 @@
+Nuevo mensaje desde Noches Sobrenaturales
+
+Tema: {{ topic }}
+Nombre: {{ name }}
+Correo: {{ email }}
+Fecha: {{ submitted_at|date:"d/m/Y H:i T" }}
+
+Mensaje:
+{{ message }}
+
+Puedes responder directamente a este correo para escribirle a {{ name }}.
