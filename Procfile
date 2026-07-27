@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: gunicorn nosona.wsgi --log-file -
+web: python manage.py migrate && gunicorn nosona.wsgi --log-file -
