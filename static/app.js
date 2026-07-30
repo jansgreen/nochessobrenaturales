@@ -28,6 +28,109 @@
     revealElements.forEach((element) => revealObserver.observe(element));
   }
 
+  const heroEffects = document.querySelector("[data-hero-effects]");
+  if (heroEffects && !reduceMotion) {
+    const startSource = heroEffects.dataset.startSrc;
+    const variantSources = [
+      heroEffects.dataset.blueSrc,
+      heroEffects.dataset.whiteSrc,
+      heroEffects.dataset.goldSrc,
+    ].filter(Boolean);
+    const randomBetween = (minimum, maximum) =>
+      Math.random() * (maximum - minimum) + minimum;
+    const randomVariant = (previousIndex) => {
+      if (variantSources.length < 2) return 0;
+
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * variantSources.length);
+      } while (nextIndex === previousIndex);
+      return nextIndex;
+    };
+
+    const startHeroEffects = () => {
+      const effectCount = window.matchMedia("(max-width: 767.98px)").matches
+        ? 3
+        : 4;
+
+      for (let index = 0; index < effectCount; index += 1) {
+        const effect = document.createElement("img");
+        let firstAppearance = true;
+        let previousVariant = -1;
+        effect.className = "hero-effect";
+        effect.alt = "";
+        effect.decoding = "async";
+        effect.fetchPriority = "low";
+        heroEffects.appendChild(effect);
+
+        const playEffect = () => {
+          const isMobile = window.matchMedia("(max-width: 767.98px)").matches;
+          const isFirstAppearance = firstAppearance;
+          const duration = randomBetween(4400, 6200);
+          const size = isMobile
+            ? randomBetween(430, 620)
+            : randomBetween(680, 1040);
+
+          if (firstAppearance) {
+            effect.src = startSource;
+            firstAppearance = false;
+          } else {
+            previousVariant = randomVariant(previousVariant);
+            effect.src = variantSources[previousVariant];
+          }
+
+          effect.style.left = `${randomBetween(8, 92)}%`;
+          effect.style.top = `${randomBetween(12, 88)}%`;
+          effect.style.setProperty("--effect-size", `${size}px`);
+          effect.style.setProperty("--effect-duration", `${duration}ms`);
+          effect.style.setProperty(
+            "--effect-rotation",
+            `${randomBetween(-7, 7)}deg`
+          );
+          const peakOpacity = isFirstAppearance
+            ? randomBetween(0.78, 0.96)
+            : randomBetween(0.34, 0.55);
+          effect.style.setProperty("--effect-opacity", peakOpacity.toFixed(2));
+          effect.style.setProperty(
+            "--effect-mid-opacity",
+            (peakOpacity * 0.68).toFixed(2)
+          );
+
+          effect.classList.remove("is-active");
+          void effect.offsetWidth;
+          effect.classList.add("is-active");
+        };
+
+        effect.addEventListener("animationend", () => {
+          effect.classList.remove("is-active");
+          window.setTimeout(playEffect, randomBetween(650, 1800));
+        });
+        window.setTimeout(playEffect, index * 700);
+      }
+
+      const preloadVariants = () => {
+        variantSources.forEach((source) => {
+          const image = new Image();
+          image.decoding = "async";
+          image.src = source;
+        });
+      };
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(preloadVariants, { timeout: 2500 });
+      } else {
+        window.setTimeout(preloadVariants, 800);
+      }
+    };
+
+    const initialEffect = new Image();
+    initialEffect.src = startSource;
+    if (initialEffect.complete) {
+      startHeroEffects();
+    } else {
+      initialEffect.addEventListener("load", startHeroEffects, { once: true });
+    }
+  }
+
   const eventDay = document.querySelector("#nextEventDay");
   const eventMonth = document.querySelector("#nextEventMonth");
   const eventYear = document.querySelector("#nextEventYear");

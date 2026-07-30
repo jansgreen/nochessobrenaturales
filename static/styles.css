@@ -324,9 +324,88 @@ textarea:focus-visible {
   border-left-color: rgba(34, 139, 197, 0.42);
 }
 
+.hero-effects {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  contain: layout paint;
+  overflow: hidden;
+}
+
+.hero-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--effect-size, 760px);
+  max-width: none;
+  height: auto;
+  opacity: 0;
+  filter: brightness(1.14) saturate(1.06);
+  mix-blend-mode: screen;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+.hero-effect.is-active {
+  animation: heroEffectReveal var(--effect-duration, 5s) ease-in-out both;
+}
+
+@keyframes heroEffectReveal {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--effect-rotation, 0deg))
+      scale(0.78);
+  }
+
+  18% {
+    opacity: var(--effect-opacity, 0.48);
+  }
+
+  48% {
+    opacity: var(--effect-mid-opacity, 0.34);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--effect-rotation, 0deg))
+      scale(1.12);
+  }
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
+}
+
+.hero-main-logo {
+  position: relative;
+  display: flex;
+  width: min(100%, clamp(390px, 32vw, 520px));
+  margin: 0 auto clamp(2.8rem, 5vw, 4.5rem);
+  justify-content: center;
+  isolation: isolate;
+}
+
+.hero-main-logo::before {
+  position: absolute;
+  inset: 8% 6%;
+  z-index: -1;
+  border-radius: 50%;
+  content: "";
+  background: rgba(34, 139, 197, 0.13);
+  filter: blur(42px);
+}
+
+.hero-main-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 24px 45px rgba(0, 0, 0, 0.42));
 }
 
 .overline {
@@ -1564,6 +1643,11 @@ textarea:focus-visible {
     padding-top: calc(var(--nav-height) + 4rem);
   }
 
+  .hero-main-logo {
+    width: min(100%, 480px);
+    margin: 0 auto clamp(2.8rem, 7vw, 4.5rem);
+  }
+
   .event-spotlight {
     max-width: none;
     margin-top: 1rem;
@@ -1644,6 +1728,11 @@ textarea:focus-visible {
 
   .hero {
     padding-bottom: 4.5rem;
+  }
+
+  .hero-main-logo {
+    width: min(100%, 370px);
+    margin-bottom: 2.8rem;
   }
 
   .hero h1 {
@@ -1810,6 +1899,10 @@ textarea:focus-visible {
   .js .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .hero-effects {
+    display: none;
   }
 }
 
