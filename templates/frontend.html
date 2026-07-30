@@ -7,6 +7,23 @@
   <meta name="theme-color" content="#07090d">
   <title>{% block title %}Noches Sobrenaturales | Iglesia Milagros Hoy{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}Noches Sobrenaturales: una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy. Ven tal como eres y vuelve a creer.{% endblock %}">
+  {% static 'assets/logo.jpeg' as social_logo_url %}
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Noches Sobrenaturales">
+  <meta property="og:title" content="{% block social_title %}Noches Sobrenaturales | Iglesia Milagros Hoy{% endblock %}">
+  <meta property="og:description" content="{% block social_description %}Una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy. Ven tal como eres y vuelve a creer.{% endblock %}">
+  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ social_logo_url }}">
+  <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{{ social_logo_url }}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="610">
+  <meta property="og:image:height" content="438">
+  <meta property="og:image:alt" content="Logo de Iglesia Milagros Hoy">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Noches Sobrenaturales | Iglesia Milagros Hoy">
+  <meta name="twitter:description" content="Una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy.">
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ social_logo_url }}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

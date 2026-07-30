@@ -26,6 +26,27 @@ class ContactEmailTests(TestCase):
         self.assertContains(response, 'name="csrfmiddlewaretoken"')
         self.assertContains(response, "Enviar mensaje")
 
+    def test_home_contains_absolute_social_preview_metadata(self):
+        host = "nochesobrenatural-07f49a74f27c.herokuapp.com"
+
+        response = self.client.get(reverse("home"), secure=True, HTTP_HOST=host)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            f'<meta property="og:url" content="https://{host}/">',
+            html=True,
+        )
+        self.assertContains(
+            response,
+            (
+                '<meta property="og:image" '
+                f'content="https://{host}/static/assets/logo.jpeg">'
+            ),
+            html=True,
+        )
+        self.assertContains(response, 'name="twitter:card"')
+
     def test_valid_contact_message_sends_multipart_email(self):
         response = self.client.post(reverse("home"), self.valid_data)
 
