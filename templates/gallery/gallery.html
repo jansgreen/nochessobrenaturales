@@ -1,0 +1,134 @@
+{% extends 'frontend.html' %}
+{% load i18n %}
+
+{% block title %}{% translate "Galería de imágenes | Noches Sobrenaturales" %}{% endblock %}
+{% block meta_description %}{% translate "Explora los momentos de fe, adoración y comunidad vividos en Noches Sobrenaturales." %}{% endblock %}
+{% block social_title %}{% translate "Galería de imágenes | Noches Sobrenaturales" %}{% endblock %}
+{% block social_description %}{% translate "Momentos de fe, adoración y comunidad que queremos recordar contigo." %}{% endblock %}
+{% block header %}{% endblock %}
+{% block banners %}{% endblock %}
+
+{% block content %}
+  <main id="contenido" class="photo-gallery-page">
+    <header class="photo-gallery-hero">
+      <div class="photo-gallery-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="photo-gallery-hero-grid">
+          <div class="reveal">
+            <p class="overline"><span></span> {% translate "Memorias de la comunidad" %}</p>
+            <h1>{% translate "Instantes que cuentan" %}<br><em>{% translate "una historia de fe." %}</em></h1>
+          </div>
+          <div class="photo-gallery-intro reveal" data-reveal-delay="100">
+            <p>{% translate "Cada imagen conserva una parte de lo que vivimos juntos: adoración, esperanza, servicio y vidas transformadas." %}</p>
+            {% if image_count %}
+              <span>{{ image_count|stringformat:"02d" }} {% translate "recuerdos publicados" %}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="photo-gallery-archive section-space" aria-labelledby="photoGalleryTitle">
+      <div class="container">
+        <div class="photo-gallery-heading reveal">
+          <div>
+            <p class="overline overline-dark"><span></span> {% translate "Nuestra galería" %}</p>
+            <h2 id="photoGalleryTitle">{% translate "Mira de cerca." %}<br><em>{% translate "Recuerda con nosotros." %}</em></h2>
+          </div>
+          <p>{% translate "Selecciona cualquier fotografía para verla a pantalla completa y conocer los detalles de ese momento." %}</p>
+        </div>
+
+        {% if page_obj %}
+          <div class="photo-gallery-grid">
+            {% for gallery_image in page_obj %}
+              <a
+                class="photo-gallery-card reveal js-gallery-trigger"
+                href="{{ gallery_image.image.url }}"
+                data-gallery-src="{{ gallery_image.image.url }}"
+                data-gallery-alt="{{ gallery_image.alt_text }}"
+                data-gallery-title="{{ gallery_image.title }}"
+                data-gallery-description="{{ gallery_image.description }}"
+                data-gallery-date="{% if gallery_image.photographed_on %}{{ gallery_image.photographed_on|date:'d.m.Y' }}{% endif %}"
+                data-reveal-delay="{{ forloop.counter0 }}0"
+              >
+                <span class="photo-gallery-media">
+                  <img
+                    src="{{ gallery_image.image.url }}"
+                    alt="{{ gallery_image.alt_text }}"
+                    loading="lazy"
+                  >
+                </span>
+                <span class="photo-gallery-overlay">
+                  {% if gallery_image.photographed_on %}
+                    <time datetime="{{ gallery_image.photographed_on|date:'Y-m-d' }}">{{ gallery_image.photographed_on|date:"d.m.Y" }}</time>
+                  {% else %}
+                    <small>Noches Sobrenaturales</small>
+                  {% endif %}
+                  <strong>{{ gallery_image.title }}</strong>
+                  <b aria-hidden="true">↗</b>
+                </span>
+              </a>
+            {% endfor %}
+          </div>
+
+          {% if page_obj.has_other_pages %}
+            <nav class="gallery-pagination" aria-label="{% translate 'Páginas de la galería' %}">
+              {% if page_obj.has_previous %}
+                <a class="gallery-pagination-arrow" href="?pagina={{ page_obj.previous_page_number }}" aria-label="{% translate 'Página anterior' %}">←</a>
+              {% else %}
+                <span class="gallery-pagination-arrow disabled" aria-hidden="true">←</span>
+              {% endif %}
+
+              <div class="gallery-pagination-pages">
+                {% for page_number in page_range %}
+                  {% if page_number == pagination_ellipsis %}
+                    <span class="gallery-pagination-ellipsis">{{ page_number }}</span>
+                  {% elif page_number == page_obj.number %}
+                    <span class="active" aria-current="page">{{ page_number }}</span>
+                  {% else %}
+                    <a href="?pagina={{ page_number }}">{{ page_number }}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              {% if page_obj.has_next %}
+                <a class="gallery-pagination-arrow" href="?pagina={{ page_obj.next_page_number }}" aria-label="{% translate 'Página siguiente' %}">→</a>
+              {% else %}
+                <span class="gallery-pagination-arrow disabled" aria-hidden="true">→</span>
+              {% endif %}
+            </nav>
+          {% endif %}
+        {% else %}
+          <div class="photo-gallery-empty reveal">
+            <span aria-hidden="true">✦</span>
+            <h2>{% translate "Muy pronto compartiremos nuevos recuerdos." %}</h2>
+            <p>{% translate "Estamos preparando esta galería para que puedas volver a vivir cada encuentro." %}</p>
+            <a class="btn btn-primary-faith" href="{% url 'home' %}#calendario">{% translate "Ver próximas fechas" %}</a>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+
+  {% if page_obj %}
+    <dialog class="gallery-dialog" id="galleryDialog" aria-labelledby="galleryDialogTitle">
+      <div class="gallery-dialog-shell">
+        <button class="gallery-dialog-close" type="button" data-gallery-close aria-label="{% translate 'Cerrar imagen' %}">×</button>
+        <button class="gallery-dialog-nav previous" type="button" data-gallery-previous aria-label="{% translate 'Imagen anterior' %}">←</button>
+        <figure>
+          <div class="gallery-dialog-media">
+            <img id="galleryDialogImage" src="" alt="">
+          </div>
+          <figcaption>
+            <div>
+              <time id="galleryDialogDate" hidden></time>
+              <h2 id="galleryDialogTitle"></h2>
+            </div>
+            <p id="galleryDialogDescription" hidden></p>
+          </figcaption>
+        </figure>
+        <button class="gallery-dialog-nav next" type="button" data-gallery-next aria-label="{% translate 'Imagen siguiente' %}">→</button>
+      </div>
+    </dialog>
+  {% endif %}
+{% endblock %}

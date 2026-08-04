@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <header id="inicio" class="hero">
   <div class="hero-light" aria-hidden="true"></div>
   <div class="hero-rings" aria-hidden="true">
@@ -23,24 +23,23 @@
     <div class="row align-items-center g-5">
       <div class="col-lg-7">
         <div class="hero-copy reveal">
-          <p class="overline"><span></span> Una noche para volver a creer</p>
-          <h1>Donde la fe<br>se <em>enciende</em>.</h1>
-          <p class="hero-lead">Una experiencia de adoración, palabra y oración donde cada persona puede encontrarse con
-            Dios y descubrir que lo imposible todavía sucede.</p>
+          <p class="overline"><span></span> {% translate "Una noche para volver a creer" %}</p>
+          <h1>{% translate "Donde la fe" %}<br>{% translate "se" %} <em>{% translate "enciende" %}</em>.</h1>
+          <p class="hero-lead">{% translate "Una experiencia de adoración, palabra y oración donde cada persona puede encontrarse con Dios y descubrir que lo imposible todavía sucede." %}</p>
 
           <div class="hero-actions">
             <a href="#calendario" class="btn btn-primary-faith">
-              Ver próxima noche
+              {% translate "Ver próxima noche" %}
               <svg viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M4 10h11M11 6l4 4-4 4" />
               </svg>
             </a>
-            <a href="#experiencia" class="text-link">Conoce la experiencia <span aria-hidden="true">↓</span></a>
+            <a href="#experiencia" class="text-link">{% translate "Conoce la experiencia" %} <span aria-hidden="true">↓</span></a>
           </div>
 
           <div class="hero-promise">
             <span class="promise-line" aria-hidden="true"></span>
-            <p><q>Para Dios todo es posible.</q><small>Mateo 19:26</small></p>
+            <p><q>{% translate "Para Dios todo es posible." %}</q><small>{% translate "Mateo 19:26" %}</small></p>
           </div>
         </div>
       </div>
@@ -50,38 +49,37 @@
           <div class="spotlight-glow" aria-hidden="true"></div>
           <div class="spotlight-top">
             <span class="live-dot"></span>
-            <span id="nextEventEyebrow">{{ next_event.eyebrow|default:"Próximo encuentro" }}</span>
+            <span id="nextEventEyebrow">{% if next_event %}{{ next_event.eyebrow }}{% else %}{% translate "Próximo encuentro" %}{% endif %}</span>
           </div>
 
           <div class="spotlight-date" aria-hidden="true">
             <span id="nextEventDay">{% if next_event %}{{ next_event.day_number }}{% else %}--{% endif %}</span>
             <div>
-              <strong id="nextEventMonth">{% if next_event %}{{ next_event.month_name }}{% else %}Fecha{% endif%}</strong>
-              <small id="nextEventYear">{% if next_event %}{{ next_event.local_start.year }}{% else %}por anunciar{%endif %}</small>
+              <strong id="nextEventMonth">{% if next_event %}{{ next_event.month_name }}{% else %}{% translate "Fecha" %}{% endif%}</strong>
+              <small id="nextEventYear">{% if next_event %}{{ next_event.local_start.year }}{% else %}{% translate "por anunciar" %}{%endif %}</small>
             </div>
           </div>
 
-          <h2 id="nextEventLabel">{% if next_event %}{{ next_event.full_date_label }}{% else %}Próximamente{% endif %}
+          <h2 id="nextEventLabel">{% if next_event %}{{ next_event.full_date_label }}{% else %}{% translate "Próximamente" %}{% endif %}
           </h2>
           <p class="event-time">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="9" />
               <path d="M12 7v5l3 2" />
             </svg>
-            <span id="nextEventTime">{% if next_event %}{{ next_event.time_label }}{% else %}Hora por anunciar{% endif %}</span>
+            <span id="nextEventTime">{% if next_event %}{{ next_event.time_label }}{% else %}{% translate "Hora por anunciar" %}{% endif %}</span>
             <span class="event-separator" aria-hidden="true"></span>
-            <span id="nextEventAdmission">{% if next_event %}{{ next_event.admission_text }}{% else %}Mantente
-              conectado{% endif %}</span>
+            <span id="nextEventAdmission">{% if next_event %}{{ next_event.admission_text }}{% else %}{% translate "Mantente conectado" %}{% endif %}</span>
           </p>
 
-          <div class="countdown" id="countdown" aria-label="Cuenta regresiva para el próximo encuentro">
-            <div><strong id="d">00</strong><small>Días</small></div>
+          <div class="countdown" id="countdown" aria-label="{% translate 'Cuenta regresiva para el próximo encuentro' %}">
+            <div><strong id="d">00</strong><small>{% translate "Días" %}</small></div>
             <i></i>
-            <div><strong id="h">00</strong><small>Horas</small></div>
+            <div><strong id="h">00</strong><small>{% translate "Horas" %}</small></div>
             <i></i>
-            <div><strong id="m">00</strong><small>Min</small></div>
+            <div><strong id="m">00</strong><small>{% translate "Min" %}</small></div>
             <i></i>
-            <div><strong id="s">00</strong><small>Seg</small></div>
+            <div><strong id="s">00</strong><small>{% translate "Seg" %}</small></div>
           </div>
 
           {% if next_event %}
@@ -95,11 +93,11 @@
     </div>
   </div>
 
-  <div class="hero-signature" aria-label="Amar a Dios. Amar a las personas. Alcanzar al mundo.">
-    <span>Amar a Dios</span>
+  <div class="hero-signature" aria-label="{% translate 'Amar a Dios. Amar a las personas. Alcanzar al mundo.' %}">
+    <span>{% translate "Amar a Dios" %}</span>
     <i></i>
-    <span>Amar a las personas</span>
+    <span>{% translate "Amar a las personas" %}</span>
     <i></i>
-    <span>Alcanzar al mundo</span>
+    <span>{% translate "Alcanzar al mundo" %}</span>
   </div>
 </header>

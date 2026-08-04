@@ -50,4 +50,20 @@ urlpatterns = [
         name="event_feature",
     ),
     path("eventos/<int:pk>/eliminar/", views.event_delete, name="event_delete"),
+    path("galeria/", views.gallery_image_list, name="gallery_image_list"),
+    path(
+        "galeria/agregar/",
+        views.gallery_image_create,
+        name="gallery_image_create",
+    ),
+    path(
+        "galeria/<int:pk>/editar/",
+        views.gallery_image_update,
+        name="gallery_image_update",
+    ),
+    path(
+        "galeria/<int:pk>/eliminar/",
+        views.gallery_image_delete,
+        name="gallery_image_delete",
+    ),
 ]

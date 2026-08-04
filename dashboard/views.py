@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
@@ -22,6 +23,8 @@ from events.youtube_api import (
     YouTubeVideoUnavailable,
     fetch_youtube_metadata,
 )
+from gallery.forms import GalleryImageForm
+from gallery.models import GalleryImage
 
 from .decorators import staff_required
 
@@ -39,6 +42,10 @@ def dashboard_home(request):
         context["upcoming_event_count"] = get_upcoming_events().count()
         context["video_count"] = YouTubeVideo.objects.count()
         context["active_video_count"] = get_active_videos().count()
+        context["gallery_image_count"] = GalleryImage.objects.count()
+        context["active_gallery_image_count"] = GalleryImage.objects.filter(
+            is_active=True
+        ).count()
     return render(request, 'dash.html', context)
 
 
@@ -355,4 +362,84 @@ def event_delete(request, pk):
         request,
         "backend/events/event_confirm_delete.html",
         {"event": event},
+    )
+
+
+@staff_required
+def gallery_image_list(request):
+    paginator = Paginator(GalleryImage.objects.all(), 10)
+    page_obj = paginator.get_page(request.GET.get("pagina"))
+    return render(
+        request,
+        "backend/gallery/image_list.html",
+        {"page_obj": page_obj},
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def gallery_image_create(request):
+    form = GalleryImageForm(request.POST or None, request.FILES or None)
+    if request.method == "POST" and form.is_valid():
+        image = form.save()
+        messages.success(
+            request,
+            f'La imagen “{image.title}” fue agregada a la galería.',
+        )
+        return redirect("dashboard:gallery_image_list")
+
+    return render(
+        request,
+        "backend/gallery/image_form.html",
+        {
+            "form": form,
+            "page_title": "Agregar imagen",
+            "submit_label": "Agregar imagen",
+        },
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def gallery_image_update(request, pk):
+    gallery_image = get_object_or_404(GalleryImage, pk=pk)
+    form = GalleryImageForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=gallery_image,
+    )
+    if request.method == "POST" and form.is_valid():
+        gallery_image = form.save()
+        messages.success(
+            request,
+            f'La imagen “{gallery_image.title}” fue actualizada.',
+        )
+        return redirect("dashboard:gallery_image_list")
+
+    return render(
+        request,
+        "backend/gallery/image_form.html",
+        {
+            "form": form,
+            "gallery_image": gallery_image,
+            "page_title": "Editar imagen",
+            "submit_label": "Guardar cambios",
+        },
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def gallery_image_delete(request, pk):
+    gallery_image = get_object_or_404(GalleryImage, pk=pk)
+    if request.method == "POST":
+        title = gallery_image.title
+        gallery_image.delete()
+        messages.success(request, f'La imagen “{title}” fue eliminada.')
+        return redirect("dashboard:gallery_image_list")
+
+    return render(
+        request,
+        "backend/gallery/image_confirm_delete.html",
+        {"gallery_image": gallery_image},
     )

@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Noches Sobrenaturales\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "A gift for your journey"
+msgstr "Un regalo para tu caminar"
+
+msgid "A warm welcome for you."
+msgstr "Una cálida bienvenida para ti."
+
+msgid "Arrive with ease."
+msgstr "Llega con toda comodidad."
+
+msgid "Available while supplies last."
+msgstr "Disponible hasta agotar existencias."
+
+msgid "Come as you are."
+msgstr "Ven tal como eres."
+
+msgid "Free Bible."
+msgstr "Biblia Gratis."
+
+msgid "Free food or snacks"
+msgstr "Comida o refrigerios gratis"
+
+msgid "Free gifts"
+msgstr "Regalos gratis"
+
+msgid "Free transportation"
+msgstr "Transporte gratis"
+
+msgid "Free valet parking"
+msgstr "Estacionamiento valet gratis"
+
+msgid "From the Bronx to Washington Heights."
+msgstr "Desde El Bronx hasta Washington Heights."
+
+msgid "One per person"
+msgstr "Una por persona"
+
+msgid "Receive a free Bible—limit one per person, no strings attached. We will mail the Bible while supplies last. Call us or submit your prayer request, and let us know you would like a Bible. We are here to pray with you, encourage you, and help you grow in God’s Word."
+msgstr "Recibe una Biblia gratis, con un límite de una por persona y sin compromisos. Enviaremos la Biblia por correo mientras haya existencias. Llámanos o envía tu petición de oración e indícanos que deseas una Biblia. Estamos aquí para orar contigo, animarte y ayudarte a crecer en la Palabra de Dios."
+
+msgid "Request Your"
+msgstr "Solicita Tu"
+
+msgid "Request my Bible"
+msgstr "Solicitar mi Biblia"
+
+msgid "Something to enjoy together."
+msgstr "Algo para disfrutar juntos."
+
+msgid "We’ll take care of the rest."
+msgstr "Nosotros nos encargamos del resto."
+
+msgid "You are our guest"
+msgstr "Eres nuestro invitado"

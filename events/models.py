@@ -3,33 +3,11 @@ from urllib.parse import parse_qs, urlsplit
 
 from django.core.exceptions import ValidationError
 from django.db import models, transaction
+from django.utils.formats import date_format
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 
-SPANISH_MONTHS = (
-    "",
-    "enero",
-    "febrero",
-    "marzo",
-    "abril",
-    "mayo",
-    "junio",
-    "julio",
-    "agosto",
-    "septiembre",
-    "octubre",
-    "noviembre",
-    "diciembre",
-)
-SPANISH_WEEKDAYS = (
-    "lunes",
-    "martes",
-    "miércoles",
-    "jueves",
-    "viernes",
-    "sábado",
-    "domingo",
-)
 YOUTUBE_VIDEO_ID_PATTERN = re.compile(r"^[A-Za-z0-9_-]{11}$")
 
 
@@ -146,20 +124,19 @@ class Event(models.Model):
 
     @property
     def month_name(self):
-        return SPANISH_MONTHS[self.local_start.month].capitalize()
+        return date_format(self.local_start, "F").capitalize()
 
     @property
     def weekday_name(self):
-        return SPANISH_WEEKDAYS[self.local_start.weekday()].capitalize()
+        return date_format(self.local_start, "l").capitalize()
 
     @property
     def full_date_label(self):
-        local_start = self.local_start
-        month = SPANISH_MONTHS[local_start.month]
-        return (
-            f"{SPANISH_WEEKDAYS[local_start.weekday()].capitalize()}, "
-            f"{local_start.day} de {month}"
-        )
+        return _("%(weekday)s, %(day)s de %(month)s") % {
+            "weekday": self.weekday_name,
+            "day": self.local_start.day,
+            "month": self.month_name.lower(),
+        }
 
     @property
     def time_label(self):

@@ -25,6 +25,10 @@
 
     <div class="dashboard-form-grid">
       {% for field in form %}
+        {% if field.name == 'eyebrow_es' %}<h2 class="dashboard-language-heading field-wide"><span>ES</span> Español</h2>{% endif %}
+        {% if field.name == 'eyebrow_en' %}<h2 class="dashboard-language-heading field-wide"><span>EN</span> English</h2>{% endif %}
+        {% if field.name == 'eyebrow_pt' %}<h2 class="dashboard-language-heading field-wide"><span>PT</span> Português</h2>{% endif %}
+        {% if field.name == 'starts_at' %}<h2 class="dashboard-language-heading field-wide"><span>◎</span> Configuración común</h2>{% endif %}
         {% if field.field.widget.input_type == 'checkbox' %}
           <div class="dashboard-checkbox">
             {{ field }}
@@ -49,4 +53,3 @@
     </div>
   </form>
 {% endblock %}
-

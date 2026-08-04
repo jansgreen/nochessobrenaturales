@@ -1,7 +1,8 @@
 {% extends 'frontend.html' %}
+{% load i18n %}
 
-{% block title %}Eventos en video | Noches Sobrenaturales{% endblock %}
-{% block meta_description %}Revive los mensajes, testimonios y momentos de Noches Sobrenaturales en nuestra galería de videos.{% endblock %}
+{% block title %}{% translate "Eventos en video | Noches Sobrenaturales" %}{% endblock %}
+{% block meta_description %}{% translate "Revive los mensajes, testimonios y momentos de Noches Sobrenaturales en nuestra galería de videos." %}{% endblock %}
 {% block header %}{% endblock %}
 {% block banners %}{% endblock %}
 
@@ -12,13 +13,13 @@
       <div class="container">
         <div class="row align-items-end g-5">
           <div class="col-lg-8 reveal">
-            <p class="overline"><span></span> Archivo de encuentros</p>
-            <h1>Eventos que dejan<br><em>una huella eterna.</em></h1>
+            <p class="overline"><span></span> {% translate "Archivo de encuentros" %}</p>
+            <h1>{% translate "Eventos que dejan" %}<br><em>{% translate "una huella eterna." %}</em></h1>
           </div>
           <div class="col-lg-4 reveal" data-reveal-delay="100">
-            <p>Vuelve a vivir cada palabra, cada testimonio y cada momento donde la fe se encontró con lo imposible.</p>
+            <p>{% translate "Vuelve a vivir cada palabra, cada testimonio y cada momento donde la fe se encontró con lo imposible." %}</p>
             {% if video_count %}
-              <span class="events-video-count">{{ video_count|stringformat:"02d" }} videos disponibles</span>
+              <span class="events-video-count">{{ video_count|stringformat:"02d" }} {% translate "videos disponibles" %}</span>
             {% endif %}
           </div>
         </div>
@@ -29,10 +30,10 @@
       <div class="container">
         <div class="events-archive-heading reveal">
           <div>
-            <p class="overline overline-dark"><span></span> Nuestra videoteca</p>
-            <h2 id="eventsGalleryTitle">Mira. Recuerda. <em>Vuelve a creer.</em></h2>
+            <p class="overline overline-dark"><span></span> {% translate "Nuestra videoteca" %}</p>
+            <h2 id="eventsGalleryTitle">{% translate "Mira. Recuerda." %} <em>{% translate "Vuelve a creer." %}</em></h2>
           </div>
-          <p>Selecciona cualquier video para reproducirlo sin salir de la experiencia.</p>
+          <p>{% translate "Selecciona cualquier video para reproducirlo sin salir de la experiencia." %}</p>
         </div>
 
         {% if page_obj %}
@@ -48,13 +49,13 @@
                 <span class="video-card-media">
                   <img
                     src="{{ video.display_thumbnail_url }}"
-                    alt="Miniatura de {{ video.display_title }}"
+                    alt="{% blocktranslate with title=video.display_title %}Miniatura de {{ title }}{% endblocktranslate %}"
                     loading="lazy"
                   >
                   <span class="video-play" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><path d="m9 7 8 5-8 5V7Z"></path></svg>
                   </span>
-                  <span class="video-duration-label">Reproducir</span>
+                  <span class="video-duration-label">{% translate "Reproducir" %}</span>
                 </span>
                 <span class="video-card-copy">
                   <small>{{ video.display_channel }}</small>
@@ -62,7 +63,7 @@
                   {% if video.published_at %}
                     <time datetime="{{ video.published_at|date:'c' }}">{{ video.published_at|date:"d.m.Y" }}</time>
                   {% else %}
-                    <span>Evento en video</span>
+                    <span>{% translate "Evento en video" %}</span>
                   {% endif %}
                 </span>
               </a>
@@ -70,15 +71,15 @@
           </div>
 
           {% if page_obj.has_other_pages %}
-            <nav class="video-pagination" aria-label="Páginas de videos">
+            <nav class="video-pagination" aria-label="{% translate 'Páginas de videos' %}">
               {% if page_obj.has_previous %}
-                <a href="?pagina={{ page_obj.previous_page_number }}">← Anterior</a>
+                <a href="?pagina={{ page_obj.previous_page_number }}">← {% translate "Anterior" %}</a>
               {% else %}
                 <span></span>
               {% endif %}
-              <p>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</p>
+              <p>{% blocktranslate with current=page_obj.number total=page_obj.paginator.num_pages %}Página {{ current }} de {{ total }}{% endblocktranslate %}</p>
               {% if page_obj.has_next %}
-                <a href="?pagina={{ page_obj.next_page_number }}">Siguiente →</a>
+                <a href="?pagina={{ page_obj.next_page_number }}">{% translate "Siguiente" %} →</a>
               {% else %}
                 <span></span>
               {% endif %}
@@ -87,9 +88,9 @@
         {% else %}
           <div class="events-video-empty reveal">
             <span aria-hidden="true">✦</span>
-            <h2>Nuevos momentos llegarán pronto.</h2>
-            <p>Estamos preparando nuestra videoteca. Mientras tanto, conoce la fecha del próximo encuentro.</p>
-            <a class="btn btn-primary-faith" href="{% url 'home' %}#calendario">Ver próximas fechas</a>
+            <h2>{% translate "Nuevos momentos llegarán pronto." %}</h2>
+            <p>{% translate "Estamos preparando nuestra videoteca. Mientras tanto, conoce la fecha del próximo encuentro." %}</p>
+            <a class="btn btn-primary-faith" href="{% url 'home' %}#calendario">{% translate "Ver próximas fechas" %}</a>
           </div>
         {% endif %}
       </div>
@@ -98,4 +99,3 @@
 
   {% if page_obj %}{% include 'events/_video_modal.html' %}{% endif %}
 {% endblock %}
-

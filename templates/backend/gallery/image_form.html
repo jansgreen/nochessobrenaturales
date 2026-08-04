@@ -1,0 +1,66 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+  <header class="dashboard-section-heading compact">
+    <div>
+      <p class="dashboard-eyebrow">Galería de imágenes</p>
+      <h1>{{ page_title }}</h1>
+      <p>Completa la información visual y decide si la imagen estará publicada.</p>
+    </div>
+    <a class="dashboard-secondary-link" href="{% url 'dashboard:gallery_image_list' %}">
+      ← Volver a la galería
+    </a>
+  </header>
+
+  <form method="post" enctype="multipart/form-data" class="dashboard-form" novalidate>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="dashboard-form-alert" role="alert">
+        {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+      </div>
+    {% endif %}
+
+    {% if gallery_image and gallery_image.image %}
+      <div class="gallery-form-current">
+        <img src="{{ gallery_image.image.url }}" alt="{{ gallery_image.alt_text }}">
+        <div>
+          <small>Imagen actual</small>
+          <strong>{{ gallery_image.title }}</strong>
+          <p>Selecciona un archivo nuevo solamente si deseas reemplazarla.</p>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="dashboard-form-grid">
+      {% for field in form %}
+        {% if field.name == 'title_es' %}<h2 class="dashboard-language-heading field-wide"><span>ES</span> Español</h2>{% endif %}
+        {% if field.name == 'title_en' %}<h2 class="dashboard-language-heading field-wide"><span>EN</span> English</h2>{% endif %}
+        {% if field.name == 'title_pt' %}<h2 class="dashboard-language-heading field-wide"><span>PT</span> Português</h2>{% endif %}
+        {% if field.name == 'image' %}<h2 class="dashboard-language-heading field-wide"><span>◎</span> Configuración común</h2>{% endif %}
+        {% if field.field.widget.input_type == 'checkbox' %}
+          <div class="dashboard-checkbox">
+            {{ field }}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {% if field.help_text %}<p>{{ field.help_text }}</p>{% endif %}
+            {% for error in field.errors %}<p class="dashboard-field-error">{{ error }}</p>{% endfor %}
+          </div>
+        {% else %}
+          <div class="dashboard-field{% if 'description' in field.name or field.name == 'image' or 'alt_text' in field.name %} field-wide{% endif %}{% if field.errors %} has-error{% endif %}">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<p class="dashboard-field-help">{{ field.help_text }}</p>{% endif %}
+            {% for error in field.errors %}<p class="dashboard-field-error">{{ error }}</p>{% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="dashboard-form-actions">
+      <a href="{% url 'dashboard:gallery_image_list' %}">Cancelar</a>
+      <button type="submit">{{ submit_label }} <span aria-hidden="true">→</span></button>
+    </div>
+  </form>
+{% endblock %}

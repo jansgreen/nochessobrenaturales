@@ -1,0 +1,487 @@
+{% extends 'frontend.html' %}
+{% load static i18n %}
+
+{% block title %}{% translate "Sobre Nosotros | Noches Sobrenaturales" %}{% endblock %}
+{% block meta_description %}{% translate "Conoce la misión, creencias, valores y visión de Miracles Now Heavenly Vision Christian Center, junto con el testimonio del Pastor Richie Ramos." %}{% endblock %}
+{% block social_title %}{% translate "Sobre Nosotros | Noches Sobrenaturales" %}{% endblock %}
+{% block social_description %}{% translate "Una iglesia dedicada a amar a Dios, amar a las personas y alcanzar al mundo con el Evangelio de Jesucristo." %}{% endblock %}
+{% block header %}{% endblock %}
+{% block banners %}{% endblock %}
+
+{% block content %}
+  <main id="contenido" class="about-page">
+    <header class="about-hero">
+      <div class="about-hero-orbit" aria-hidden="true"><span></span><span></span></div>
+      <div class="container">
+        <div class="about-hero-grid">
+          <div class="about-hero-copy reveal">
+            <p class="overline"><span></span> {% translate "Fundador y Pastor Principal" %}</p>
+            <h1>Pastor<br><em>Richie Ramos</em></h1>
+            <p class="about-hero-lead">{% translate "Un testimonio viviente del poder transformador de Jesucristo." %}</p>
+            <a class="about-scroll-link" href="#historia">
+              {% translate "Conoce su historia" %} <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+
+          <div class="about-identity reveal" data-reveal-delay="120" aria-label="{% translate 'Identidad ministerial' %}">
+            <div class="about-identity-media">
+              <img
+                src="{% static 'assets/pastor-richie-ramos/pastor-richie-ramos-hero.jpeg' %}"
+                alt="{% translate 'Pastor Richie Ramos sonriendo con traje azul' %}"
+                width="1085"
+                height="1450"
+                fetchpriority="high"
+              >
+              <span aria-hidden="true">RR</span>
+            </div>
+            <div class="about-identity-copy">
+              <small>Miracles Now</small>
+              <strong>Heavenly Vision<br>Christian Center</strong>
+              <p>Washington Heights · New York</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="about-church section-space" id="sobre-nosotros" aria-labelledby="aboutChurchTitle">
+      <div class="container">
+        <div class="about-church-heading">
+          <div class="reveal">
+            <p class="overline overline-dark"><span></span> {% translate "Sobre Nosotros" %}</p>
+            <h2 id="aboutChurchTitle">{% translate "Una iglesia para" %}<br><em>{% translate "creer, crecer y servir." %}</em></h2>
+          </div>
+          <p class="about-church-lead reveal" data-reveal-delay="100">
+            {% translate "Miracles Now Heavenly Vision Christian Center es una iglesia cristiana dedicada a exaltar a Jesucristo, amar a las personas y alcanzar al mundo con el poder transformador del Evangelio." %}
+          </p>
+        </div>
+
+        <div class="about-church-mission">
+          <article class="about-church-mission-copy reveal">
+            <span class="about-church-index">01</span>
+            <div>
+              <p class="about-chapter-label">{% translate "Nuestra misión" %}</p>
+              <p>{% translate "Nuestra misión es guiar a las personas a una relación personal con Jesucristo mediante la adoración, la enseñanza bíblica, la oración, el evangelismo y el servicio a la comunidad." %}</p>
+              <p>{% translate "Creemos que Dios sigue obrando con poder hoy, trayendo salvación, sanidad, restauración, liberación y esperanza a toda persona que pone su fe en Él." %}</p>
+            </div>
+          </article>
+
+          <div class="about-ministry-pillars" aria-label="{% translate 'Áreas de nuestra misión' %}">
+            <span class="reveal">{% translate "Adoración" %}</span>
+            <span class="reveal" data-reveal-delay="50">{% translate "Enseñanza bíblica" %}</span>
+            <span class="reveal" data-reveal-delay="100">{% translate "Oración" %}</span>
+            <span class="reveal" data-reveal-delay="150">{% translate "Evangelismo" %}</span>
+            <span class="reveal" data-reveal-delay="200">{% translate "Servicio" %}</span>
+          </div>
+        </div>
+
+        <div class="about-church-columns">
+          <article class="about-church-column reveal">
+            <span class="about-church-index">02</span>
+            <div>
+              <p class="about-chapter-label">{% translate "Un lugar para todos" %}</p>
+              <p>{% translate "Somos una iglesia donde personas de todas las edades y procedencias pueden crecer espiritualmente, descubrir el propósito de Dios para sus vidas y desarrollar una fe firme basada en la Palabra de Dios." %}</p>
+            </div>
+          </article>
+
+          <article class="about-church-column reveal" data-reveal-delay="100">
+            <span class="about-church-index">03</span>
+            <div>
+              <p class="about-chapter-label">{% translate "Visión de impacto global" %}</p>
+              <p>{% translate "Con una visión de impacto global, estamos comprometidos a establecer ministerios que transformen vidas en Nueva York, Newark (Nueva Jersey), Barranquilla (Colombia) y la República Dominicana, compartiendo el amor de Cristo y formando discípulos para las futuras generaciones." %}</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="about-reach reveal" aria-label="{% translate 'Ciudades y países de nuestra visión' %}">
+          <span>{% translate "Nueva York" %} <small>{% translate "Estados Unidos" %}</small></span>
+          <span>Newark <small>{% translate "Nueva Jersey" %}</small></span>
+          <span>Barranquilla <small>Colombia</small></span>
+          <span>{% translate "República Dominicana" %} <small>{% translate "El Caribe" %}</small></span>
+        </div>
+
+        <section class="about-beliefs" aria-labelledby="aboutBeliefsTitle">
+          <div class="about-beliefs-heading">
+            <div class="reveal">
+              <p class="overline overline-dark"><span></span> {% translate "Fundamento de fe" %}</p>
+              <h2 id="aboutBeliefsTitle">{% translate "Nuestras" %}<br><em>{% translate "Creencias." %}</em></h2>
+            </div>
+            <p class="reveal" data-reveal-delay="100">{% translate "En Centro Cristiano Milagros Ahora Visión Celestial, creemos que la Biblia es la Palabra de Dios inspirada, infalible y autoritativa. Es el fundamento de nuestra fe, nuestras enseñanzas y nuestra vida diaria." %}</p>
+          </div>
+
+          <div class="about-beliefs-grid">
+            <article class="about-belief reveal">
+              <span>01</span>
+              <div>
+                <h3>{% translate "Un solo Dios" %}</h3>
+                <p>{% translate "Creemos en un solo Dios, que existe eternamente como Padre, Hijo y Espíritu Santo." %}</p>
+              </div>
+            </article>
+            <article class="about-belief reveal" data-reveal-delay="50">
+              <span>02</span>
+              <div>
+                <h3>Jesucristo</h3>
+                <p>{% translate "Creemos que Jesucristo es el Hijo de Dios, nacido de la virgen María, que vivió una vida sin pecado, murió en la cruz por nuestros pecados, fue sepultado, resucitó corporalmente de entre los muertos y regresará nuevamente con poder y gloria." %}</p>
+              </div>
+            </article>
+            <article class="about-belief reveal">
+              <span>03</span>
+              <div>
+                <h3>{% translate "Salvación por gracia" %}</h3>
+                <p>{% translate "Creemos que la salvación es por la gracia de Dios, mediante la fe solamente en Jesucristo. Toda persona que se arrepiente y deposita su confianza en Cristo recibe el perdón de sus pecados y el regalo de la vida eterna." %}</p>
+              </div>
+            </article>
+            <article class="about-belief reveal" data-reveal-delay="50">
+              <span>04</span>
+              <div>
+                <h3>{% translate "El Espíritu Santo" %}</h3>
+                <p>{% translate "Creemos en el bautismo y en la obra continua del Espíritu Santo, quien capacita a los creyentes para vivir en santidad y ministrar con valentía, compasión y dones espirituales." %}</p>
+              </div>
+            </article>
+            <article class="about-belief reveal">
+              <span>05</span>
+              <div>
+                <h3>{% translate "Milagros hoy" %}</h3>
+                <p>{% translate "Creemos que Dios todavía realiza milagros en la actualidad, y que la sanidad, la restauración y la liberación están disponibles por medio del poder de Jesucristo." %}</p>
+              </div>
+            </article>
+            <article class="about-belief reveal" data-reveal-delay="50">
+              <span>06</span>
+              <div>
+                <h3>{% translate "La Iglesia" %}</h3>
+                <p>{% translate "Creemos que la Iglesia es el cuerpo de Cristo, llamada a adorar a Dios, hacer discípulos, cuidar de los necesitados y proclamar el Evangelio a todas las naciones." %}</p>
+              </div>
+            </article>
+            <article class="about-belief about-belief-wide reveal">
+              <span>07</span>
+              <div>
+                <h3>{% translate "Matrimonio y dignidad humana" %}</h3>
+                <p>{% translate "Creemos que el matrimonio bíblico es una unión de pacto entre un hombre y una mujer, y que toda persona ha sido creada a imagen de Dios y debe ser tratada con dignidad, respeto y amor." %}</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="about-values" aria-labelledby="aboutValuesTitle">
+          <div class="about-values-heading reveal">
+            <p class="overline"><span></span> {% translate "Lo que guía nuestro caminar" %}</p>
+            <h2 id="aboutValuesTitle">{% translate "Nuestros Valores" %}<br><em>{% translate "Fundamentales." %}</em></h2>
+          </div>
+
+          <div class="about-values-grid">
+            <article class="about-value reveal">
+
+              <span>01</span>
+
+              <div>
+
+                <h3>{% translate "Cristo Primero" %}</h3>
+
+                <p>{% translate "Jesús es el centro de todo lo que hacemos." %}</p>
+
+              </div>
+
+            </article>
+            <article class="about-value reveal" data-reveal-delay="40">
+
+              <span>02</span>
+
+              <div>
+
+                <h3>{% translate "Verdad Bíblica" %}</h3>
+
+                <p>{% translate "Permanecemos firmes en la Palabra de Dios." %}</p>
+
+              </div>
+
+            </article>
+            <article class="about-value reveal">
+
+              <span>03</span>
+
+              <div>
+
+                <h3>{% translate "Oración" %}</h3>
+
+                <p>{% translate "Buscamos la dirección y el poder de Dios por medio de la oración." %}</p>
+
+              </div>
+
+            </article>
+            <article class="about-value reveal" data-reveal-delay="40">
+
+              <span>04</span>
+
+              <div>
+
+                <h3>{% translate "Amor" %}</h3>
+
+                <p>{% translate "Amamos a Dios con todo nuestro corazón y amamos a las personas incondicionalmente." %}</p>
+
+              </div>
+
+            </article>
+            <article class="about-value reveal">
+
+              <span>05</span>
+
+              <div>
+
+                <h3>{% translate "Integridad" %}</h3>
+
+                <p>{% translate "Honramos a Dios mediante la honestidad, la fidelidad y la excelencia." %}</p>
+
+              </div>
+
+            </article>
+            <article class="about-value reveal" data-reveal-delay="40">
+
+              <span>06</span>
+
+              <div>
+
+                <h3>{% translate "Compasión" %}</h3>
+
+                <p>{% translate "Servimos a nuestras comunidades con bondad y generosidad." %}</p>
+
+              </div>
+
+            </article>
+            <article class="about-value reveal">
+
+              <span>07</span>
+
+              <div>
+
+                <h3>{% translate "Avivamiento" %}</h3>
+
+                <p>{% translate "Buscamos la presencia y el poder transformador del Espíritu Santo." %}</p>
+
+              </div>
+
+            </article>
+            <article class="about-value reveal" data-reveal-delay="40">
+
+              <span>08</span>
+
+              <div>
+
+                <h3>{% translate "Discipulado" %}</h3>
+
+                <p>{% translate "Capacitamos a los creyentes para que crezcan en la fe y cumplan el llamado de Dios." %}</p>
+
+              </div>
+
+            </article>
+            <article class="about-value reveal">
+
+              <span>09</span>
+
+              <div>
+
+                <h3>{% translate "Evangelismo" %}</h3>
+
+                <p>{% translate "Estamos comprometidos con alcanzar nuestras ciudades y las naciones con el Evangelio." %}</p>
+
+              </div>
+
+            </article>
+            <article class="about-value reveal" data-reveal-delay="40">
+
+              <span>10</span>
+
+              <div>
+
+                <h3>{% translate "Excelencia" %}</h3>
+
+                <p>{% translate "Le ofrecemos a Dios lo mejor de nosotros en cada área del ministerio." %}</p>
+
+              </div>
+
+            </article>
+          </div>
+        </section>
+
+        <div class="about-church-callout reveal">
+          <p>{% translate "Te invitamos a acompañarnos mientras juntos vivimos nuestra misión:" %}</p>
+          <blockquote>{% translate "Amar a Dios. Amar a las Personas." %} <em>{% translate "Alcanzar al Mundo." %}</em></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-introduction section-space" id="historia" aria-labelledby="aboutStoryTitle">
+      <div class="container">
+        <div class="about-intro-grid">
+          <div class="about-section-heading reveal">
+            <p class="overline overline-dark"><span></span> {% translate "Su historia" %}</p>
+            <h2 id="aboutStoryTitle">{% translate "Donde otros vieron un límite," %}<br><em>{% translate "Dios escribió un testimonio." %}</em></h2>
+          </div>
+          <p class="about-intro-statement reveal" data-reveal-delay="100">
+            {% translate "La vida del Pastor Richie Ramos proclama una verdad que continúa guiando cada etapa de su ministerio: Jesucristo salva, sana, libera y transforma vidas." %}
+          </p>
+        </div>
+
+        <div class="about-editorial" aria-label="{% translate 'Biografía del Pastor Richie Ramos' %}">
+          <article class="about-editorial-lead">
+            <figure class="about-editorial-photo about-editorial-photo-lead reveal">
+              <div>
+                <img
+                  src="{% static 'assets/pastor-richie-ramos/pastor-richie-ramos-closeup.jpeg' %}"
+                  alt="{% translate 'Retrato cercano del Pastor Richie Ramos con traje azul y camisa blanca' %}"
+                  width="1122"
+                  height="1402"
+                  loading="lazy"
+                >
+              </div>
+              <figcaption><span>{% translate "Retrato" %} 01</span> Pastor Richie Ramos · {% translate "Nueva York" %}</figcaption>
+            </figure>
+
+            <div class="about-editorial-copy reveal" data-reveal-delay="100">
+              <span class="about-editorial-number">01</span>
+              <p class="about-chapter-label">{% translate "El comienzo" %}</p>
+              <h3>{% translate "Una promesa más grande que el diagnóstico." %}</h3>
+              <p class="about-dropcap">{% translate "Diagnosticado con parálisis cerebral al nacer, los médicos declararon que nunca podría caminar. Recomendaron que pasara el resto de su vida en una silla de ruedas y, posteriormente, en un hogar de cuidado permanente. Sin embargo, su madre se negó a aceptar ese diagnóstico y decidió creer en la promesa y el poder de Dios." %}</p>
+              <p>{% translate "A la edad de cuatro años, por la gracia y el poder de Jesucristo de Nazaret, Richie dio sus primeros pasos, convirtiéndose en un testimonio vivo de que para Dios no existe lo imposible." %}</p>
+            </div>
+          </article>
+
+          <aside class="about-editorial-quote reveal">
+            <span aria-hidden="true">“</span>
+            <blockquote>{% translate "Para Dios no existe lo imposible." %}</blockquote>
+            <p>{% translate "Una vida marcada por la gracia, el servicio y la fe." %}</p>
+          </aside>
+
+          <article class="about-editorial-spread">
+            <div class="about-editorial-copy reveal">
+              <span class="about-editorial-number">02</span>
+              <p class="about-chapter-label">{% translate "El llamado" %}</p>
+              <h3>{% translate "Una vida transformada para anunciar a Jesucristo." %}</h3>
+              <p>{% translate "A los veintiún años entregó completamente su vida al Señor Jesucristo y experimentó una poderosa transformación espiritual. Fue milagrosamente liberado de fortalezas demoníacas, marcando el inicio de un llamado ministerial dedicado a proclamar el Evangelio con demostración del poder de Dios." %}</p>
+              <p>{% translate "Desde entonces, ha llevado el mensaje de Jesucristo a nueve naciones, predicando en inglés, español y portugués. Su ministerio está enfocado en el avivamiento, la sanidad, la liberación y la restauración de vidas, creyendo que Jesucristo sigue haciendo milagros hoy." %}</p>
+            </div>
+
+            <figure class="about-editorial-photo about-editorial-photo-formal reveal" data-reveal-delay="100">
+              <div>
+                <img
+                  src="{% static 'assets/pastor-richie-ramos/pastor-richie-ramos-formal.jpeg' %}"
+                  alt="{% translate 'Retrato formal del Pastor Richie Ramos con traje azul y corbata' %}"
+                  width="1086"
+                  height="1448"
+                  loading="lazy"
+                >
+              </div>
+              <figcaption><span>{% translate "Retrato" %} 02</span> {% translate "Fe, llamado y propósito" %}</figcaption>
+            </figure>
+          </article>
+
+          <article class="about-editorial-service">
+            <figure class="about-editorial-photo about-editorial-photo-service reveal">
+              <div>
+                <img
+                  src="{% static 'assets/pastor-richie-ramos/pastor-richie-ramos-testimony.jpeg' %}"
+                  alt="{% translate 'Pastor Richie Ramos sentado, sonriendo y vestido con traje azul' %}"
+                  width="640"
+                  height="640"
+                  loading="lazy"
+                >
+              </div>
+              <figcaption><span>{% translate "Retrato" %} 03</span> {% translate "Un testimonio viviente" %}</figcaption>
+            </figure>
+
+            <div class="about-editorial-copy reveal" data-reveal-delay="100">
+              <span class="about-editorial-number">03</span>
+              <p class="about-chapter-label">{% translate "Una vida de servicio" %}</p>
+              <h3>{% translate "Presencia, esperanza y liderazgo con principios." %}</h3>
+              <p>{% translate "Durante dieciséis años sirvió fielmente como capellán, ofreciendo esperanza, consuelo y dirección espiritual a miles de personas en momentos de necesidad. Asimismo, ha dedicado parte de su ministerio a formar y motivar emprendedores, ayudándolos a desarrollar un liderazgo basado en principios bíblicos." %}</p>
+              <div class="about-editorial-topics" aria-label="{% translate 'Áreas de servicio' %}">
+                <span>{% translate "Capellanía" %}</span>
+                <span>{% translate "Liderazgo" %}</span>
+                <span>{% translate "Principios bíblicos" %}</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-impact" aria-labelledby="aboutImpactTitle">
+      <div class="container">
+        <div class="about-impact-heading reveal">
+          <p class="overline"><span></span> {% translate "Alcance ministerial" %}</p>
+          <h2 id="aboutImpactTitle">{% translate "Una misión que cruza" %} <em>{% translate "fronteras." %}</em></h2>
+        </div>
+
+        <div class="about-stats" aria-label="{% translate 'Cifras de la trayectoria ministerial' %}">
+          <article class="about-stat reveal">
+            <strong data-about-count="9">9</strong>
+            <span>{% translate "Naciones alcanzadas" %}</span>
+          </article>
+          <article class="about-stat reveal" data-reveal-delay="80">
+            <strong data-about-count="3">3</strong>
+            <span>{% translate "Idiomas de predicación" %}</span>
+          </article>
+          <article class="about-stat reveal" data-reveal-delay="160">
+            <strong data-about-count="16">16</strong>
+            <span>{% translate "Años de capellanía" %}</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-books section-space" aria-labelledby="aboutBooksTitle">
+      <div class="container">
+        <div class="about-books-layout">
+          <div class="about-books-heading reveal">
+            <p class="overline overline-dark"><span></span> {% translate "Autor y conferencista" %}</p>
+            <h2 id="aboutBooksTitle">{% translate "Palabras para vivir" %}<br><em>{% translate "con propósito." %}</em></h2>
+            <p>{% translate "Como conferencista internacional, motivador y autor, inspira a miles de personas a descubrir que, con Dios, toda limitación puede convertirse en un testimonio de victoria." %}</p>
+          </div>
+
+          <div class="about-book-list">
+            <article class="about-book reveal">
+              <span>01</span>
+              <div>
+                <small>{% translate "Publicado en 2021" %}</small>
+                <h3>7 Claves para Vivir el Reino de Dios</h3>
+              </div>
+              <b aria-hidden="true">✦</b>
+            </article>
+            <article class="about-book reveal" data-reveal-delay="100">
+              <span>02</span>
+              <div>
+                <small>{% translate "Lanzamiento" %} · <time datetime="2026-10-12">{% translate "12 de octubre de 2026" %}</time></small>
+                <h3>Cojo, Pero No Loco: 7 Pasos para Vivir Feliz</h3>
+              </div>
+              <b aria-hidden="true">✦</b>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-present">
+      <div class="about-present-mark" aria-hidden="true">RR</div>
+      <div class="container">
+        <div class="about-present-grid">
+          <div class="reveal">
+            <p class="overline"><span></span> {% translate "Visión presente y futura" %}</p>
+            <h2>{% translate "Amar a Dios." %}<br>{% translate "Amar a las personas." %}<br><em>{% translate "Alcanzar al mundo." %}</em></h2>
+          </div>
+          <div class="about-present-copy reveal" data-reveal-delay="100">
+            <p>{% translate "Actualmente es el Fundador y Pastor Principal de Miracles Now Heavenly Vision Christian Center, ubicado en Washington Heights, Nueva York. Continúa levantando una generación apasionada por Cristo y comprometida con llevar el Evangelio hasta lo último de la tierra." %}</p>
+            <p>{% translate "Con una visión de expansión mundial, el ministerio iniciará una nueva etapa de alcance internacional a partir del año 2027, proclamando que Jesucristo salva, sana, libera y transforma vidas." %}</p>
+            <a class="text-link text-link-light" href="{% url 'home' %}#contacto">{% translate "Conecta con nosotros" %} <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-scripture" aria-labelledby="aboutScriptureTitle">
+      <div class="container reveal">
+        <span aria-hidden="true">“</span>
+        <blockquote id="aboutScriptureTitle">{% translate "Porque para Dios no hay nada imposible." %}</blockquote>
+        <cite>{% translate "Lucas 1:37" %}</cite>
+      </div>
+    </section>
+  </main>
+{% endblock %}

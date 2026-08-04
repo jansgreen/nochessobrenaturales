@@ -1,37 +1,38 @@
 from django import forms
 from django.core.validators import MinLengthValidator
+from django.utils.translation import gettext_lazy as _
 
 
 class ContactForm(forms.Form):
     TOPIC_CHOICES = (
-        ("Confirmar asistencia", "Quiero confirmar mi asistencia"),
-        ("Petición de oración", "Tengo una petición de oración"),
-        ("Testimonio", "Quiero compartir mi testimonio"),
-        ("Biblia gratis", "Quiero recibir una Biblia"),
-        ("Servicio comunitario", "Quiero servir a la comunidad"),
+        ("Confirmar asistencia", _("Quiero confirmar mi asistencia")),
+        ("Petición de oración", _("Tengo una petición de oración")),
+        ("Testimonio", _("Quiero compartir mi testimonio")),
+        ("Biblia gratis", _("Quiero recibir una Biblia")),
+        ("Servicio comunitario", _("Quiero servir a la comunidad")),
     )
 
     name = forms.CharField(
-        label="Nombre completo",
+        label=_("Nombre completo"),
         max_length=120,
         validators=[
-            MinLengthValidator(2, "Escribe un nombre de al menos 2 caracteres.")
+            MinLengthValidator(2, _("Escribe un nombre de al menos 2 caracteres."))
         ],
     )
     email = forms.EmailField(
-        label="Correo electrónico",
+        label=_("Correo electrónico"),
         max_length=254,
-        error_messages={"invalid": "Ingresa un correo electrónico válido."},
+        error_messages={"invalid": _("Ingresa un correo electrónico válido.")},
     )
     topic = forms.ChoiceField(
-        label="¿Cómo podemos ayudarte?",
+        label=_("¿Cómo podemos ayudarte?"),
         choices=TOPIC_CHOICES,
     )
     message = forms.CharField(
-        label="Mensaje",
+        label=_("Mensaje"),
         max_length=3000,
         validators=[
-            MinLengthValidator(10, "Escribe un mensaje de al menos 10 caracteres.")
+            MinLengthValidator(10, _("Escribe un mensaje de al menos 10 caracteres."))
         ],
         widget=forms.Textarea,
     )
@@ -46,4 +47,3 @@ class ContactForm(forms.Form):
 
     def clean_message(self):
         return self.cleaned_data["message"].strip()
-

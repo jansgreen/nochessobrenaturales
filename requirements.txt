@@ -1,8 +1,11 @@
 Django==6.0.7
+django-modeltranslation @ git+https://github.com/deschler/django-modeltranslation.git@d9bdffa6108ef38db2e203e67a1affa99a7b39b1
+cloudinary==1.45.0
 dj-database-url==3.1.2
 django-ckeditor-5==0.2.20
 gunicorn==26.0.0
 nh3==0.3.6
+pillow==12.3.0
 psycopg[binary]==3.3.4
 python-dotenv==1.2.2
 whitenoise==6.12.0

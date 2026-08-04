@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.db import transaction
+from modeltranslation.admin import TranslationAdmin
 
 from .models import Event, YouTubeVideo
 
 
 @admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(TranslationAdmin):
     list_display = (
         "starts_at",
         "eyebrow",

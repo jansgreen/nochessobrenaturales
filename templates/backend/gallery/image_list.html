@@ -1,0 +1,70 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Galería de imágenes{% endblock %}
+
+{% block content %}
+  <header class="dashboard-section-heading">
+    <div>
+      <p class="dashboard-eyebrow">Galería pública</p>
+      <h1>Imágenes</h1>
+      <p>Organiza los recuerdos que se muestran en la galería pública del sitio.</p>
+    </div>
+    <a class="dashboard-primary-link" href="{% url 'dashboard:gallery_image_create' %}">
+      Agregar imagen <span aria-hidden="true">+</span>
+    </a>
+  </header>
+
+  {% if page_obj %}
+    <div class="gallery-admin-list">
+      {% for gallery_image in page_obj %}
+        <article class="gallery-admin-row">
+          <div class="gallery-admin-thumb">
+            <img src="{{ gallery_image.image.url }}" alt="" loading="lazy">
+          </div>
+
+          <div class="gallery-admin-content">
+            <small>Posición {{ gallery_image.position }}</small>
+            <h2>{{ gallery_image.title }}</h2>
+            <p>
+              {% if gallery_image.photographed_on %}{{ gallery_image.photographed_on|date:"d/m/Y" }} · {% endif %}
+              Actualizada {{ gallery_image.updated_at|date:"d/m/Y H:i" }}
+            </p>
+          </div>
+
+          <div class="gallery-admin-status">
+            {% if gallery_image.is_active %}
+              <span class="banner-status active">Publicada</span>
+            {% else %}
+              <span class="banner-status">Oculta</span>
+            {% endif %}
+          </div>
+
+          <div class="event-admin-actions">
+            <a href="{% url 'dashboard:gallery_image_update' gallery_image.pk %}">Editar</a>
+            <a class="danger" href="{% url 'dashboard:gallery_image_delete' gallery_image.pk %}">Eliminar</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    {% if page_obj.has_other_pages %}
+      <nav class="dashboard-pagination" aria-label="Páginas de imágenes">
+        {% if page_obj.has_previous %}
+          <a href="?pagina={{ page_obj.previous_page_number }}">← Anterior</a>
+        {% else %}<span></span>{% endif %}
+        <p>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</p>
+        {% if page_obj.has_next %}
+          <a href="?pagina={{ page_obj.next_page_number }}">Siguiente →</a>
+        {% else %}<span></span>{% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <section class="dashboard-empty-state">
+      <span aria-hidden="true">▧</span>
+      <h2>Todavía no hay imágenes</h2>
+      <p>Sube el primer recuerdo para activar la galería pública.</p>
+      <a href="{% url 'dashboard:gallery_image_create' %}">Agregar la primera imagen</a>
+    </section>
+  {% endif %}
+{% endblock %}
+

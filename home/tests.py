@@ -1,6 +1,9 @@
+from django.conf import settings
 from django.core import mail
 from django.test import TestCase, override_settings
 from django.urls import reverse
+
+from banners.models import Banner
 
 
 @override_settings(
@@ -25,6 +28,18 @@ class ContactEmailTests(TestCase):
         self.assertContains(response, 'method="post"')
         self.assertContains(response, 'name="csrfmiddlewaretoken"')
         self.assertContains(response, "Enviar mensaje")
+
+    def test_home_contains_free_bible_and_guest_benefits(self):
+        response = self.client.get(reverse("home"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Solicita Tu")
+        self.assertContains(response, "Biblia Gratis.")
+        self.assertContains(response, "Estacionamiento valet gratis")
+        self.assertContains(response, "Comida o refrigerios gratis")
+        self.assertContains(response, "Regalos gratis")
+        self.assertContains(response, "Desde El Bronx hasta Washington Heights.")
+        self.assertContains(response, 'data-topic="Biblia gratis"', count=2)
 
     def test_home_contains_absolute_social_preview_metadata(self):
         host = "nochesobrenatural-07f49a74f27c.herokuapp.com"
@@ -124,3 +139,162 @@ class ContactEmailTests(TestCase):
         html_body = mail.outbox[0].alternatives[0].content
         self.assertNotIn("<script>", html_body)
         self.assertIn("&lt;script&gt;", html_body)
+
+
+class AboutPageTests(TestCase):
+    def test_about_page_contains_pastor_biography_and_ministry_details(self):
+        response = self.client.get(reverse("about"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Pastor Richie Ramos")
+        self.assertContains(response, "parálisis cerebral")
+        self.assertContains(response, "nueve naciones")
+        self.assertContains(response, "Miracles Now Heavenly Vision")
+        self.assertContains(response, "Cojo, Pero No Loco")
+        self.assertContains(response, 'datetime="2026-10-12"')
+        self.assertContains(response, "Lucas 1:37")
+        self.assertContains(response, 'class="about-editorial-lead"')
+        self.assertContains(response, 'class="about-editorial-spread"')
+        self.assertContains(response, 'class="about-editorial-service"')
+        self.assertContains(response, "Una promesa más grande")
+        for image_name in (
+            "pastor-richie-ramos-hero.jpeg",
+            "pastor-richie-ramos-closeup.jpeg",
+            "pastor-richie-ramos-testimony.jpeg",
+            "pastor-richie-ramos-formal.jpeg",
+        ):
+            with self.subTest(image_name=image_name):
+                self.assertContains(response, image_name)
+
+    def test_about_page_contains_church_identity_and_global_vision(self):
+        response = self.client.get(reverse("about"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Sobre Nosotros")
+        self.assertContains(response, "relación personal con Jesucristo")
+        self.assertContains(response, "todas las edades y procedencias")
+        self.assertContains(response, "Newark (Nueva Jersey)")
+        self.assertContains(response, "Barranquilla (Colombia)")
+        self.assertContains(response, "República Dominicana")
+        self.assertContains(
+            response,
+            "Amar a Dios. Amar a las Personas.",
+        )
+
+    def test_about_page_contains_beliefs_and_core_values(self):
+        response = self.client.get(reverse("about"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'id="aboutBeliefsTitle"')
+        self.assertContains(response, "Creencias.")
+        self.assertContains(response, "Palabra de Dios inspirada")
+        self.assertContains(response, "Padre, Hijo y Espíritu Santo")
+        self.assertContains(response, "salvación es por la gracia de Dios")
+        self.assertContains(response, "matrimonio bíblico")
+        self.assertContains(response, 'id="aboutValuesTitle"')
+        self.assertContains(response, "Fundamentales.")
+        for value in (
+            "Cristo Primero",
+            "Verdad Bíblica",
+            "Oración",
+            "Amor",
+            "Integridad",
+            "Compasión",
+            "Avivamiento",
+            "Discipulado",
+            "Evangelismo",
+            "Excelencia",
+        ):
+            with self.subTest(value=value):
+                self.assertContains(response, value)
+
+    def test_about_navigation_tab_is_available_and_active(self):
+        about_response = self.client.get(reverse("about"))
+        home_response = self.client.get(reverse("home"))
+
+        self.assertContains(
+            about_response,
+            '<a class="nav-link active" href="/nosotros/">Nosotros</a>',
+            html=True,
+        )
+        self.assertContains(
+            home_response,
+            '<a class="nav-link" href="/nosotros/">Nosotros</a>',
+            html=True,
+        )
+
+
+class LanguageSelectionTests(TestCase):
+    def select_language(self, language, next_url="/"):
+        return self.client.post(
+            reverse("set_language"),
+            {"language": language, "next": next_url},
+        )
+
+    def test_menu_selection_activates_language_and_sets_cookie(self):
+        expectations = (
+            ("es", "Nosotros", "Solicita Tu"),
+            ("en", "About Us", "Request Your"),
+            ("pt", "Sobre Nós", "Peça a Sua"),
+        )
+
+        for code, navigation, bible_heading in expectations:
+            with self.subTest(language=code):
+                response = self.client.post(
+                    reverse("set_language"),
+                    {"language": code, "next": reverse("home")},
+                    follow=True,
+                )
+
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.headers["Content-Language"], code)
+                self.assertEqual(
+                    self.client.cookies[settings.LANGUAGE_COOKIE_NAME].value,
+                    code,
+                )
+                self.assertContains(response, f'<html lang="{code}">')
+                self.assertContains(response, navigation)
+                self.assertContains(response, bible_heading)
+                self.assertContains(response, 'class="language-switcher"')
+
+    def test_language_menu_keeps_current_path_without_domain_links(self):
+        response = self.client.get(f'{reverse("home")}?campaign=summer')
+
+        self.assertContains(
+            response,
+            f'action="{reverse("set_language")}"',
+            count=3,
+        )
+        self.assertContains(
+            response,
+            'name="next" value="/?campaign=summer"',
+            count=3,
+        )
+        self.assertNotContains(response, "en.iglesia.test")
+        self.assertNotContains(response, "pt.iglesia.test")
+        self.assertNotContains(response, 'hreflang="x-default"')
+
+    def test_dynamic_banner_uses_the_selected_language(self):
+        banner = Banner.objects.create(
+            title="Aviso base",
+            description="<p>Contenido base</p>",
+            is_active=True,
+        )
+        Banner.objects.filter(pk=banner.pk).update(
+            title_es="Bienvenidos",
+            description_es="<p>Mensaje en español</p>",
+            title_en="Welcome",
+            description_en="<p>English message</p>",
+            title_pt="Bem-vindos",
+            description_pt="<p>Mensagem em português</p>",
+        )
+
+        for language, expected in (
+            ("es", "Bienvenidos"),
+            ("en", "Welcome"),
+            ("pt", "Bem-vindos"),
+        ):
+            with self.subTest(language=language):
+                self.select_language(language)
+                response = self.client.get(reverse("home"))
+                self.assertContains(response, expected)

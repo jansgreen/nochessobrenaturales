@@ -294,6 +294,130 @@
     activeVideoTrigger = null;
   });
 
+  const galleryDialog = document.querySelector("#galleryDialog");
+  const galleryDialogImage = document.querySelector("#galleryDialogImage");
+  const galleryDialogTitle = document.querySelector("#galleryDialogTitle");
+  const galleryDialogDescription = document.querySelector(
+    "#galleryDialogDescription"
+  );
+  const galleryDialogDate = document.querySelector("#galleryDialogDate");
+  const galleryTriggers = Array.from(
+    document.querySelectorAll(".js-gallery-trigger")
+  );
+  const galleryCloseButton = galleryDialog?.querySelector(
+    "[data-gallery-close]"
+  );
+  const galleryPreviousButton = galleryDialog?.querySelector(
+    "[data-gallery-previous]"
+  );
+  const galleryNextButton = galleryDialog?.querySelector(
+    "[data-gallery-next]"
+  );
+  let activeGalleryIndex = -1;
+
+  const showGalleryImage = (index) => {
+    if (!galleryDialogImage || !galleryTriggers.length) return;
+
+    activeGalleryIndex =
+      (index + galleryTriggers.length) % galleryTriggers.length;
+    const trigger = galleryTriggers[activeGalleryIndex];
+    const description = trigger.dataset.galleryDescription?.trim() || "";
+    const date = trigger.dataset.galleryDate?.trim() || "";
+
+    galleryDialogImage.src = trigger.dataset.gallerySrc;
+    galleryDialogImage.alt = trigger.dataset.galleryAlt || "";
+    if (galleryDialogTitle) {
+      galleryDialogTitle.textContent =
+        trigger.dataset.galleryTitle || "Noches Sobrenaturales";
+    }
+    if (galleryDialogDescription) {
+      galleryDialogDescription.textContent = description;
+      galleryDialogDescription.hidden = !description;
+    }
+    if (galleryDialogDate) {
+      galleryDialogDate.textContent = date;
+      galleryDialogDate.hidden = !date;
+    }
+
+    const hasMultipleImages = galleryTriggers.length > 1;
+    if (galleryPreviousButton) galleryPreviousButton.hidden = !hasMultipleImages;
+    if (galleryNextButton) galleryNextButton.hidden = !hasMultipleImages;
+  };
+
+  galleryTriggers.forEach((trigger, index) => {
+    trigger.addEventListener("click", (event) => {
+      if (!galleryDialog?.showModal || !galleryDialogImage) return;
+
+      event.preventDefault();
+      showGalleryImage(index);
+      galleryDialog.showModal();
+    });
+  });
+
+  galleryPreviousButton?.addEventListener("click", () => {
+    showGalleryImage(activeGalleryIndex - 1);
+  });
+  galleryNextButton?.addEventListener("click", () => {
+    showGalleryImage(activeGalleryIndex + 1);
+  });
+  galleryCloseButton?.addEventListener("click", () => galleryDialog.close());
+  galleryDialog?.addEventListener("click", (event) => {
+    if (event.target === galleryDialog) galleryDialog.close();
+  });
+  galleryDialog?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") showGalleryImage(activeGalleryIndex - 1);
+    if (event.key === "ArrowRight") showGalleryImage(activeGalleryIndex + 1);
+  });
+  galleryDialog?.addEventListener("close", () => {
+    galleryDialogImage?.removeAttribute("src");
+    galleryTriggers[activeGalleryIndex]?.focus();
+    activeGalleryIndex = -1;
+  });
+
+  const aboutCounters = document.querySelectorAll("[data-about-count]");
+  if (aboutCounters.length && !reduceMotion && "IntersectionObserver" in window) {
+    const counterObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const counter = entry.target;
+          const target = Number(counter.dataset.aboutCount || 0);
+          const duration = 1100;
+          const startedAt = performance.now();
+          const updateCounter = (timestamp) => {
+            const progress = Math.min((timestamp - startedAt) / duration, 1);
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            counter.textContent = String(Math.round(target * easedProgress));
+            if (progress < 1) window.requestAnimationFrame(updateCounter);
+          };
+
+          counter.textContent = "0";
+          window.requestAnimationFrame(updateCounter);
+          observer.unobserve(counter);
+        });
+      },
+      { threshold: 0.55 }
+    );
+
+    aboutCounters.forEach((counter) => counterObserver.observe(counter));
+  }
+
+  const languageSwitcher = document.querySelector(".language-switcher");
+  if (languageSwitcher) {
+    document.addEventListener("click", (event) => {
+      if (!languageSwitcher.contains(event.target)) {
+        languageSwitcher.removeAttribute("open");
+      }
+    });
+    languageSwitcher.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        languageSwitcher.removeAttribute("open");
+        languageSwitcher.querySelector("summary")?.focus();
+      }
+    });
+  }
+
   const currentYear = document.querySelector("#year");
   if (currentYear) currentYear.textContent = new Date().getFullYear();
 

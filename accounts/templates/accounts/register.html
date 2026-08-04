@@ -1,12 +1,13 @@
 {% extends 'accounts/base.html' %}
+{% load i18n %}
 
-{% block title %}Crear una cuenta{% endblock %}
+{% block title %}{% translate "Crear una cuenta" %}{% endblock %}
 
 {% block content %}
   <header class="auth-heading">
-    <p class="auth-kicker">Comienza aquí</p>
-    <h2>Crea tu cuenta</h2>
-    <p>Completa tus datos para formar parte de la comunidad.</p>
+    <p class="auth-kicker">{% translate "Comienza aquí" %}</p>
+    <h2>{% translate "Crea tu cuenta" %}</h2>
+    <p>{% translate "Completa tus datos para formar parte de la comunidad." %}</p>
   </header>
 
   <form method="post" class="auth-form" novalidate>
@@ -33,14 +34,13 @@
     {% endfor %}
 
     <button type="submit" class="auth-submit">
-      Crear mi cuenta
+      {% translate "Crear mi cuenta" %}
       <span aria-hidden="true">→</span>
     </button>
   </form>
 
   <p class="auth-switch">
-    ¿Ya tienes una cuenta?
-    <a href="{% url 'accounts:login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Inicia sesión</a>
+    {% translate "¿Ya tienes una cuenta?" %}
+    <a href="{% url 'accounts:login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">{% translate "Inicia sesión" %}</a>
   </p>
 {% endblock %}
-

@@ -80,6 +80,14 @@
         <p>{{ active_video_count }} activos de {{ video_count }} videos agregados.</p>
         <a href="{% url 'dashboard:youtube_video_list' %}">Gestionar galería <span aria-hidden="true">→</span></a>
       </article>
+
+      <article class="dashboard-card dashboard-card-admin">
+        <span class="dashboard-card-index">08</span>
+        <p class="dashboard-card-label">Administración</p>
+        <h2>Galería de imágenes</h2>
+        <p>{{ active_gallery_image_count }} publicadas de {{ gallery_image_count }} imágenes agregadas.</p>
+        <a href="{% url 'dashboard:gallery_image_list' %}">Gestionar imágenes <span aria-hidden="true">→</span></a>
+      </article>
     {% endif %}
   </section>
 {% endblock %}

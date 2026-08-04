@@ -1,5 +1,5 @@
-{% load static %}
-  <nav id="mainNav" class="navbar navbar-dark navbar-expand-lg fixed-top" aria-label="Navegación principal">
+{% load static i18n %}
+  <nav id="mainNav" class="navbar navbar-dark navbar-expand-lg fixed-top" aria-label="{% translate 'Navegación principal' %}">
     <div class="container">
       <a class="navbar-brand brand" href="{% url 'home' %}#inicio" aria-label="Noches Sobrenaturales, inicio">
         <span class="brand-logo">
@@ -11,30 +11,64 @@
         </span>
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="{% translate 'Abrir menú' %}">
         <span></span>
         <span></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#experiencia">La experiencia</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#calendario">Fechas</a></li>
           <li class="nav-item">
-            <a class="nav-link{% if page_name == 'events' %} active{% endif %}" href="{% url 'events:gallery' %}">Eventos</a>
+            <a class="nav-link{% if page_name == 'about' %} active{% endif %}" href="{% url 'about' %}">{% translate "Nosotros" %}</a>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#comunidad">Comunidad</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#experiencia">{% translate "Experiencia" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#calendario">{% translate "Fechas" %}</a></li>
+          <li class="nav-item">
+            <a class="nav-link{% if page_name == 'events' %} active{% endif %}" href="{% url 'events:gallery' %}">{% translate "Eventos" %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% if page_name == 'gallery' %} active{% endif %}" href="{% url 'gallery:index' %}">{% translate "Galería" %}</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#comunidad">{% translate "Comunidad" %}</a></li>
           {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:home' %}">Mi panel</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:home' %}">{% translate "Mi panel" %}</a></li>
             <li class="nav-item">
               <form class="nav-inline-form" method="post" action="{% url 'accounts:logout' %}">
                 {% csrf_token %}
-                <button class="nav-link nav-logout" type="submit">Salir</button>
+                <button class="nav-link nav-logout" type="submit">{% translate "Salir" %}</button>
               </form>
             </li>
           {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Ingresar</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">{% translate "Ingresar" %}</a></li>
           {% endif %}
+          <li class="nav-item nav-language-item">
+            <details class="language-switcher">
+              <summary aria-label="{% translate 'Seleccionar idioma' %}" title="{% translate 'Seleccionar idioma' %}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"/></svg>
+                <span>{{ active_language|upper }}</span>
+                <b aria-hidden="true">⌄</b>
+              </summary>
+              <div class="language-menu" role="list">
+                <p>{% translate "Idioma del sitio" %}</p>
+                {% for language in language_options %}
+                  <form action="{% url 'set_language' %}" method="post" role="listitem">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                    <input type="hidden" name="language" value="{{ language.code }}">
+                    <button
+                      type="submit"
+                      lang="{{ language.code }}"
+                      {% if language.is_active %}class="active" aria-current="true"{% endif %}
+                    >
+                      <span>{{ language.code|upper }}</span>
+                      <strong>{{ language.name }}</strong>
+                      {% if language.is_active %}<b aria-hidden="true">✓</b>{% endif %}
+                    </button>
+                  </form>
+                {% endfor %}
+              </div>
+            </details>
+          </li>
           {% if donation_url %}
             <li class="nav-item ms-lg-2">
               <a
@@ -42,11 +76,11 @@
                 href="{{ donation_url }}"
                 target="_blank"
                 rel="noopener noreferrer"
-              >Donaciones</a>
+              >{% translate "Donaciones" %}</a>
             </li>
           {% endif %}
           <li class="nav-item ms-lg-3">
-            <a class="btn btn-nav" href="{% url 'home' %}#contacto">Quiero asistir</a>
+            <a class="btn btn-nav" href="{% url 'home' %}#contacto">{% translate "Quiero asistir" %}</a>
           </li>
         </ul>
       </div>

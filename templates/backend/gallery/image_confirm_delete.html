@@ -1,0 +1,21 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Eliminar imagen{% endblock %}
+
+{% block content %}
+  <section class="dashboard-confirm">
+    <span class="dashboard-confirm-icon" aria-hidden="true">×</span>
+    <p class="dashboard-eyebrow">Acción permanente</p>
+    <div class="gallery-delete-preview">
+      <img src="{{ gallery_image.image.url }}" alt="">
+    </div>
+    <h1>¿Eliminar esta imagen?</h1>
+    <p>“{{ gallery_image.title }}” dejará de aparecer en la galería pública y su archivo será eliminado.</p>
+    <form method="post">
+      {% csrf_token %}
+      <a href="{% url 'dashboard:gallery_image_list' %}">Cancelar</a>
+      <button type="submit">Sí, eliminar</button>
+    </form>
+  </section>
+{% endblock %}
+

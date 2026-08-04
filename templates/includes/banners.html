@@ -1,5 +1,6 @@
+{% load i18n %}
 {% if banners %}
-  <section class="site-banners" aria-label="Anuncios destacados">
+  <section class="site-banners" aria-label="{% translate 'Anuncios destacados' %}">
     <div class="container">
       <div class="site-banner-grid">
         {% for banner in banners %}

@@ -1,0 +1,974 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Noches Sobrenaturales\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%(weekday)s, %(day)s de %(month)s"
+msgstr "%(weekday)s, %(month)s %(day)s"
+
+msgid "12 de octubre de 2026"
+msgstr "October 12, 2026"
+
+msgid "A la edad de cuatro años, por la gracia y el poder de Jesucristo de Nazaret, Richie dio sus primeros pasos, convirtiéndose en un testimonio vivo de que para Dios no existe lo imposible."
+msgstr "At the age of four, by the grace and power of Jesus Christ of Nazareth, Richie took his first steps, becoming living proof that nothing is impossible for God."
+
+msgid "A los veintiún años entregó completamente su vida al Señor Jesucristo y experimentó una poderosa transformación espiritual. Fue milagrosamente liberado de fortalezas demoníacas, marcando el inicio de un llamado ministerial dedicado a proclamar el Evangelio con demostración del poder de Dios."
+msgstr "At twenty-one, he fully surrendered his life to the Lord Jesus Christ and experienced a powerful spiritual transformation. He was miraculously delivered from demonic strongholds, marking the beginning of a ministry calling devoted to proclaiming the Gospel with a demonstration of God's power."
+
+msgid "Abrir menú"
+msgstr "Open menu"
+
+msgid "Actualmente es el Fundador y Pastor Principal de Miracles Now Heavenly Vision Christian Center, ubicado en Washington Heights, Nueva York. Continúa levantando una generación apasionada por Cristo y comprometida con llevar el Evangelio hasta lo último de la tierra."
+msgstr "He is currently the Founder and Senior Pastor of Miracles Now Heavenly Vision Christian Center in Washington Heights, New York. He continues to raise a generation passionate about Christ and committed to taking the Gospel to the ends of the earth."
+
+msgid "Adoración"
+msgstr "Worship"
+
+msgid "Alcance ministerial"
+msgstr "Ministry reach"
+
+msgid "Alcanzar al Mundo."
+msgstr "Reach the World."
+
+msgid "Alcanzar al mundo"
+msgstr "Reach the world"
+
+msgid "Alcanzar al mundo."
+msgstr "Reach the world."
+
+msgid "Amamos a Dios con todo nuestro corazón y amamos a las personas incondicionalmente."
+msgstr "We love God with all our heart, and we love people unconditionally."
+
+msgid "Amar a Dios"
+msgstr "Love God"
+
+msgid "Amar a Dios."
+msgstr "Love God."
+
+msgid "Amar a Dios. Amar a las Personas."
+msgstr "Love God. Love People."
+
+msgid "Amar a Dios. Amar a las personas."
+msgstr "Love God. Love people."
+
+msgid "Amar a Dios. Amar a las personas. Alcanzar al mundo."
+msgstr "Love God. Love people. Reach the world."
+
+msgid "Amar a las personas"
+msgstr "Love people"
+
+msgid "Amar a las personas."
+msgstr "Love people."
+
+msgid "Ambiente familiar · Ven tal como eres"
+msgstr "A family-friendly atmosphere · Come as you are"
+
+msgid "Amor"
+msgstr "Love"
+
+msgid "Anterior"
+msgstr "Previous"
+
+msgid "Anuncios destacados"
+msgstr "Featured announcements"
+
+msgid "Archivo de encuentros"
+msgstr "Gathering archive"
+
+msgid "Autor y conferencista"
+msgstr "Author and speaker"
+
+msgid "Avivamiento"
+msgstr "Revival"
+
+msgid "Años de capellanía"
+msgstr "Years of chaplaincy"
+
+msgid "Biografía del Pastor Richie Ramos"
+msgstr "Biography of Pastor Richie Ramos"
+
+msgid "Buscamos la dirección y el poder de Dios por medio de la oración."
+msgstr "We seek God's direction and power through prayer."
+
+msgid "Buscamos la presencia y el poder transformador del Espíritu Santo."
+msgstr "We seek the presence and transforming power of the Holy Spirit."
+
+msgid "Cada imagen conserva una parte de lo que vivimos juntos: adoración, esperanza, servicio y vidas transformadas."
+msgstr "Every image preserves part of what we experienced together: worship, hope, service, and transformed lives."
+
+msgid "Calendario"
+msgstr "Calendar"
+
+msgid "Capacitamos a los creyentes para que crezcan en la fe y cumplan el llamado de Dios."
+msgstr "We equip believers to grow in faith and fulfill God's calling."
+
+msgid "Capellanía"
+msgstr "Chaplaincy"
+
+msgid "Celebremos lo que Dios hizo."
+msgstr "Let us celebrate what God has done."
+
+msgid "Cerrar imagen"
+msgstr "Close image"
+
+msgid "Cerrar video"
+msgstr "Close video"
+
+msgid "Cifras de la trayectoria ministerial"
+msgstr "Ministry journey in numbers"
+
+msgid "Ciudades y países de nuestra visión"
+msgstr "Cities and countries in our vision"
+
+msgid "Como conferencista internacional, motivador y autor, inspira a miles de personas a descubrir que, con Dios, toda limitación puede convertirse en un testimonio de victoria."
+msgstr "As an international speaker, motivator, and author, he inspires thousands to discover that, with God, every limitation can become a testimony of victory."
+
+msgid "Comparte tu testimonio"
+msgstr "Share your testimony"
+
+msgid "Compasión"
+msgstr "Compassion"
+
+msgid "Completa tus datos y enviaremos tu mensaje a nuestro equipo."
+msgstr "Complete your information and we will send your message to our team."
+
+msgid "Comunidad"
+msgstr "Community"
+
+msgid "Con una visión de expansión mundial, el ministerio iniciará una nueva etapa de alcance internacional a partir del año 2027, proclamando que Jesucristo salva, sana, libera y transforma vidas."
+msgstr "With a vision for worldwide expansion, the ministry will begin a new season of international outreach in 2027, proclaiming that Jesus Christ saves, heals, delivers, and transforms lives."
+
+msgid "Con una visión de impacto global, estamos comprometidos a establecer ministerios que transformen vidas en Nueva York, Newark (Nueva Jersey), Barranquilla (Colombia) y la República Dominicana, compartiendo el amor de Cristo y formando discípulos para las futuras generaciones."
+msgstr "With a vision for global impact, we are committed to establishing life-transforming ministries in New York, Newark (New Jersey), Barranquilla (Colombia), and the Dominican Republic, sharing Christ's love and making disciples for future generations."
+
+msgid "Conecta con nosotros"
+msgstr "Connect with us"
+
+msgid "Conoce la experiencia"
+msgstr "Discover the experience"
+
+msgid "Conoce la misión, creencias, valores y visión de Miracles Now Heavenly Vision Christian Center, junto con el testimonio del Pastor Richie Ramos."
+msgstr "Discover the mission, beliefs, values, and vision of Miracles Now Heavenly Vision Christian Center, along with Pastor Richie Ramos's testimony."
+
+msgid "Conoce su historia"
+msgstr "Discover his story"
+
+msgid "Correo electrónico"
+msgstr "Email address"
+
+msgid "Creamos un espacio seguro y lleno de fe para detener el ruido, abrir el corazón y experimentar a Dios de una manera personal."
+msgstr "We create a safe, faith-filled space to quiet the noise, open your heart, and experience God personally."
+
+msgid "Creemos en el bautismo y en la obra continua del Espíritu Santo, quien capacita a los creyentes para vivir en santidad y ministrar con valentía, compasión y dones espirituales."
+msgstr "We believe in baptism and in the continuing work of the Holy Spirit, who empowers believers to live in holiness and minister with courage, compassion, and spiritual gifts."
+
+msgid "Creemos en un Dios que obra hoy"
+msgstr "We believe in a God who works today"
+
+msgid "Creemos en un solo Dios, que existe eternamente como Padre, Hijo y Espíritu Santo."
+msgstr "We believe in one God, eternally existing as Father, Son, and Holy Spirit."
+
+msgid "Creemos que Dios sigue obrando con poder hoy, trayendo salvación, sanidad, restauración, liberación y esperanza a toda persona que pone su fe en Él."
+msgstr "We believe God is still working powerfully today, bringing salvation, healing, restoration, deliverance, and hope to everyone who places their faith in Him."
+
+msgid "Creemos que Dios todavía realiza milagros en la actualidad, y que la sanidad, la restauración y la liberación están disponibles por medio del poder de Jesucristo."
+msgstr "We believe God still performs miracles today, and that healing, restoration, and deliverance are available through the power of Jesus Christ."
+
+msgid "Creemos que Jesucristo es el Hijo de Dios, nacido de la virgen María, que vivió una vida sin pecado, murió en la cruz por nuestros pecados, fue sepultado, resucitó corporalmente de entre los muertos y regresará nuevamente con poder y gloria."
+msgstr "We believe Jesus Christ is the Son of God, born of the virgin Mary, who lived a sinless life, died on the cross for our sins, was buried, rose bodily from the dead, and will return again in power and glory."
+
+msgid "Creemos que el matrimonio bíblico es una unión de pacto entre un hombre y una mujer, y que toda persona ha sido creada a imagen de Dios y debe ser tratada con dignidad, respeto y amor."
+msgstr "We believe biblical marriage is a covenant union between one man and one woman, and that every person is created in the image of God and should be treated with dignity, respect, and love."
+
+msgid "Creemos que la Iglesia es el cuerpo de Cristo, llamada a adorar a Dios, hacer discípulos, cuidar de los necesitados y proclamar el Evangelio a todas las naciones."
+msgstr "We believe the Church is the body of Christ, called to worship God, make disciples, care for those in need, and proclaim the Gospel to all nations."
+
+msgid "Creemos que la salvación es por la gracia de Dios, mediante la fe solamente en Jesucristo. Toda persona que se arrepiente y deposita su confianza en Cristo recibe el perdón de sus pecados y el regalo de la vida eterna."
+msgstr "We believe salvation is by God's grace through faith in Jesus Christ alone. Everyone who repents and places their trust in Christ receives forgiveness of sins and the gift of eternal life."
+
+msgid "Creencias."
+msgstr "Beliefs."
+
+msgid "Cristo Primero"
+msgstr "Christ First"
+
+msgid "Cuenta regresiva para el próximo encuentro"
+msgstr "Countdown to the next gathering"
+
+msgid "Cuéntanos cómo podemos ayudarte o confirma que nos acompañarás. Nuestro equipo estará feliz de recibirte."
+msgstr "Tell us how we can help or let us know you will join us. Our team will be happy to welcome you."
+
+msgid "Cuéntanos un poco más..."
+msgstr "Tell us a little more..."
+
+msgid "Da el siguiente"
+msgstr "Take the next"
+
+msgid "Desde entonces, ha llevado el mensaje de Jesucristo a nueve naciones, predicando en inglés, español y portugués. Su ministerio está enfocado en el avivamiento, la sanidad, la liberación y la restauración de vidas, creyendo que Jesucristo sigue haciendo milagros hoy."
+msgstr "Since then, he has carried the message of Jesus Christ to nine nations, preaching in English, Spanish, and Portuguese. His ministry focuses on revival, healing, deliverance, and the restoration of lives, believing that Jesus Christ still performs miracles today."
+
+msgid "Diagnosticado con parálisis cerebral al nacer, los médicos declararon que nunca podría caminar. Recomendaron que pasara el resto de su vida en una silla de ruedas y, posteriormente, en un hogar de cuidado permanente. Sin embargo, su madre se negó a aceptar ese diagnóstico y decidió creer en la promesa y el poder de Dios."
+msgstr "Diagnosed with cerebral palsy at birth, doctors declared that he would never walk. They recommended that he spend the rest of his life in a wheelchair and later in a permanent care facility. His mother, however, refused to accept that diagnosis and chose to believe in God's promise and power."
+
+msgid "Dinos cómo podemos llamarte."
+msgstr "Tell us what to call you."
+
+msgid "Dios escribió un testimonio."
+msgstr "God wrote a testimony."
+
+msgid "Discipulado"
+msgstr "Discipleship"
+
+msgid "Disponible"
+msgstr "Available"
+
+msgid "Donaciones"
+msgstr "Donations"
+
+msgid "Donde la fe"
+msgstr "Where faith"
+
+msgid "Donde otros vieron un límite,"
+msgstr "Where others saw a limitation,"
+
+msgid "Durante dieciséis años sirvió fielmente como capellán, ofreciendo esperanza, consuelo y dirección espiritual a miles de personas en momentos de necesidad. Asimismo, ha dedicado parte de su ministerio a formar y motivar emprendedores, ayudándolos a desarrollar un liderazgo basado en principios bíblicos."
+msgstr "For sixteen years, he faithfully served as a chaplain, offering hope, comfort, and spiritual guidance to thousands in times of need. He has also devoted part of his ministry to training and motivating entrepreneurs, helping them develop leadership grounded in biblical principles."
+
+msgid "Días"
+msgstr "Days"
+
+msgid "El Caribe"
+msgstr "The Caribbean"
+
+msgid "El Espíritu Santo"
+msgstr "The Holy Spirit"
+
+msgid "El comienzo"
+msgstr "The beginning"
+
+msgid "El encuentro"
+msgstr "The gathering"
+
+msgid "El llamado"
+msgstr "The calling"
+
+msgid "Elige tu próxima"
+msgstr "Choose your next"
+
+msgid "En Centro Cristiano Milagros Ahora Visión Celestial, creemos que la Biblia es la Palabra de Dios inspirada, infalible y autoritativa. Es el fundamento de nuestra fe, nuestras enseñanzas y nuestra vida diaria."
+msgstr "At Miracles Now Heavenly Vision Christian Center, we believe the Bible is the inspired, infallible, and authoritative Word of God. It is the foundation of our faith, our teaching, and our daily life."
+
+msgid "Encuentro"
+msgstr "Gathering"
+
+msgid "Enseñanza bíblica"
+msgstr "Biblical teaching"
+
+msgid "Enviar mensaje"
+msgstr "Send message"
+
+msgid "Escribe tu nombre"
+msgstr "Enter your name"
+
+msgid "Escribe un mensaje breve."
+msgstr "Write a brief message."
+
+msgid "Escribe un mensaje de al menos 10 caracteres."
+msgstr "Write a message of at least 10 characters."
+
+msgid "Escribe un nombre de al menos 2 caracteres."
+msgstr "Enter a name of at least 2 characters."
+
+msgid "Escríbenos"
+msgstr "Email us"
+
+msgid "Espera un momento antes de enviar otro mensaje."
+msgstr "Please wait a moment before sending another message."
+
+msgid "Estados Unidos"
+msgstr "United States"
+
+msgid "Estamos comprometidos con alcanzar nuestras ciudades y las naciones con el Evangelio."
+msgstr "We are committed to reaching our cities and the nations with the Gospel."
+
+msgid "Estamos para servirte antes, durante y después del encuentro. Nadie tiene que caminar solo."
+msgstr "We are here to serve you before, during, and after the gathering. No one has to walk alone."
+
+msgid "Estamos para ti"
+msgstr "We are here for you"
+
+msgid "Estamos preparando esta galería para que puedas volver a vivir cada encuentro."
+msgstr "We are preparing this gallery so you can relive every gathering."
+
+msgid "Estamos preparando nuestra videoteca. Mientras tanto, conoce la fecha del próximo encuentro."
+msgstr "We are preparing our video library. In the meantime, discover the date of the next gathering."
+
+msgid "Evangelismo"
+msgstr "Evangelism"
+
+msgid "Evento en video"
+msgstr "Video event"
+
+msgid "Eventos"
+msgstr "Events"
+
+msgid "Eventos en video | Noches Sobrenaturales"
+msgstr "Video Events | Supernatural Nights"
+
+msgid "Eventos que dejan"
+msgstr "Events that leave"
+
+msgid "Excelencia"
+msgstr "Excellence"
+
+msgid "Experiencia"
+msgstr "Experience"
+
+msgid "Explora los momentos de fe, adoración y comunidad vividos en Noches Sobrenaturales."
+msgstr "Explore moments of faith, worship, and community experienced at Supernatural Nights."
+
+msgid "Explorar todos los eventos"
+msgstr "Explore all events"
+
+msgid "Fe que se convierte en"
+msgstr "Faith that becomes"
+
+msgid "Fe, llamado y propósito"
+msgstr "Faith, calling, and purpose"
+
+msgid "Fecha"
+msgstr "Date"
+
+msgid "Fechas"
+msgstr "Dates"
+
+msgid "Fundador y Pastor Principal"
+msgstr "Founder and Senior Pastor"
+
+msgid "Fundamentales."
+msgstr "Core Values."
+
+msgid "Fundamento de fe"
+msgstr "Foundation of faith"
+
+msgid "Galería"
+msgstr "Gallery"
+
+msgid "Galería de imágenes | Noches Sobrenaturales"
+msgstr "Photo Gallery | Supernatural Nights"
+
+msgid "Hablemos"
+msgstr "Let us talk"
+
+msgid "Historias, palabra y momentos que vale la pena volver a vivir."
+msgstr "Stories, messages, and moments worth experiencing again."
+
+msgid "Honramos a Dios mediante la honestidad, la fidelidad y la excelencia."
+msgstr "We honor God through honesty, faithfulness, and excellence."
+
+msgid "Hora por anunciar"
+msgstr "Time to be announced"
+
+msgid "Horas"
+msgstr "Hours"
+
+msgid "Identidad ministerial"
+msgstr "Ministry identity"
+
+msgid "Idioma del sitio"
+msgstr "Site language"
+
+msgid "Idiomas de predicación"
+msgstr "Languages preached"
+
+msgid "Imagen anterior"
+msgstr "Previous image"
+
+msgid "Imagen siguiente"
+msgstr "Next image"
+
+msgid "Ingresa un correo electrónico válido."
+msgstr "Enter a valid email address."
+
+msgid "Ingresa un correo válido."
+msgstr "Enter a valid email address."
+
+msgid "Ingresar"
+msgstr "Sign in"
+
+msgid "Instantes que cuentan"
+msgstr "Moments that tell"
+
+msgid "Integridad"
+msgstr "Integrity"
+
+msgid "Jeremías 33:3"
+msgstr "Jeremiah 33:3"
+
+msgid "Jesús es el centro de todo lo que hacemos."
+msgstr "Jesus is at the center of everything we do."
+
+msgid "La Iglesia"
+msgstr "The Church"
+
+msgid "La vida del Pastor Richie Ramos proclama una verdad que continúa guiando cada etapa de su ministerio: Jesucristo salva, sana, libera y transforma vidas."
+msgstr "Pastor Richie Ramos's life proclaims a truth that continues to guide every season of his ministry: Jesus Christ saves, heals, delivers, and transforms lives."
+
+msgid "Lanzamiento"
+msgstr "Release"
+
+msgid "Le ofrecemos a Dios lo mejor de nosotros en cada área del ministerio."
+msgstr "We offer God our best in every area of ministry."
+
+msgid "Liderazgo"
+msgstr "Leadership"
+
+msgid "Lo que guía nuestro caminar"
+msgstr "What guides our walk"
+
+msgid "Logo de Iglesia Milagros Hoy"
+msgstr "Iglesia Milagros Hoy logo"
+
+msgid "Lucas 1:37"
+msgstr "Luke 1:37"
+
+msgid "Mantente conectado"
+msgstr "Stay connected"
+
+msgid "Mateo 19:26"
+msgstr "Matthew 19:26"
+
+msgid "Matrimonio y dignidad humana"
+msgstr "Marriage and human dignity"
+
+msgid "Memorias de la comunidad"
+msgstr "Community memories"
+
+msgid "Mensaje"
+msgstr "Message"
+
+msgid "Mensaje de fe"
+msgstr "Message of faith"
+
+msgid "Mi panel"
+msgstr "Dashboard"
+
+msgid "Milagros hoy"
+msgstr "Miracles today"
+
+msgid "Miniatura de %(title)s"
+msgstr "Thumbnail for %(title)s"
+
+msgid "Mira de cerca."
+msgstr "Take a closer look."
+
+msgid "Mira mensajes y momentos de nuestras noches. Cada historia es un recordatorio de que Dios continúa obrando."
+msgstr "Watch messages and moments from our nights. Every story is a reminder that God is still at work."
+
+msgid "Mira. Recuerda."
+msgstr "Watch. Remember."
+
+msgid "Miracles Now Heavenly Vision Christian Center es una iglesia cristiana dedicada a exaltar a Jesucristo, amar a las personas y alcanzar al mundo con el poder transformador del Evangelio."
+msgstr "Miracles Now Heavenly Vision Christian Center is a Christian church devoted to exalting Jesus Christ, loving people, and reaching the world with the transforming power of the Gospel."
+
+msgid "Momentos de fe, adoración y comunidad que queremos recordar contigo."
+msgstr "Moments of faith, worship, and community that we want to remember with you."
+
+msgid "Momentos que siguen"
+msgstr "Moments that keep"
+
+msgid "Mucho más que una noche"
+msgstr "Much more than one night"
+
+msgid "Muy pronto compartiremos nuevos recuerdos."
+msgstr "We will share new memories very soon."
+
+msgid "Música y momentos que aquietan el alma y dirigen toda la atención a Jesús."
+msgstr "Music and moments that quiet the soul and direct every eye toward Jesus."
+
+msgid "Naciones alcanzadas"
+msgstr "Nations reached"
+
+msgid "Navegación principal"
+msgstr "Main navigation"
+
+msgid "No pudimos enviar el mensaje en este momento. Inténtalo nuevamente más tarde."
+msgstr "We could not send your message at this time. Please try again later."
+
+msgid "No vienes a un evento."
+msgstr "You are not coming to an event."
+
+msgid "Noches Sobrenaturales | Iglesia Milagros Hoy"
+msgstr "Supernatural Nights | Iglesia Milagros Hoy"
+
+msgid "Noches Sobrenaturales: una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy. Ven tal como eres y vuelve a creer."
+msgstr "Supernatural Nights: a worship, Word, and prayer experience from Iglesia Milagros Hoy. Come as you are and believe again."
+
+msgid "Nombre completo"
+msgstr "Full name"
+
+msgid "Nosotros"
+msgstr "About Us"
+
+msgid "Nuestra galería"
+msgstr "Our gallery"
+
+msgid "Nuestra misión"
+msgstr "Our mission"
+
+msgid "Nuestra misión es guiar a las personas a una relación personal con Jesucristo mediante la adoración, la enseñanza bíblica, la oración, el evangelismo y el servicio a la comunidad."
+msgstr "Our mission is to guide people into a personal relationship with Jesus Christ through worship, biblical teaching, prayer, evangelism, and service to the community."
+
+msgid "Nuestra videoteca"
+msgstr "Our video library"
+
+msgid "Nuestras"
+msgstr "Our"
+
+msgid "Nuestros Valores"
+msgstr "Our"
+
+msgid "Nueva Jersey"
+msgstr "New Jersey"
+
+msgid "Nueva York"
+msgstr "New York"
+
+msgid "Nuevos momentos llegarán pronto."
+msgstr "New moments are coming soon."
+
+msgid "Oración"
+msgstr "Prayer"
+
+msgid "Palabra"
+msgstr "The Word"
+
+msgid "Palabras para vivir"
+msgstr "Words to live"
+
+msgid "Para Dios no existe lo imposible."
+msgstr "Nothing is impossible for God."
+
+msgid "Para Dios todo es posible."
+msgstr "With God all things are possible."
+
+msgid "Pastor Richie Ramos sentado, sonriendo y vestido con traje azul"
+msgstr "Pastor Richie Ramos seated, smiling, and wearing a blue suit"
+
+msgid "Pastor Richie Ramos sonriendo con traje azul"
+msgstr "Pastor Richie Ramos smiling in a blue suit"
+
+msgid "Permanecemos firmes en la Palabra de Dios."
+msgstr "We stand firmly on the Word of God."
+
+msgid "Personas dispuestas a escucharte, creer contigo y acompañarte sin juzgar."
+msgstr "People ready to listen, believe with you, and walk beside you without judgment."
+
+msgid "Petición de oración"
+msgstr "Prayer request"
+
+msgid "Porque para Dios no hay nada imposible."
+msgstr "For nothing will be impossible with God."
+
+msgid "Presencia, esperanza y liderazgo con principios."
+msgstr "Presence, hope, and principled leadership."
+
+msgid "Principios bíblicos"
+msgstr "Biblical principles"
+
+msgid "Próxima"
+msgstr "Next"
+
+msgid "Próximamente"
+msgstr "Coming soon"
+
+msgid "Próximo encuentro"
+msgstr "Next gathering"
+
+msgid "Publicado en 2021"
+msgstr "Published in 2021"
+
+msgid "Publicaremos la próxima fecha muy pronto."
+msgstr "We will announce the next date very soon."
+
+msgid "Página %(current)s de %(total)s"
+msgstr "Page %(current)s of %(total)s"
+
+msgid "Página anterior"
+msgstr "Previous page"
+
+msgid "Página siguiente"
+msgstr "Next page"
+
+msgid "Páginas de la galería"
+msgstr "Gallery pages"
+
+msgid "Páginas de videos"
+msgstr "Video pages"
+
+msgid "Queremos creer contigo."
+msgstr "We want to believe with you."
+
+msgid "Quiero asistir"
+msgstr "I want to attend"
+
+msgid "Quiero compartir mi testimonio"
+msgstr "I want to share my testimony"
+
+msgid "Quiero confirmar mi asistencia"
+msgstr "I want to confirm my attendance"
+
+msgid "Quiero recibir una Biblia"
+msgstr "I want to receive a Bible"
+
+msgid "Quiero servir a la comunidad"
+msgstr "I want to serve the community"
+
+msgid "Recibe una Biblia"
+msgstr "Receive a Bible"
+
+msgid "Recibimos tu mensaje. Gracias por escribirnos."
+msgstr "We received your message. Thank you for contacting us."
+
+msgid "Recuerda con nosotros."
+msgstr "Remember with us."
+
+msgid "Reproducir"
+msgstr "Play"
+
+msgid "Reproductor de YouTube"
+msgstr "YouTube player"
+
+msgid "República Dominicana"
+msgstr "Dominican Republic"
+
+msgid "Retrato"
+msgstr "Portrait"
+
+msgid "Retrato cercano del Pastor Richie Ramos con traje azul y camisa blanca"
+msgstr "Close portrait of Pastor Richie Ramos in a blue suit and white shirt"
+
+msgid "Retrato formal del Pastor Richie Ramos con traje azul y corbata"
+msgstr "Formal portrait of Pastor Richie Ramos in a blue suit and tie"
+
+msgid "Revive el encuentro"
+msgstr "Relive the gathering"
+
+msgid "Revive los mensajes, testimonios y momentos de Noches Sobrenaturales en nuestra galería de videos."
+msgstr "Relive the messages, testimonies, and moments from Supernatural Nights in our video gallery."
+
+msgid "Salir"
+msgstr "Sign out"
+
+msgid "Saltar al contenido"
+msgstr "Skip to content"
+
+msgid "Salvación por gracia"
+msgstr "Salvation by grace"
+
+msgid "Seg"
+msgstr "Sec"
+
+msgid "Selecciona cualquier fotografía para verla a pantalla completa y conocer los detalles de ese momento."
+msgstr "Select any photograph to view it full screen and discover the details of that moment."
+
+msgid "Selecciona cualquier video para reproducirlo sin salir de la experiencia."
+msgstr "Select any video to play it without leaving the experience."
+
+msgid "Selecciona una fecha para ver sus detalles y actualizar la cuenta regresiva."
+msgstr "Select a date to view its details and update the countdown."
+
+msgid "Seleccionar idioma"
+msgstr "Select language"
+
+msgid "Servicio"
+msgstr "Service"
+
+msgid "Servimos a nuestras comunidades con bondad y generosidad."
+msgstr "We serve our communities with kindness and generosity."
+
+msgid "Siguiente"
+msgstr "Next"
+
+msgid "Sirve a la comunidad"
+msgstr "Serve the community"
+
+msgid "Sobre Nosotros"
+msgstr "About Us"
+
+msgid "Sobre Nosotros | Noches Sobrenaturales"
+msgstr "About Us | Supernatural Nights"
+
+msgid "Somos una iglesia donde personas de todas las edades y procedencias pueden crecer espiritualmente, descubrir el propósito de Dios para sus vidas y desarrollar una fe firme basada en la Palabra de Dios."
+msgstr "We are a church where people of every age and background can grow spiritually, discover God's purpose for their lives, and develop a strong faith grounded in the Word of God."
+
+msgid "Su historia"
+msgstr "His story"
+
+msgid "Te invitamos a acompañarnos mientras juntos vivimos nuestra misión:"
+msgstr "We invite you to join us as we live out our mission together:"
+
+msgid "Tengo una petición de oración"
+msgstr "I have a prayer request"
+
+msgid "Tu ayuda puede cambiar una vida."
+msgstr "Your help can change a life."
+
+msgid "Tu mensaje fue enviado. Nuestro equipo se comunicará contigo."
+msgstr "Your message has been sent. Our team will contact you."
+
+msgid "Tu primera Biblia es gratis."
+msgstr "Your first Bible is free."
+
+msgid "Un lugar para todos"
+msgstr "A place for everyone"
+
+msgid "Un mensaje bíblico, relevante y lleno de esperanza para caminar con propósito."
+msgstr "A biblical, relevant, hope-filled message to help you walk with purpose."
+
+msgid "Un solo Dios"
+msgstr "One God"
+
+msgid "Un testimonio viviente"
+msgstr "A living testimony"
+
+msgid "Un testimonio viviente del poder transformador de Jesucristo."
+msgstr "A living testimony of the transforming power of Jesus Christ."
+
+msgid "Una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy."
+msgstr "A worship, Word, and prayer experience from Iglesia Milagros Hoy."
+
+msgid "Una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy. Ven tal como eres y vuelve a creer."
+msgstr "A worship, Word, and prayer experience from Iglesia Milagros Hoy. Come as you are and believe again."
+
+msgid "Una experiencia de adoración, palabra y oración donde cada persona puede encontrarse con Dios y descubrir que lo imposible todavía sucede."
+msgstr "A worship, Word, and prayer experience where everyone can encounter God and discover that the impossible still happens."
+
+msgid "Una iglesia dedicada a amar a Dios, amar a las personas y alcanzar al mundo con el Evangelio de Jesucristo."
+msgstr "A church devoted to loving God, loving people, and reaching the world with the Gospel of Jesus Christ."
+
+msgid "Una iglesia para"
+msgstr "A church to"
+
+msgid "Una misión que cruza"
+msgstr "A mission that crosses"
+
+msgid "Una noche para volver a creer"
+msgstr "A night to believe again"
+
+msgid "Una promesa más grande que el diagnóstico."
+msgstr "A promise greater than the diagnosis."
+
+msgid "Una vida de servicio"
+msgstr "A life of service"
+
+msgid "Una vida marcada por la gracia, el servicio y la fe."
+msgstr "A life marked by grace, service, and faith."
+
+msgid "Una vida transformada para anunciar a Jesucristo."
+msgstr "A life transformed to proclaim Jesus Christ."
+
+msgid "Ver ahora"
+msgstr "Watch now"
+
+msgid "Ver próxima noche"
+msgstr "View next night"
+
+msgid "Ver próximas fechas"
+msgstr "View upcoming dates"
+
+msgid "Verdad Bíblica"
+msgstr "Biblical Truth"
+
+msgid "Video del encuentro"
+msgstr "Gathering video"
+
+msgid "Vienes a Su presencia."
+msgstr "You come into His presence."
+
+msgid "Visión de impacto global"
+msgstr "Vision for global impact"
+
+msgid "Visión presente y futura"
+msgstr "Present and future vision"
+
+msgid "Volver arriba"
+msgstr "Back to top"
+
+msgid "Vuelve a creer."
+msgstr "Believe again."
+
+msgid "Vuelve a vivir cada palabra, cada testimonio y cada momento donde la fe se encontró con lo imposible."
+msgstr "Relive every word, every testimony, and every moment when faith encountered the impossible."
+
+msgid "acción."
+msgstr "action."
+
+msgid "con propósito."
+msgstr "with purpose."
+
+msgid "creer, crecer y servir."
+msgstr "believe, grow, and serve."
+
+msgid "enciende"
+msgstr "ignited"
+
+msgid "fronteras."
+msgstr "borders."
+
+msgid "hablando al corazón."
+msgstr "speaking to the heart."
+
+msgid "noche sobrenatural."
+msgstr "supernatural night."
+
+msgid "paso de fe."
+msgstr "step of faith."
+
+msgid "por anunciar"
+msgstr "to be announced"
+
+msgid "recuerdos publicados"
+msgstr "published memories"
+
+msgid "se"
+msgstr "is"
+
+msgid "una historia de fe."
+msgstr "a story of faith."
+
+msgid "una huella eterna."
+msgstr "an eternal mark."
+
+msgid "videos disponibles"
+msgstr "videos available"
+
+msgid "¿Cómo podemos ayudarte?"
+msgstr "How can we help you?"
+
+msgid "Áreas de nuestra misión"
+msgstr "Areas of our mission"
+
+msgid "Áreas de servicio"
+msgstr "Areas of service"
+
+msgid "“Clama a mí, y yo te responderé, y te enseñaré cosas grandes y ocultas que tú no conoces.”"
+msgstr "“Call to me and I will answer you and tell you great and unsearchable things you do not know.”"
+
+msgid "Acceso a la comunidad de Noches Sobrenaturales de Iglesia Milagros Hoy."
+msgstr "Access the Supernatural Nights community from Iglesia Milagros Hoy."
+
+msgid "Bienvenido de nuevo"
+msgstr "Welcome back"
+
+msgid "Comienza aquí"
+msgstr "Start here"
+
+msgid "Completa tus datos para formar parte de la comunidad."
+msgstr "Complete your information to become part of the community."
+
+msgid "Conecta con la comunidad, administra tu participación y acompáñanos en la próxima noche sobrenatural."
+msgstr "Connect with the community, manage your participation, and join us for the next supernatural night."
+
+msgid "Confirmar contraseña"
+msgstr "Confirm password"
+
+msgid "Contraseña"
+msgstr "Password"
+
+msgid "Crea tu cuenta"
+msgstr "Create your account"
+
+msgid "Crea una contraseña segura"
+msgstr "Create a secure password"
+
+msgid "Crear mi cuenta"
+msgstr "Create my account"
+
+msgid "Crear una cuenta"
+msgstr "Create an account"
+
+msgid "Cuenta"
+msgstr "Account"
+
+msgid "Debe tener al menos 8 caracteres y no ser demasiado común."
+msgstr "It must contain at least 8 characters and must not be too common."
+
+msgid "El nombre de usuario o la contraseña no son correctos. Verifica los datos e inténtalo nuevamente."
+msgstr "The username or password is incorrect. Check your information and try again."
+
+msgid "Elige un nombre de usuario"
+msgstr "Choose a username"
+
+msgid "Entrar a mi cuenta"
+msgstr "Sign in to my account"
+
+msgid "Escribe la misma contraseña nuevamente."
+msgstr "Enter the same password again."
+
+msgid "Esta cuenta está inactiva."
+msgstr "This account is inactive."
+
+msgid "Has iniciado sesión correctamente."
+msgstr "You have signed in successfully."
+
+msgid "Ingresa tus datos para acceder a tu cuenta."
+msgstr "Enter your information to access your account."
+
+msgid "Inicia sesión"
+msgstr "Sign in"
+
+msgid "Iniciar sesión"
+msgstr "Sign in"
+
+msgid "Nombre de usuario"
+msgstr "Username"
+
+msgid "Regístrate"
+msgstr "Register"
+
+msgid "Repite tu contraseña"
+msgstr "Repeat your password"
+
+msgid "Saltar al formulario"
+msgstr "Skip to form"
+
+msgid "Tu contraseña"
+msgstr "Your password"
+
+msgid "Tu cuenta fue creada correctamente. ¡Bienvenido!"
+msgstr "Your account was created successfully. Welcome!"
+
+msgid "Tu nombre de usuario"
+msgstr "Your username"
+
+msgid "Tu sesión se cerró correctamente."
+msgstr "You have signed out successfully."
+
+msgid "Un lugar para"
+msgstr "A place to"
+
+msgid "Una comunidad de fe"
+msgstr "A community of faith"
+
+msgid "Usa hasta 150 caracteres: letras, números y @/./+/-/_."
+msgstr "Use up to 150 characters: letters, numbers, and @/./+/-/_."
+
+msgid "Volver al sitio"
+msgstr "Back to the site"
+
+msgid "Ya existe una cuenta registrada con este correo."
+msgstr "An account is already registered with this email address."
+
+msgid "volver a creer."
+msgstr "believe again."
+
+msgid "¿Todavía no tienes cuenta?"
+msgstr "Do you still need an account?"
+
+msgid "¿Ya tienes una cuenta?"
+msgstr "Already have an account?"

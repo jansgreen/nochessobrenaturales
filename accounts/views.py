@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods, require_POST
 
 from .forms import LoginForm, RegistrationForm
@@ -33,7 +34,7 @@ def register(request):
         auth_login(request, user)
         messages.success(
             request,
-            "Tu cuenta fue creada correctamente. ¡Bienvenido!",
+            _("Tu cuenta fue creada correctamente. ¡Bienvenido!"),
         )
         return redirect(redirect_url)
 
@@ -53,7 +54,7 @@ def user_login(request):
     form = LoginForm(request=request, data=request.POST or None)
     if request.method == "POST" and form.is_valid():
         auth_login(request, form.get_user())
-        messages.success(request, "Has iniciado sesión correctamente.")
+        messages.success(request, _("Has iniciado sesión correctamente."))
         return redirect(redirect_url)
 
     return render(
@@ -67,6 +68,5 @@ def user_login(request):
 @require_POST
 def user_logout(request):
     auth_logout(request)
-    messages.success(request, "Tu sesión se cerró correctamente.")
+    messages.success(request, _("Tu sesión se cerró correctamente."))
     return redirect("accounts:login")
-

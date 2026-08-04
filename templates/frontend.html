@@ -1,28 +1,28 @@
-{% load static %}
+{% load static i18n %}
 <!doctype html>
-<html lang="es">
+<html lang="{{ active_language|default:'es' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#07090d">
-  <title>{% block title %}Noches Sobrenaturales | Iglesia Milagros Hoy{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}Noches Sobrenaturales: una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy. Ven tal como eres y vuelve a creer.{% endblock %}">
+  <title>{% block title %}{% translate "Noches Sobrenaturales | Iglesia Milagros Hoy" %}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{% translate 'Noches Sobrenaturales: una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy. Ven tal como eres y vuelve a creer.' %}{% endblock %}">
   {% static 'assets/logo.jpeg' as social_logo_url %}
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale" content="{{ open_graph_locale }}">
   <meta property="og:site_name" content="Noches Sobrenaturales">
-  <meta property="og:title" content="{% block social_title %}Noches Sobrenaturales | Iglesia Milagros Hoy{% endblock %}">
-  <meta property="og:description" content="{% block social_description %}Una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy. Ven tal como eres y vuelve a creer.{% endblock %}">
+  <meta property="og:title" content="{% block social_title %}{% translate 'Noches Sobrenaturales | Iglesia Milagros Hoy' %}{% endblock %}">
+  <meta property="og:description" content="{% block social_description %}{% translate 'Una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy. Ven tal como eres y vuelve a creer.' %}{% endblock %}">
   <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
   <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ social_logo_url }}">
   <meta property="og:image:secure_url" content="{{ request.scheme }}://{{ request.get_host }}{{ social_logo_url }}">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="610">
   <meta property="og:image:height" content="438">
-  <meta property="og:image:alt" content="Logo de Iglesia Milagros Hoy">
+  <meta property="og:image:alt" content="{% translate 'Logo de Iglesia Milagros Hoy' %}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Noches Sobrenaturales | Iglesia Milagros Hoy">
-  <meta name="twitter:description" content="Una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy.">
+  <meta name="twitter:title" content="{% translate 'Noches Sobrenaturales | Iglesia Milagros Hoy' %}">
+  <meta name="twitter:description" content="{% translate 'Una experiencia de adoración, palabra y oración de Iglesia Milagros Hoy.' %}">
   <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ social_logo_url }}">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@
   <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <a class="skip-link" href="#contenido">{% translate "Saltar al contenido" %}</a>
 
 {% include 'includes/navbar.html' %}
 {% block header %}{% include 'includes/header.html' %}{% endblock %}

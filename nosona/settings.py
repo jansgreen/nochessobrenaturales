@@ -15,6 +15,7 @@ from pathlib import Path
 
 import dj_database_url
 from dotenv import load_dotenv
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,17 +31,27 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', '').strip()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1', 'www.nochesdemilagros.com', 'nochesdemilagros.com']
+ALLOWED_HOSTS = [
+    '.herokuapp.com',
+    '.nochesdemilagros.com',
+    'localhost',
+    '.localhost',
+    '127.0.0.1',
+    'testserver',
+    '.testserver',
+]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
     'django_ckeditor_5',
     'home.apps.HomeConfig',
     'dashboard.apps.DashboardConfig',
@@ -48,12 +59,14 @@ INSTALLED_APPS = [
     'banners.apps.BannersConfig',
     'events.apps.EventsConfig',
     'donations.apps.DonationsConfig',
+    'gallery.apps.GalleryConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -73,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'nosona.context_processors.language_navigation',
             ],
         },
     },
@@ -121,7 +135,24 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
+
+LANGUAGES = (
+    ('es', _('Español')),
+    ('en', _('English')),
+    ('pt', _('Português')),
+)
+
+LOCALE_PATHS = [BASE_DIR / 'locale']
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'es'
+MODELTRANSLATION_LANGUAGES = ('es', 'en', 'pt')
+MODELTRANSLATION_CUSTOM_FIELDS = ('CKEditor5Field',)
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    'default': ('es',),
+    'en': ('es',),
+    'pt': ('es',),
+}
 
 TIME_ZONE = 'America/New_York'
 
@@ -136,9 +167,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+CLOUDINARY_URL = os.getenv('CLOUDINARY_URL', '').strip()
+
 STORAGES = {
     'default': {
-        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+        'BACKEND': (
+            'gallery.storage.CloudinaryMediaStorage'
+            if CLOUDINARY_URL
+            else 'django.core.files.storage.FileSystemStorage'
+        ),
     },
     'staticfiles': {
         'BACKEND': (

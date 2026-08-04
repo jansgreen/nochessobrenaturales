@@ -18,39 +18,100 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = (
-            "eyebrow",
+            "eyebrow_es",
+            "admission_text_es",
+            "cta_text_es",
+            "eyebrow_en",
+            "admission_text_en",
+            "cta_text_en",
+            "eyebrow_pt",
+            "admission_text_pt",
+            "cta_text_pt",
             "starts_at",
-            "admission_text",
-            "cta_text",
             "cta_url",
             "is_featured",
             "is_published",
         )
         labels = {
-            "eyebrow": "Etiqueta superior",
-            "admission_text": "Información de entrada",
-            "cta_text": "Texto del botón",
+            "eyebrow_es": "Etiqueta superior",
+            "admission_text_es": "Información de entrada",
+            "cta_text_es": "Texto del botón",
+            "eyebrow_en": "Top label",
+            "admission_text_en": "Admission information",
+            "cta_text_en": "Button text",
+            "eyebrow_pt": "Etiqueta superior",
+            "admission_text_pt": "Informação de entrada",
+            "cta_text_pt": "Texto do botão",
             "cta_url": "Destino del botón",
             "is_featured": "Mostrar como próximo encuentro",
             "is_published": "Publicar en el calendario",
         }
         help_texts = {
-            "eyebrow": "Ej. Próximo encuentro",
+            "eyebrow_es": "Ej. Próximo encuentro",
+            "eyebrow_en": "E.g. Next gathering",
+            "eyebrow_pt": "Ex. Próximo encontro",
             "cta_url": "Ej. #contacto o /accounts/registro/",
             "is_featured": "Solo un evento puede ocupar la tarjeta principal.",
         }
         widgets = {
-            "eyebrow": forms.TextInput(
+            "eyebrow_es": forms.TextInput(
                 attrs={"placeholder": "Próximo encuentro"}
             ),
-            "admission_text": forms.TextInput(
+            "admission_text_es": forms.TextInput(
                 attrs={"placeholder": "Entrada libre"}
             ),
-            "cta_text": forms.TextInput(
+            "cta_text_es": forms.TextInput(
                 attrs={"placeholder": "Reservar mi lugar"}
+            ),
+            "eyebrow_en": forms.TextInput(
+                attrs={"placeholder": "Next gathering"}
+            ),
+            "admission_text_en": forms.TextInput(
+                attrs={"placeholder": "Free admission"}
+            ),
+            "cta_text_en": forms.TextInput(
+                attrs={"placeholder": "Reserve my place"}
+            ),
+            "eyebrow_pt": forms.TextInput(
+                attrs={"placeholder": "Próximo encontro"}
+            ),
+            "admission_text_pt": forms.TextInput(
+                attrs={"placeholder": "Entrada gratuita"}
+            ),
+            "cta_text_pt": forms.TextInput(
+                attrs={"placeholder": "Reservar o meu lugar"}
             ),
             "cta_url": forms.TextInput(attrs={"placeholder": "#contacto"}),
         }
+
+    def __init__(self, *args, **kwargs):
+        data = kwargs.get("data", args[0] if args else None)
+        if data is not None:
+            data = data.copy()
+            for base_name in ("eyebrow", "admission_text", "cta_text"):
+                if base_name not in data:
+                    continue
+                for suffix in ("es", "en", "pt"):
+                    localized_name = f"{base_name}_{suffix}"
+                    if localized_name not in data:
+                        data[localized_name] = data.get(base_name, "")
+            if args:
+                args = (data, *args[1:])
+            else:
+                kwargs["data"] = data
+        super().__init__(*args, **kwargs)
+        for field_name in (
+            "eyebrow_es",
+            "admission_text_es",
+            "cta_text_es",
+            "eyebrow_en",
+            "admission_text_en",
+            "cta_text_en",
+            "eyebrow_pt",
+            "admission_text_pt",
+            "cta_text_pt",
+        ):
+            self.fields[field_name].required = True
 
     def clean_starts_at(self):
         starts_at = self.cleaned_data["starts_at"]
