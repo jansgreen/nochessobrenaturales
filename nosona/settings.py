@@ -29,7 +29,7 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', '').strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DJANGO_DEBUG', 'False').strip().lower() == 'true'
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',
@@ -39,6 +39,11 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'testserver',
     '.testserver',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://nochessobrenaturales.com',
+    'https://www.nochessobrenaturales.com',
 ]
 
 # Application definition
