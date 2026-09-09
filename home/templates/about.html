@@ -23,7 +23,7 @@
             </a>
           </div>
 
-          <div class="about-identity reveal" data-reveal-delay="120" aria-label="{% translate 'Identidad ministerial' %}">
+          <figure class="about-identity reveal" data-reveal-delay="120">
             <div class="about-identity-media">
               <img
                 src="{% static 'assets/pastor-richie-ramos/pastor-richie-ramos-hero.jpeg' %}"
@@ -32,14 +32,10 @@
                 height="1450"
                 fetchpriority="high"
               >
-              <span aria-hidden="true">RR</span>
             </div>
-            <div class="about-identity-copy">
-              <small>Miracles Now</small>
-              <strong>Heavenly Vision<br>Christian Center</strong>
-              <p>Washington Heights · New York</p>
-            </div>
-          </div>
+
+            <figcaption class="about-identity-caption">Pastor Richie Ramos</figcaption>
+          </figure>
         </div>
       </div>
     </header>
@@ -458,6 +454,73 @@
         </div>
       </div>
     </section>
+
+    {% if ministry_profiles %}
+      <section class="about-ministry section-space" id="equipo" aria-labelledby="aboutMinistryTitle">
+        <div class="container">
+          <header class="about-ministry-heading">
+            <div class="reveal">
+              <p class="overline overline-dark"><span></span> {% translate "Nuestro equipo" %}</p>
+              <h2 id="aboutMinistryTitle">{% translate "Voces que sirven." %}<br><em>{% translate "Vidas que inspiran." %}</em></h2>
+            </div>
+            <p class="reveal" data-reveal-delay="100">
+              {% translate "Conoce a los pastores, líderes e invitados que comparten con nosotros una misma pasión por Jesucristo y por las personas." %}
+            </p>
+          </header>
+
+          <div class="about-ministry-list">
+            {% for profile in ministry_profiles %}
+              <article class="about-ministry-profile reveal" id="perfil-{{ profile.pk }}">
+                <figure class="about-ministry-photo">
+                  <div>
+                    <img
+                      src="{{ profile.photo.url }}"
+                      alt="{{ profile.alt_text }}"
+                      width="900"
+                      height="1125"
+                      loading="lazy"
+                    >
+                  </div>
+                  <figcaption>
+                    <span>{{ forloop.counter|stringformat:"02d" }}</span>
+                    {% if profile.profile_type == "pastor" %}
+                      {% translate "Pastor" %}
+                    {% elif profile.profile_type == "guest" %}
+                      {% translate "Invitado especial" %}
+                    {% else %}
+                      {% translate "Líder ministerial" %}
+                    {% endif %}
+                  </figcaption>
+                </figure>
+
+                <div class="about-ministry-copy">
+                  <p class="about-chapter-label">
+                    {% if profile.profile_type == "pastor" %}
+                      {% translate "Pastor" %}
+                    {% elif profile.profile_type == "guest" %}
+                      {% translate "Invitado especial" %}
+                    {% else %}
+                      {% translate "Líder ministerial" %}
+                    {% endif %}
+                  </p>
+                  <h3>{{ profile.name }}</h3>
+                  <p class="about-ministry-role">{{ profile.role }}</p>
+                  <p class="about-ministry-introduction">{{ profile.introduction }}</p>
+
+                  <details class="about-ministry-biography">
+                    <summary>
+                      <span>{% translate "Conoce su historia" %}</span>
+                      <b aria-hidden="true">+</b>
+                    </summary>
+                    <div>{{ profile.biography|linebreaks }}</div>
+                  </details>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
 
     <section class="about-present">
       <div class="about-present-mark" aria-hidden="true">RR</div>

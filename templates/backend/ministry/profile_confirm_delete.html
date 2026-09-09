@@ -1,0 +1,17 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Eliminar perfil{% endblock %}
+
+{% block content %}
+  <section class="dashboard-confirm-card">
+    <p class="dashboard-eyebrow">Equipo ministerial</p>
+    <h1>Eliminar a {{ ministry_profile.name }}</h1>
+    <p>El perfil y su fotografía dejarán de aparecer en la página Nosotros. Esta acción no se puede deshacer.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <a href="{% url 'dashboard:ministry_profile_list' %}">Cancelar</a>
+      <button type="submit">Sí, eliminar perfil</button>
+    </form>
+  </section>
+{% endblock %}

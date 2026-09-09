@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.core.paginator import Paginator
+from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
@@ -25,10 +27,22 @@ from events.youtube_api import (
 )
 from gallery.forms import GalleryImageForm
 from gallery.models import GalleryImage
-from guests.forms import ShowcaseCategoryForm, ShowcaseItemForm
-from guests.models import ShowcaseCategory, ShowcaseItem
+from guests.forms import (
+    MinistryProfileForm,
+    ShowcaseCategoryForm,
+    ShowcaseItemForm,
+)
+from guests.models import MinistryProfile, ShowcaseCategory, ShowcaseItem
 
-from .decorators import staff_required
+from .decorators import staff_required, superuser_required
+from .forms import (
+    DashboardSetPasswordForm,
+    DashboardUserCreationForm,
+    DashboardUserUpdateForm,
+)
+
+
+User = get_user_model()
 
 
 @login_required
@@ -57,6 +71,16 @@ def dashboard_home(request):
             is_active=True,
             category__is_active=True,
         ).count()
+        context["ministry_profile_count"] = MinistryProfile.objects.count()
+        context["active_ministry_profile_count"] = MinistryProfile.objects.filter(
+            is_active=True
+        ).count()
+        if request.user.is_superuser:
+            context["user_count"] = User.objects.count()
+            context["active_staff_count"] = User.objects.filter(
+                is_active=True,
+                is_staff=True,
+            ).count()
     return render(request, 'dash.html', context)
 
 
@@ -603,4 +627,190 @@ def showcase_item_delete(request, pk):
         request,
         "backend/showcase/item_confirm_delete.html",
         {"showcase_item": showcase_item},
+    )
+
+
+@staff_required
+def ministry_profile_list(request):
+    return render(
+        request,
+        "backend/ministry/profile_list.html",
+        {"ministry_profiles": MinistryProfile.objects.all()},
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def ministry_profile_create(request):
+    form = MinistryProfileForm(request.POST or None, request.FILES or None)
+    if request.method == "POST" and form.is_valid():
+        profile = form.save()
+        messages.success(request, f'El perfil de “{profile.name}” fue agregado.')
+        return redirect("dashboard:ministry_profile_list")
+
+    return render(
+        request,
+        "backend/ministry/profile_form.html",
+        {
+            "form": form,
+            "page_title": "Agregar pastor o invitado",
+            "submit_label": "Agregar perfil",
+        },
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def ministry_profile_update(request, pk):
+    ministry_profile = get_object_or_404(MinistryProfile, pk=pk)
+    form = MinistryProfileForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=ministry_profile,
+    )
+    if request.method == "POST" and form.is_valid():
+        ministry_profile = form.save()
+        messages.success(
+            request,
+            f'El perfil de “{ministry_profile.name}” fue actualizado.',
+        )
+        return redirect("dashboard:ministry_profile_list")
+
+    return render(
+        request,
+        "backend/ministry/profile_form.html",
+        {
+            "form": form,
+            "ministry_profile": ministry_profile,
+            "page_title": "Editar perfil ministerial",
+            "submit_label": "Guardar cambios",
+        },
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def ministry_profile_delete(request, pk):
+    ministry_profile = get_object_or_404(MinistryProfile, pk=pk)
+    if request.method == "POST":
+        name = ministry_profile.name
+        ministry_profile.delete()
+        messages.success(request, f'El perfil de “{name}” fue eliminado.')
+        return redirect("dashboard:ministry_profile_list")
+
+    return render(
+        request,
+        "backend/ministry/profile_confirm_delete.html",
+        {"ministry_profile": ministry_profile},
+    )
+
+
+@superuser_required
+def user_list(request):
+    query = request.GET.get("q", "").strip()[:100]
+    users = User.objects.order_by("-is_superuser", "-is_staff", "username")
+    if query:
+        users = users.filter(
+            Q(username__icontains=query)
+            | Q(first_name__icontains=query)
+            | Q(last_name__icontains=query)
+            | Q(email__icontains=query)
+        )
+    page_obj = Paginator(users, 15).get_page(request.GET.get("pagina"))
+    return render(
+        request,
+        "backend/users/user_list.html",
+        {"page_obj": page_obj, "query": query},
+    )
+
+
+@superuser_required
+@require_http_methods(["GET", "POST"])
+def user_create(request):
+    form = DashboardUserCreationForm(request.POST or None, actor=request.user)
+    if request.method == "POST" and form.is_valid():
+        account = form.save()
+        messages.success(request, f'La cuenta de “{account.username}” fue creada.')
+        return redirect("dashboard:user_list")
+
+    return render(
+        request,
+        "backend/users/user_form.html",
+        {
+            "form": form,
+            "page_title": "Crear usuario",
+            "submit_label": "Crear cuenta",
+        },
+    )
+
+
+@superuser_required
+@require_http_methods(["GET", "POST"])
+def user_update(request, pk):
+    account = get_object_or_404(User, pk=pk)
+    form = DashboardUserUpdateForm(
+        request.POST or None,
+        instance=account,
+        actor=request.user,
+    )
+    if request.method == "POST" and form.is_valid():
+        account = form.save()
+        messages.success(request, f'La cuenta de “{account.username}” fue actualizada.')
+        return redirect("dashboard:user_list")
+
+    return render(
+        request,
+        "backend/users/user_form.html",
+        {
+            "form": form,
+            "account": account,
+            "page_title": "Editar usuario",
+            "submit_label": "Guardar cambios",
+        },
+    )
+
+
+@superuser_required
+@require_http_methods(["GET", "POST"])
+def user_password(request, pk):
+    account = get_object_or_404(User, pk=pk)
+    form = DashboardSetPasswordForm(account, request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        account = form.save()
+        if account.pk == request.user.pk:
+            update_session_auth_hash(request, account)
+        messages.success(
+            request,
+            f'La contraseña de “{account.username}” fue actualizada.',
+        )
+        return redirect("dashboard:user_list")
+
+    return render(
+        request,
+        "backend/users/user_password.html",
+        {"form": form, "account": account},
+    )
+
+
+@superuser_required
+@require_http_methods(["GET", "POST"])
+def user_delete(request, pk):
+    account = get_object_or_404(User, pk=pk)
+    if account.pk == request.user.pk:
+        messages.error(request, "No puedes eliminar tu propia cuenta.")
+        return redirect("dashboard:user_list")
+    if account.is_superuser and User.objects.filter(is_superuser=True).count() <= 1:
+        messages.error(request, "Debe permanecer al menos un superusuario.")
+        return redirect("dashboard:user_list")
+
+    if request.method == "POST":
+        username = account.username
+        account.delete()
+        messages.success(request, f'La cuenta de “{username}” fue eliminada.')
+        return redirect("dashboard:user_list")
+
+    return render(
+        request,
+        "backend/users/user_confirm_delete.html",
+        {"account": account},
     )

@@ -1038,3 +1038,24 @@ msgstr "Cartão anterior"
 
 msgid "Tarjeta siguiente"
 msgstr "Cartão seguinte"
+
+msgid "Nuestro equipo"
+msgstr "Nossa equipa"
+
+msgid "Voces que sirven."
+msgstr "Vozes que servem."
+
+msgid "Vidas que inspiran."
+msgstr "Vidas que inspiram."
+
+msgid "Conoce a los pastores, líderes e invitados que comparten con nosotros una misma pasión por Jesucristo y por las personas."
+msgstr "Conheça os pastores, líderes e convidados que partilham connosco a mesma paixão por Jesus Cristo e pelas pessoas."
+
+msgid "Pastor"
+msgstr "Pastor"
+
+msgid "Invitado especial"
+msgstr "Convidado especial"
+
+msgid "Líder ministerial"
+msgstr "Líder ministerial"

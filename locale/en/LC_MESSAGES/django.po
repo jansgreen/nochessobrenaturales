@@ -981,3 +981,24 @@ msgstr "Previous card"
 
 msgid "Tarjeta siguiente"
 msgstr "Next card"
+
+msgid "Nuestro equipo"
+msgstr "Our team"
+
+msgid "Voces que sirven."
+msgstr "Voices that serve."
+
+msgid "Vidas que inspiran."
+msgstr "Lives that inspire."
+
+msgid "Conoce a los pastores, líderes e invitados que comparten con nosotros una misma pasión por Jesucristo y por las personas."
+msgstr "Meet the pastors, leaders, and guests who share our passion for Jesus Christ and for people."
+
+msgid "Pastor"
+msgstr "Pastor"
+
+msgid "Invitado especial"
+msgstr "Special guest"
+
+msgid "Líder ministerial"
+msgstr "Ministry leader"

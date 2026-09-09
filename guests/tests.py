@@ -9,8 +9,9 @@ from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from django.urls import reverse
+from django.utils import translation
 
-from .models import ShowcaseCategory, ShowcaseItem
+from .models import MinistryProfile, ShowcaseCategory, ShowcaseItem
 
 
 User = get_user_model()
@@ -118,6 +119,162 @@ class PublicShowcaseTests(TemporaryShowcaseMediaTests):
         self.assertContains(response, "A place to gather.")
         self.assertContains(response, "Washington Heights")
         self.assertContains(response, "A welcoming place for the whole family.")
+
+
+class PublicMinistryProfileTests(TemporaryShowcaseMediaTests):
+    def create_profile(self, name, position, is_active=True):
+        return MinistryProfile.objects.create(
+            name=name,
+            profile_type=MinistryProfile.ProfileType.PASTOR,
+            role="Pastor invitado",
+            introduction=f"Presentación de {name}.",
+            biography=f"Biografía completa de {name}.",
+            photo=uploaded_photo(f"{name}.png"),
+            alt_text=f"Retrato de {name}",
+            position=position,
+            is_active=is_active,
+        )
+
+    def test_about_lists_only_active_profiles_in_editorial_order(self):
+        second = self.create_profile("Pastor Segundo", 20)
+        first = self.create_profile("Pastora Primera", 10)
+        hidden = self.create_profile("Invitado Oculto", 0, is_active=False)
+
+        response = self.client.get(reverse("about"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'id="equipo"')
+        self.assertContains(response, first.name)
+        self.assertContains(response, second.name)
+        self.assertContains(response, first.biography)
+        self.assertNotContains(response, hidden.name)
+        self.assertLess(
+            response.content.index(first.name.encode()),
+            response.content.index(second.name.encode()),
+        )
+
+    def test_about_uses_selected_language_for_ministry_profile(self):
+        profile = self.create_profile("Pastor Example", 1)
+        MinistryProfile.objects.filter(pk=profile.pk).update(
+            role_en="Guest pastor",
+            introduction_en="A life devoted to serving others.",
+            biography_en="His ministry shares a message of hope.",
+            alt_text_en="Portrait of Pastor Example",
+        )
+
+        self.client.post(
+            reverse("set_language"),
+            {"language": "en", "next": reverse("about")},
+        )
+        with translation.override("en"):
+            response = self.client.get(reverse("about"))
+
+        self.assertContains(response, "Our team")
+        self.assertContains(response, "Voices that serve.")
+        self.assertContains(response, "Guest pastor")
+        self.assertContains(response, "A life devoted to serving others.")
+        self.assertContains(response, "His ministry shares a message of hope.")
+
+
+class MinistryProfileDashboardTests(TemporaryShowcaseMediaTests):
+    def setUp(self):
+        self.staff_user = User.objects.create_user(
+            username="ministry-editor",
+            password="ClaveSegura-2026!",
+            is_staff=True,
+        )
+        self.regular_user = User.objects.create_user(
+            username="ministry-member",
+            password="ClaveSegura-2026!",
+        )
+        self.profile = MinistryProfile.objects.create(
+            name="Pastor Inicial",
+            profile_type=MinistryProfile.ProfileType.PASTOR,
+            role="Pastor invitado",
+            introduction="Una presentación breve.",
+            biography="Una biografía ministerial completa.",
+            photo=uploaded_photo("pastor-inicial.png"),
+            alt_text="Retrato del Pastor Inicial",
+            position=1,
+        )
+
+    def profile_data(self, **overrides):
+        data = {
+            "name": "Pastora Elena Rivera",
+            "profile_type": MinistryProfile.ProfileType.GUEST,
+            "role": "Conferencista invitada",
+            "introduction": "Una vida dedicada a compartir esperanza.",
+            "biography": "Su trayectoria refleja una fe activa y compasiva.",
+            "alt_text": "Retrato de la Pastora Elena Rivera",
+            "position": 2,
+            "is_active": "on",
+        }
+        data.update(overrides)
+        return data
+
+    def test_ministry_management_requires_staff_access(self):
+        anonymous = self.client.get(reverse("dashboard:ministry_profile_list"))
+        self.assertEqual(anonymous.status_code, 302)
+
+        self.client.force_login(self.regular_user)
+        member = self.client.get(reverse("dashboard:ministry_profile_list"))
+        self.assertEqual(member.status_code, 403)
+
+    def test_staff_user_can_create_ministry_profile(self):
+        self.client.force_login(self.staff_user)
+
+        response = self.client.post(
+            reverse("dashboard:ministry_profile_create"),
+            {
+                **self.profile_data(),
+                "photo": uploaded_photo("pastora-elena.png"),
+            },
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("dashboard:ministry_profile_list"),
+            fetch_redirect_response=False,
+        )
+        created = MinistryProfile.objects.exclude(pk=self.profile.pk).get()
+        self.assertEqual(created.name, "Pastora Elena Rivera")
+        self.assertTrue(created.photo.name.startswith("ministry/"))
+
+    def test_staff_user_can_update_profile_without_replacing_photo(self):
+        original_photo = self.profile.photo.name
+        self.client.force_login(self.staff_user)
+
+        response = self.client.post(
+            reverse("dashboard:ministry_profile_update", args=[self.profile.pk]),
+            self.profile_data(name="Pastor Actualizado", position=5),
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("dashboard:ministry_profile_list"),
+            fetch_redirect_response=False,
+        )
+        self.profile.refresh_from_db()
+        self.assertEqual(self.profile.name, "Pastor Actualizado")
+        self.assertEqual(self.profile.position, 5)
+        self.assertEqual(self.profile.photo.name, original_photo)
+
+    def test_deleting_profile_also_deletes_photo(self):
+        photo_path = self.profile.photo.path
+        self.assertTrue(Path(photo_path).exists())
+        self.client.force_login(self.staff_user)
+
+        response = self.client.post(
+            reverse("dashboard:ministry_profile_delete", args=[self.profile.pk])
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("dashboard:ministry_profile_list"),
+            fetch_redirect_response=False,
+        )
+        self.assertFalse(MinistryProfile.objects.filter(pk=self.profile.pk).exists())
+        self.assertFalse(Path(photo_path).exists())
 
 
 class ShowcaseDashboardTests(TemporaryShowcaseMediaTests):

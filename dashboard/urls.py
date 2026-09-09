@@ -97,4 +97,33 @@ urlpatterns = [
         views.showcase_item_delete,
         name="showcase_item_delete",
     ),
+    path(
+        "equipo-ministerial/",
+        views.ministry_profile_list,
+        name="ministry_profile_list",
+    ),
+    path(
+        "equipo-ministerial/agregar/",
+        views.ministry_profile_create,
+        name="ministry_profile_create",
+    ),
+    path(
+        "equipo-ministerial/<int:pk>/editar/",
+        views.ministry_profile_update,
+        name="ministry_profile_update",
+    ),
+    path(
+        "equipo-ministerial/<int:pk>/eliminar/",
+        views.ministry_profile_delete,
+        name="ministry_profile_delete",
+    ),
+    path("usuarios/", views.user_list, name="user_list"),
+    path("usuarios/crear/", views.user_create, name="user_create"),
+    path("usuarios/<int:pk>/editar/", views.user_update, name="user_update"),
+    path(
+        "usuarios/<int:pk>/contrasena/",
+        views.user_password,
+        name="user_password",
+    ),
+    path("usuarios/<int:pk>/eliminar/", views.user_delete, name="user_delete"),
 ]

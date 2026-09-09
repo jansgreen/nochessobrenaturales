@@ -12,6 +12,12 @@ def guest_photo_upload_to(instance, filename):
     return f"guests/{dated_folder}/{uuid4().hex}{extension}"
 
 
+def ministry_photo_upload_to(instance, filename):
+    extension = Path(filename).suffix.lower()
+    dated_folder = timezone.now().strftime("%Y/%m")
+    return f"ministry/{dated_folder}/{uuid4().hex}{extension}"
+
+
 class ShowcaseCategory(models.Model):
     title = models.CharField(max_length=120)
     headline = models.CharField(max_length=170)
@@ -58,6 +64,44 @@ class ShowcaseItem(models.Model):
         ordering = ("position", "name", "id")
         verbose_name = "tarjeta destacada"
         verbose_name_plural = "tarjetas destacadas"
+
+    def __str__(self):
+        return self.name
+
+
+class MinistryProfile(models.Model):
+    class ProfileType(models.TextChoices):
+        PASTOR = "pastor", "Pastor"
+        GUEST = "guest", "Invitado especial"
+        LEADER = "leader", "Líder ministerial"
+
+    name = models.CharField(max_length=140)
+    profile_type = models.CharField(
+        max_length=20,
+        choices=ProfileType.choices,
+        default=ProfileType.PASTOR,
+    )
+    role = models.CharField(max_length=170)
+    introduction = models.TextField(max_length=500)
+    biography = models.TextField(max_length=5000)
+    photo = models.ImageField(
+        upload_to=ministry_photo_upload_to,
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=("jpg", "jpeg", "png", "webp")
+            )
+        ],
+    )
+    alt_text = models.CharField(max_length=180)
+    position = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("position", "name", "id")
+        verbose_name = "perfil ministerial"
+        verbose_name_plural = "perfiles ministeriales"
 
     def __str__(self):
         return self.name

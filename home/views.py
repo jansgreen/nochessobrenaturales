@@ -17,6 +17,7 @@ from events.selectors import (
     get_upcoming_events,
 )
 from guests.selectors import get_active_showcase_categories
+from guests.models import MinistryProfile
 
 from .forms import ContactForm
 from .services import EmailConfigurationError, send_contact_email
@@ -32,6 +33,7 @@ def about(request):
         "about.html",
         {
             "donation_url": get_donation_url(),
+            "ministry_profiles": MinistryProfile.objects.filter(is_active=True),
             "page_name": "about",
         },
     )

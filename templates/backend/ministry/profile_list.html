@@ -1,0 +1,53 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Equipo ministerial{% endblock %}
+
+{% block content %}
+  <header class="dashboard-section-heading">
+    <div>
+      <p class="dashboard-eyebrow">Contenido de Nosotros</p>
+      <h1>Pastores e invitados</h1>
+      <p>Administra los perfiles editoriales que acompañan la historia del Pastor Richie Ramos.</p>
+    </div>
+    <a class="dashboard-primary-link" href="{% url 'dashboard:ministry_profile_create' %}">
+      Agregar perfil <span aria-hidden="true">+</span>
+    </a>
+  </header>
+
+  {% if ministry_profiles %}
+    <div class="guest-admin-list ministry-admin-list">
+      {% for profile in ministry_profiles %}
+        <article class="guest-admin-row">
+          <div class="guest-admin-thumb ministry-admin-thumb">
+            <img src="{{ profile.photo.url }}" alt="" loading="lazy">
+          </div>
+
+          <div class="guest-admin-content">
+            <small>Posición {{ profile.position }} · {{ profile.get_profile_type_display }}</small>
+            <h2>{{ profile.name }}</h2>
+            <p><strong>{{ profile.role }}</strong></p>
+            <p>{{ profile.introduction|truncatechars:150 }}</p>
+          </div>
+
+          <div class="guest-admin-status">
+            <span class="banner-status{% if profile.is_active %} active{% endif %}">
+              {% if profile.is_active %}Publicado{% else %}Oculto{% endif %}
+            </span>
+          </div>
+
+          <div class="event-admin-actions">
+            <a href="{% url 'dashboard:ministry_profile_update' profile.pk %}">Editar</a>
+            <a class="danger" href="{% url 'dashboard:ministry_profile_delete' profile.pk %}">Eliminar</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <section class="dashboard-empty-state">
+      <span aria-hidden="true">✦</span>
+      <h2>Todavía no hay perfiles adicionales</h2>
+      <p>El Pastor Richie Ramos permanece como perfil principal. Agrega aquí a los demás pastores, líderes o invitados.</p>
+      <a href="{% url 'dashboard:ministry_profile_create' %}">Agregar el primer perfil</a>
+    </section>
+  {% endif %}
+{% endblock %}

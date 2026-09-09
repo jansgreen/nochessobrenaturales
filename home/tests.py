@@ -147,6 +147,13 @@ class AboutPageTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Pastor Richie Ramos")
+        self.assertContains(
+            response,
+            '<figcaption class="about-identity-caption">Pastor Richie Ramos</figcaption>',
+            html=True,
+        )
+        self.assertNotContains(response, 'class="about-identity-copy"')
+        self.assertNotContains(response, '<span aria-hidden="true">RR</span>')
         self.assertContains(response, "parálisis cerebral")
         self.assertContains(response, "nueve naciones")
         self.assertContains(response, "Miracles Now Heavenly Vision")

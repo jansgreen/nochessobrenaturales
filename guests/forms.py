@@ -1,7 +1,7 @@
 from django import forms
 from django.core.files.uploadedfile import UploadedFile
 
-from .models import ShowcaseCategory, ShowcaseItem
+from .models import MinistryProfile, ShowcaseCategory, ShowcaseItem
 
 
 MAX_PHOTO_SIZE = 8 * 1024 * 1024
@@ -206,6 +206,119 @@ class ShowcaseItemForm(forms.ModelForm):
             self.fields[f"role_{suffix}"].required = False
             self.fields[f"description_{suffix}"].required = False
             self.fields[f"alt_text_{suffix}"].required = False
+
+    def clean_photo(self):
+        photo = self.cleaned_data.get("photo")
+        if isinstance(photo, UploadedFile) and photo.size > MAX_PHOTO_SIZE:
+            raise forms.ValidationError("La fotografía no puede superar los 8 MB.")
+        return photo
+
+
+class MinistryProfileForm(forms.ModelForm):
+    class Meta:
+        model = MinistryProfile
+        fields = (
+            "name",
+            "profile_type",
+            "role_es",
+            "introduction_es",
+            "biography_es",
+            "alt_text_es",
+            "role_en",
+            "introduction_en",
+            "biography_en",
+            "alt_text_en",
+            "role_pt",
+            "introduction_pt",
+            "biography_pt",
+            "alt_text_pt",
+            "photo",
+            "position",
+            "is_active",
+        )
+        labels = {
+            "name": "Nombre completo",
+            "profile_type": "Tipo de perfil",
+            "role_es": "Cargo o ministerio",
+            "introduction_es": "Presentación breve",
+            "biography_es": "Biografía",
+            "alt_text_es": "Texto alternativo de la fotografía",
+            "role_en": "Role or ministry",
+            "introduction_en": "Short introduction",
+            "biography_en": "Biography",
+            "alt_text_en": "Photo alternative text",
+            "role_pt": "Cargo ou ministério",
+            "introduction_pt": "Apresentação breve",
+            "biography_pt": "Biografia",
+            "alt_text_pt": "Texto alternativo da fotografia",
+            "photo": "Fotografía principal",
+            "position": "Posición",
+            "is_active": "Mostrar en la página Nosotros",
+        }
+        help_texts = {
+            "name": "Se mostrará igual en los tres idiomas.",
+            "introduction_es": "Resumen editorial de hasta 500 caracteres.",
+            "biography_es": "Puedes separar la biografía en varios párrafos.",
+            "role_en": "Opcional. Si queda vacío, se mostrará el español.",
+            "role_pt": "Opcional. Se ficar vazio, será apresentado o espanhol.",
+            "photo": "Retrato vertical recomendado. JPG, PNG o WebP; máximo 8 MB.",
+            "position": "Los números menores aparecen primero.",
+        }
+        widgets = {
+            "name": forms.TextInput(attrs={"placeholder": "Ej. Pastor Juan Pérez"}),
+            "role_es": forms.TextInput(
+                attrs={"placeholder": "Ej. Pastor invitado y conferencista"}
+            ),
+            "introduction_es": forms.Textarea(
+                attrs={"rows": 3, "placeholder": "Una presentación breve..."}
+            ),
+            "biography_es": forms.Textarea(
+                attrs={"rows": 9, "placeholder": "Escribe aquí su historia y trayectoria..."}
+            ),
+            "alt_text_es": forms.TextInput(
+                attrs={"placeholder": "Ej. Retrato del Pastor Juan Pérez"}
+            ),
+            "role_en": forms.TextInput(attrs={"placeholder": "E.g. Guest pastor"}),
+            "introduction_en": forms.Textarea(attrs={"rows": 3}),
+            "biography_en": forms.Textarea(attrs={"rows": 9}),
+            "alt_text_en": forms.TextInput(attrs={"placeholder": "E.g. Portrait"}),
+            "role_pt": forms.TextInput(attrs={"placeholder": "Ex. Pastor convidado"}),
+            "introduction_pt": forms.Textarea(attrs={"rows": 3}),
+            "biography_pt": forms.Textarea(attrs={"rows": 9}),
+            "alt_text_pt": forms.TextInput(attrs={"placeholder": "Ex. Retrato"}),
+            "photo": forms.ClearableFileInput(
+                attrs={"accept": "image/jpeg,image/png,image/webp"}
+            ),
+            "position": forms.NumberInput(attrs={"min": 0}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        data = kwargs.get("data", args[0] if args else None)
+        if data is not None:
+            data = data.copy()
+            for base_name in ("role", "introduction", "biography", "alt_text"):
+                if base_name not in data:
+                    continue
+                for suffix in ("es", "en", "pt"):
+                    localized_name = f"{base_name}_{suffix}"
+                    if localized_name not in data:
+                        data[localized_name] = data.get(base_name, "")
+            if args:
+                args = (data, *args[1:])
+            else:
+                kwargs["data"] = data
+
+        super().__init__(*args, **kwargs)
+        for field_name in (
+            "role_es",
+            "introduction_es",
+            "biography_es",
+            "alt_text_es",
+        ):
+            self.fields[field_name].required = True
+        for suffix in ("en", "pt"):
+            for base_name in ("role", "introduction", "biography", "alt_text"):
+                self.fields[f"{base_name}_{suffix}"].required = False
 
     def clean_photo(self):
         photo = self.cleaned_data.get("photo")

@@ -1,0 +1,68 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Usuarios y accesos{% endblock %}
+
+{% block content %}
+  <header class="dashboard-section-heading">
+    <div>
+      <p class="dashboard-eyebrow">Acceso y seguridad</p>
+      <h1>Usuarios</h1>
+      <p>Crea cuentas y asigna exactamente qué nivel de acceso tendrá cada persona.</p>
+    </div>
+    <a class="dashboard-primary-link" href="{% url 'dashboard:user_create' %}">
+      Crear usuario <span aria-hidden="true">+</span>
+    </a>
+  </header>
+
+  <form class="dashboard-list-search" method="get" role="search">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+    <input type="search" name="q" value="{{ query }}" placeholder="Buscar por nombre, usuario o correo" aria-label="Buscar usuarios">
+    <button type="submit">Buscar</button>
+    {% if query %}<a href="{% url 'dashboard:user_list' %}">Limpiar</a>{% endif %}
+  </form>
+
+  {% if page_obj %}
+    <div class="user-admin-list">
+      {% for account in page_obj %}
+        <article class="user-admin-row">
+          <span class="user-admin-avatar">{{ account.username|slice:":1"|upper }}</span>
+          <div class="user-admin-identity">
+            <small>@{{ account.username }}</small>
+            <h2>{{ account.get_full_name|default:account.username }}</h2>
+            <p>{{ account.email|default:"Correo no registrado" }}</p>
+          </div>
+          <div class="user-admin-access">
+            <span class="dashboard-role-badge{% if account.is_superuser %} superuser{% elif account.is_staff %} staff{% endif %}">
+              {% if account.is_superuser %}Superusuario{% elif account.is_staff %}Personal{% else %}Miembro{% endif %}
+            </span>
+            <small>{% if account.is_active %}Cuenta activa{% else %}Cuenta desactivada{% endif %}</small>
+          </div>
+          <div class="user-admin-meta">
+            <small>Último acceso</small>
+            <strong>{{ account.last_login|date:"d/m/Y H:i"|default:"Nunca" }}</strong>
+          </div>
+          <div class="event-admin-actions">
+            <a href="{% url 'dashboard:user_update' account.pk %}">Editar</a>
+            <a href="{% url 'dashboard:user_password' account.pk %}">Contraseña</a>
+            {% if account.pk != user.pk %}<a class="danger" href="{% url 'dashboard:user_delete' account.pk %}">Eliminar</a>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    {% if page_obj.has_other_pages %}
+      <nav class="dashboard-pagination" aria-label="Páginas de usuarios">
+        {% if page_obj.has_previous %}<a href="?pagina={{ page_obj.previous_page_number }}{% if query %}&q={{ query|urlencode }}{% endif %}">← Anterior</a>{% else %}<span></span>{% endif %}
+        <p>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</p>
+        {% if page_obj.has_next %}<a href="?pagina={{ page_obj.next_page_number }}{% if query %}&q={{ query|urlencode }}{% endif %}">Siguiente →</a>{% else %}<span></span>{% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <section class="dashboard-empty-state">
+      <span aria-hidden="true">◎</span>
+      <h2>No encontramos usuarios</h2>
+      <p>Prueba otra búsqueda o crea una cuenta nueva.</p>
+      <a href="{% url 'dashboard:user_create' %}">Crear usuario</a>
+    </section>
+  {% endif %}
+{% endblock %}

@@ -1,51 +1,122 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-dark dashboard-nav">
-  <div class="container">
-    <a class="navbar-brand dashboard-brand" href="{% url 'dashboard:home' %}">
+<aside class="dashboard-sidebar" data-dashboard-sidebar aria-label="Navegación del dashboard">
+  <div class="dashboard-sidebar-brand">
+    <a href="{% url 'dashboard:home' %}" aria-label="Noches Sobrenaturales, panel principal">
       <img src="{% static 'assets/logo.jpeg' %}" alt="">
       <span>
         <strong>Noches Sobrenaturales</strong>
-        <small>Panel de comunidad</small>
+        <small>Administración</small>
       </span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'dashboard:home' %}">Panel</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'home' %}">Ver sitio</a>
-        </li>
-        {% if user.is_staff %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard:banner_list' %}">Banners</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard:event_list' %}">Fechas</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard:youtube_video_list' %}">Videos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard:gallery_image_list' %}">Galería</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard:showcase_list' %}">Filas</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard:donation_settings' %}">Donaciones</a>
-          </li>
-        {% endif %}
-        <li class="nav-item ms-lg-3">
-          <form method="post" action="{% url 'accounts:logout' %}">
-            {% csrf_token %}
-            <button class="dashboard-logout" type="submit">Cerrar sesión</button>
-          </form>
-        </li>
-      </ul>
-    </div>
+    <button type="button" data-dashboard-menu-close aria-label="Cerrar menú">×</button>
   </div>
-</nav>
+
+  <nav class="dashboard-sidebar-nav">
+    <p>Principal</p>
+    <a href="{% url 'dashboard:home' %}"{% if request.resolver_match.url_name == 'home' %} class="active" aria-current="page"{% endif %}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6V4H4v9Zm0 7h6v-4H4v4Zm10 0h6v-9h-6v9Zm0-16v4h6V4h-6Z"/></svg>
+      <span>Resumen</span>
+    </a>
+    <a href="{% url 'home' %}" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/><path d="m15 3 6 6M21 3l-7 7"/></svg>
+      <span>Ver sitio público</span>
+      <b aria-hidden="true">↗</b>
+    </a>
+
+    {% if user.is_staff %}
+      <p>Contenido</p>
+      <a href="{% url 'dashboard:banner_list' %}"{% if '/dashboard/banners/' in request.path %} class="active" aria-current="page"{% endif %} data-dashboard-search-item data-search-label="banners mensajes inicio">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg>
+        <span>Banners</span>
+      </a>
+      <a href="{% url 'dashboard:event_list' %}"{% if '/dashboard/eventos/' in request.path %} class="active" aria-current="page"{% endif %} data-dashboard-search-item data-search-label="eventos fechas calendario">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v15H5zM8 3v4M16 3v4M5 9h14"/></svg>
+        <span>Eventos</span>
+      </a>
+      <a href="{% url 'dashboard:youtube_video_list' %}"{% if '/dashboard/videos/' in request.path %} class="active" aria-current="page"{% endif %} data-dashboard-search-item data-search-label="videos youtube eventos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m10 9 5 3-5 3V9Z"/></svg>
+        <span>Videos</span>
+      </a>
+      <a href="{% url 'dashboard:gallery_image_list' %}"{% if '/dashboard/galeria/' in request.path %} class="active" aria-current="page"{% endif %} data-dashboard-search-item data-search-label="galeria imágenes fotos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4z"/><circle cx="9" cy="10" r="2"/><path d="m5 18 5-5 3 3 2-2 4 4"/></svg>
+        <span>Galería</span>
+      </a>
+      <a href="{% url 'dashboard:showcase_list' %}"{% if '/dashboard/destacados/' in request.path %} class="active" aria-current="page"{% endif %} data-dashboard-search-item data-search-label="filas invitados locaciones destacados">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v5H4zM4 14h7v5H4zM15 14h5v5h-5z"/></svg>
+        <span>Filas destacadas</span>
+      </a>
+      <a href="{% url 'dashboard:ministry_profile_list' %}"{% if '/dashboard/equipo-ministerial/' in request.path %} class="active" aria-current="page"{% endif %} data-dashboard-search-item data-search-label="equipo pastores invitados ministerio">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 20c0-4 2-7 6-7s6 3 6 7M15 14c3 0 5 2 5 5"/></svg>
+        <span>Equipo ministerial</span>
+      </a>
+      <a href="{% url 'dashboard:donation_settings' %}"{% if '/dashboard/donaciones/' in request.path %} class="active" aria-current="page"{% endif %} data-dashboard-search-item data-search-label="donaciones paypal enlace">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-8-4.5-8-10a4 4 0 0 1 7-2.6L12 9l1-1.6A4 4 0 0 1 20 10c0 5.5-8 10-8 10Z"/></svg>
+        <span>Donaciones</span>
+      </a>
+    {% endif %}
+
+    {% if user.is_superuser %}
+      <p>Administración</p>
+      <a href="{% url 'dashboard:user_list' %}"{% if '/dashboard/usuarios/' in request.path %} class="active" aria-current="page"{% endif %} data-dashboard-search-item data-search-label="usuarios cuentas accesos permisos personal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-4 2-7 6-7s6 3 6 7M17 11v6M14 14h6"/></svg>
+        <span>Usuarios y accesos</span>
+      </a>
+    {% endif %}
+  </nav>
+
+  <div class="dashboard-sidebar-account">
+    <span>{{ user.username|slice:":1"|upper }}</span>
+    <div>
+      <strong>{{ user.get_full_name|default:user.username }}</strong>
+      <small>{% if user.is_superuser %}Superusuario{% elif user.is_staff %}Personal{% else %}Miembro{% endif %}</small>
+    </div>
+    <form method="post" action="{% url 'accounts:logout' %}">
+      {% csrf_token %}
+      <button type="submit" title="Cerrar sesión" aria-label="Cerrar sesión">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 5H5v14h5M14 8l4 4-4 4M18 12H9"/></svg>
+      </button>
+    </form>
+  </div>
+</aside>
+
+<header class="dashboard-topbar">
+  <button class="dashboard-menu-toggle" type="button" data-dashboard-menu-toggle aria-expanded="false" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="dashboard-topbar-title">
+    <small>Panel de control</small>
+    <strong>Noches Sobrenaturales</strong>
+  </div>
+
+  {% if user.is_staff %}
+    <div class="dashboard-tool-search" data-dashboard-search>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+      <input type="search" placeholder="Buscar herramientas" aria-label="Buscar herramientas del dashboard" autocomplete="off" data-dashboard-search-input>
+      <div class="dashboard-search-results" data-dashboard-search-results hidden></div>
+    </div>
+  {% endif %}
+
+  <div class="dashboard-topbar-actions">
+    <a href="{% url 'home' %}" target="_blank" rel="noopener" aria-label="Abrir sitio público" title="Abrir sitio público">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 4 6 4 9s-1 6-4 9c-3-3-4-6-4-9s1-6 4-9Z"/></svg>
+    </a>
+    <details class="dashboard-account-menu">
+      <summary aria-label="Abrir menú de cuenta">
+        <span>{{ user.username|slice:":1"|upper }}</span>
+        <div>
+          <strong>{{ user.get_full_name|default:user.username }}</strong>
+          <small>{% if user.is_superuser %}Superusuario{% elif user.is_staff %}Personal{% else %}Miembro{% endif %}</small>
+        </div>
+        <b aria-hidden="true">⌄</b>
+      </summary>
+      <div>
+        <p>{{ user.email|default:"Correo no registrado" }}</p>
+        <a href="{% url 'home' %}">Ver sitio</a>
+        <form method="post" action="{% url 'accounts:logout' %}">
+          {% csrf_token %}
+          <button type="submit">Cerrar sesión</button>
+        </form>
+      </div>
+    </details>
+  </div>
+</header>
