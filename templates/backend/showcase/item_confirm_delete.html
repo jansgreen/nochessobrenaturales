@@ -1,0 +1,20 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Eliminar tarjeta{% endblock %}
+
+{% block content %}
+  <section class="dashboard-confirm">
+    <span class="dashboard-confirm-icon" aria-hidden="true">×</span>
+    <p class="dashboard-eyebrow">Acción permanente</p>
+    <div class="gallery-delete-preview guest-delete-preview">
+      <img src="{{ showcase_item.photo.url }}" alt="">
+    </div>
+    <h1>¿Eliminar esta tarjeta?</h1>
+    <p>“{{ showcase_item.name }}” dejará de aparecer en la fila {{ showcase_item.category.title }} y su fotografía será eliminada.</p>
+    <form method="post">
+      {% csrf_token %}
+      <a href="{% url 'dashboard:showcase_list' %}">Cancelar</a>
+      <button type="submit">Sí, eliminar</button>
+    </form>
+  </section>
+{% endblock %}

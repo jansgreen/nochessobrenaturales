@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'donations.apps.DonationsConfig',
     'gallery.apps.GalleryConfig',
+    'guests.apps.GuestsConfig',
 ]
 
 MIDDLEWARE = [

@@ -66,4 +66,35 @@ urlpatterns = [
         views.gallery_image_delete,
         name="gallery_image_delete",
     ),
+    path("destacados/", views.showcase_list, name="showcase_list"),
+    path(
+        "destacados/categorias/crear/",
+        views.showcase_category_create,
+        name="showcase_category_create",
+    ),
+    path(
+        "destacados/categorias/<int:pk>/editar/",
+        views.showcase_category_update,
+        name="showcase_category_update",
+    ),
+    path(
+        "destacados/categorias/<int:pk>/eliminar/",
+        views.showcase_category_delete,
+        name="showcase_category_delete",
+    ),
+    path(
+        "destacados/tarjetas/crear/",
+        views.showcase_item_create,
+        name="showcase_item_create",
+    ),
+    path(
+        "destacados/tarjetas/<int:pk>/editar/",
+        views.showcase_item_update,
+        name="showcase_item_update",
+    ),
+    path(
+        "destacados/tarjetas/<int:pk>/eliminar/",
+        views.showcase_item_delete,
+        name="showcase_item_delete",
+    ),
 ]

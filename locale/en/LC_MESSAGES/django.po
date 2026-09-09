@@ -972,3 +972,12 @@ msgstr "Do you still need an account?"
 
 msgid "¿Ya tienes una cuenta?"
 msgstr "Already have an account?"
+
+msgid "Controles de la fila"
+msgstr "Row controls"
+
+msgid "Tarjeta anterior"
+msgstr "Previous card"
+
+msgid "Tarjeta siguiente"
+msgstr "Next card"

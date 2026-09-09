@@ -16,6 +16,7 @@ from events.selectors import (
     get_next_event,
     get_upcoming_events,
 )
+from guests.selectors import get_active_showcase_categories
 
 from .forms import ContactForm
 from .services import EmailConfigurationError, send_contact_email
@@ -58,6 +59,7 @@ def _home_context(contact_form):
         'calendar_years': calendar_years,
         'donation_url': get_donation_url(),
         'home_videos': get_home_videos(),
+        'showcase_categories': get_active_showcase_categories(),
         'page_name': 'home',
     }
 

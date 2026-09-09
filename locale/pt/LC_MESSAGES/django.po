@@ -1029,3 +1029,12 @@ msgstr "Ainda não tem conta?"
 
 msgid "¿Ya tienes una cuenta?"
 msgstr "Já tem uma conta?"
+
+msgid "Controles de la fila"
+msgstr "Controlos da fila"
+
+msgid "Tarjeta anterior"
+msgstr "Cartão anterior"
+
+msgid "Tarjeta siguiente"
+msgstr "Cartão seguinte"

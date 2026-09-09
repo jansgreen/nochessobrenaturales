@@ -1,0 +1,92 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Filas destacadas{% endblock %}
+
+{% block content %}
+  <header class="dashboard-section-heading showcase-dashboard-heading">
+    <div>
+      <p class="dashboard-eyebrow">Contenido del home</p>
+      <h1>Filas destacadas</h1>
+      <p>Crea categorías como Invitados especiales o Locaciones y organiza sus tarjetas.</p>
+    </div>
+    <div class="showcase-dashboard-heading-actions">
+      <a class="dashboard-secondary-link" href="{% url 'dashboard:showcase_category_create' %}">
+        Nueva categoría
+      </a>
+      {% if showcase_categories %}
+        <a class="dashboard-primary-link" href="{% url 'dashboard:showcase_item_create' %}">
+          Agregar tarjeta <span aria-hidden="true">+</span>
+        </a>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if showcase_categories %}
+    <div class="showcase-admin-categories">
+      {% for category in showcase_categories %}
+        <section class="showcase-admin-category">
+          <header class="showcase-admin-category-heading">
+            <div>
+              <small>Fila {{ category.position|stringformat:"02d" }}</small>
+              <h2>{{ category.title }}</h2>
+              <p>{{ category.headline }}{% if category.accent %} · {{ category.accent }}{% endif %}</p>
+            </div>
+            <div class="showcase-admin-category-status">
+              <span class="banner-status{% if category.is_active %} active{% endif %}">
+                {% if category.is_active %}Publicada{% else %}Oculta{% endif %}
+              </span>
+              <a href="{% url 'dashboard:showcase_category_update' category.pk %}">Editar fila</a>
+              <a class="danger" href="{% url 'dashboard:showcase_category_delete' category.pk %}">Eliminar</a>
+            </div>
+          </header>
+
+          {% if category.items.all %}
+            <div class="guest-admin-list">
+              {% for item in category.items.all %}
+                <article class="guest-admin-row">
+                  <div class="guest-admin-thumb">
+                    <img src="{{ item.photo.url }}" alt="" loading="lazy">
+                  </div>
+
+                  <div class="guest-admin-content">
+                    <small>Posición {{ item.position }}{% if item.role %} · {{ item.role }}{% endif %}</small>
+                    <h2>{{ item.name }}</h2>
+                    <p>{{ item.description|truncatechars:125 }}</p>
+                  </div>
+
+                  <div class="guest-admin-status">
+                    <span class="banner-status{% if item.is_active %} active{% endif %}">
+                      {% if item.is_active %}Publicada{% else %}Oculta{% endif %}
+                    </span>
+                  </div>
+
+                  <div class="event-admin-actions">
+                    <a href="{% url 'dashboard:showcase_item_update' item.pk %}">Editar</a>
+                    <a class="danger" href="{% url 'dashboard:showcase_item_delete' item.pk %}">Eliminar</a>
+                  </div>
+                </article>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="showcase-admin-category-empty">
+              <p>Esta categoría todavía no tiene tarjetas.</p>
+              <a href="{% url 'dashboard:showcase_item_create' %}?categoria={{ category.pk }}">Agregar la primera tarjeta</a>
+            </div>
+          {% endif %}
+
+          <footer class="showcase-admin-category-footer">
+            <a href="{% url 'dashboard:showcase_item_create' %}?categoria={{ category.pk }}">Agregar tarjeta a {{ category.title }} <span aria-hidden="true">→</span></a>
+          </footer>
+        </section>
+      {% endfor %}
+    </div>
+  {% else %}
+    <section class="dashboard-empty-state">
+      <span aria-hidden="true">▤</span>
+      <h2>Todavía no hay categorías</h2>
+      <p>Crea “Invitados especiales”, “Locaciones” o cualquier otra fila que necesites.</p>
+      <a href="{% url 'dashboard:showcase_category_create' %}">Crear la primera categoría</a>
+    </section>
+  {% endif %}
+{% endblock %}
+

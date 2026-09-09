@@ -1,0 +1,18 @@
+{% extends 'backend/backend.html' %}
+
+{% block title %}Eliminar categoría{% endblock %}
+
+{% block content %}
+  <section class="dashboard-confirm">
+    <span class="dashboard-confirm-icon" aria-hidden="true">×</span>
+    <p class="dashboard-eyebrow">Acción permanente</p>
+    <h1>¿Eliminar esta categoría?</h1>
+    <p>“{{ showcase_category.title }}” y sus {{ showcase_category.items.count }} tarjetas dejarán de aparecer en el home. Las fotografías asociadas también serán eliminadas.</p>
+    <form method="post">
+      {% csrf_token %}
+      <a href="{% url 'dashboard:showcase_list' %}">Cancelar</a>
+      <button type="submit">Sí, eliminar</button>
+    </form>
+  </section>
+{% endblock %}
+

@@ -115,6 +115,58 @@
       {% include 'events/_video_modal.html' %}
     {% endif %}
 
+    {% for category in showcase_categories %}
+      <section id="destacados-{{ category.pk }}" class="special-guests section-space{% if forloop.counter|divisibleby:'2' %} special-guests-alternate{% endif %}" aria-labelledby="showcaseTitle{{ category.pk }}">
+        <div class="special-guests-orbit" aria-hidden="true"></div>
+        <div class="container">
+          <div class="special-guests-heading">
+            <div class="reveal">
+              <p class="overline overline-dark"><span></span> {{ category.title }}</p>
+              <h2 id="showcaseTitle{{ category.pk }}" class="display-title">
+                {{ category.headline }}{% if category.accent %}<br><em>{{ category.accent }}</em>{% endif %}
+              </h2>
+            </div>
+            <div class="special-guests-heading-aside reveal" data-reveal-delay="100">
+              <p>{{ category.description }}</p>
+              {% if category.published_items|length > 1 %}
+                <div class="special-guest-controls" aria-label="{% translate 'Controles de la fila' %}">
+                  <button type="button" data-guest-previous aria-label="{% translate 'Tarjeta anterior' %}">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg>
+                  </button>
+                  <button type="button" data-guest-next aria-label="{% translate 'Tarjeta siguiente' %}">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg>
+                  </button>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="special-guest-carousel" data-guest-carousel>
+            <div class="special-guest-rail" data-guest-rail tabindex="0" aria-label="{{ category.title }}">
+              {% for item in category.published_items %}
+                <article class="special-guest-card reveal" data-reveal-delay="{{ forloop.counter0 }}00">
+                  <div class="special-guest-media">
+                    <img src="{{ item.photo.url }}" alt="{{ item.alt_text }}" loading="lazy" decoding="async">
+                    <span class="special-guest-badge">
+                      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10 3 3 7-7"></path></svg>
+                      {{ category.title }}
+                    </span>
+                    <span class="special-guest-index">{{ forloop.counter|stringformat:"02d" }}</span>
+                  </div>
+                  <div class="special-guest-copy">
+                    {% if item.role %}<p class="special-guest-role">{{ item.role }}</p>{% endif %}
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.description }}</p>
+                    <span aria-hidden="true"></span>
+                  </div>
+                </article>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endfor %}
+
     <section id="calendario" class="schedule section-space">
       <div class="container">
         <div class="row align-items-end g-4 section-intro">

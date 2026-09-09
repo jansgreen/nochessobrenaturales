@@ -25,6 +25,8 @@ from events.youtube_api import (
 )
 from gallery.forms import GalleryImageForm
 from gallery.models import GalleryImage
+from guests.forms import ShowcaseCategoryForm, ShowcaseItemForm
+from guests.models import ShowcaseCategory, ShowcaseItem
 
 from .decorators import staff_required
 
@@ -45,6 +47,15 @@ def dashboard_home(request):
         context["gallery_image_count"] = GalleryImage.objects.count()
         context["active_gallery_image_count"] = GalleryImage.objects.filter(
             is_active=True
+        ).count()
+        context["showcase_category_count"] = ShowcaseCategory.objects.count()
+        context["active_showcase_category_count"] = ShowcaseCategory.objects.filter(
+            is_active=True
+        ).count()
+        context["showcase_item_count"] = ShowcaseItem.objects.count()
+        context["active_showcase_item_count"] = ShowcaseItem.objects.filter(
+            is_active=True,
+            category__is_active=True,
         ).count()
     return render(request, 'dash.html', context)
 
@@ -442,4 +453,154 @@ def gallery_image_delete(request, pk):
         request,
         "backend/gallery/image_confirm_delete.html",
         {"gallery_image": gallery_image},
+    )
+
+
+@staff_required
+def showcase_list(request):
+    return render(
+        request,
+        "backend/showcase/showcase_list.html",
+        {"showcase_categories": ShowcaseCategory.objects.prefetch_related("items")},
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def showcase_category_create(request):
+    form = ShowcaseCategoryForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        category = form.save()
+        messages.success(
+            request,
+            f'La categoría “{category.title}” fue creada.',
+        )
+        return redirect("dashboard:showcase_list")
+
+    return render(
+        request,
+        "backend/showcase/category_form.html",
+        {
+            "form": form,
+            "page_title": "Crear categoría",
+            "submit_label": "Crear categoría",
+        },
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def showcase_category_update(request, pk):
+    showcase_category = get_object_or_404(ShowcaseCategory, pk=pk)
+    form = ShowcaseCategoryForm(
+        request.POST or None,
+        instance=showcase_category,
+    )
+    if request.method == "POST" and form.is_valid():
+        showcase_category = form.save()
+        messages.success(
+            request,
+            f'La categoría “{showcase_category.title}” fue actualizada.',
+        )
+        return redirect("dashboard:showcase_list")
+
+    return render(
+        request,
+        "backend/showcase/category_form.html",
+        {
+            "form": form,
+            "showcase_category": showcase_category,
+            "page_title": "Editar categoría",
+            "submit_label": "Guardar cambios",
+        },
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def showcase_category_delete(request, pk):
+    showcase_category = get_object_or_404(ShowcaseCategory, pk=pk)
+    if request.method == "POST":
+        title = showcase_category.title
+        showcase_category.delete()
+        messages.success(request, f'La categoría “{title}” fue eliminada.')
+        return redirect("dashboard:showcase_list")
+
+    return render(
+        request,
+        "backend/showcase/category_confirm_delete.html",
+        {"showcase_category": showcase_category},
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def showcase_item_create(request):
+    initial = {}
+    if category_id := request.GET.get("categoria"):
+        initial["category"] = category_id
+    form = ShowcaseItemForm(
+        request.POST or None,
+        request.FILES or None,
+        initial=initial,
+    )
+    if request.method == "POST" and form.is_valid():
+        item = form.save()
+        messages.success(request, f'La tarjeta “{item.name}” fue agregada.')
+        return redirect("dashboard:showcase_list")
+
+    return render(
+        request,
+        "backend/showcase/item_form.html",
+        {
+            "form": form,
+            "page_title": "Agregar tarjeta",
+            "submit_label": "Agregar tarjeta",
+        },
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def showcase_item_update(request, pk):
+    showcase_item = get_object_or_404(ShowcaseItem, pk=pk)
+    form = ShowcaseItemForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=showcase_item,
+    )
+    if request.method == "POST" and form.is_valid():
+        showcase_item = form.save()
+        messages.success(
+            request,
+            f'La tarjeta “{showcase_item.name}” fue actualizada.',
+        )
+        return redirect("dashboard:showcase_list")
+
+    return render(
+        request,
+        "backend/showcase/item_form.html",
+        {
+            "form": form,
+            "showcase_item": showcase_item,
+            "page_title": "Editar tarjeta",
+            "submit_label": "Guardar cambios",
+        },
+    )
+
+
+@staff_required
+@require_http_methods(["GET", "POST"])
+def showcase_item_delete(request, pk):
+    showcase_item = get_object_or_404(ShowcaseItem, pk=pk)
+    if request.method == "POST":
+        name = showcase_item.name
+        showcase_item.delete()
+        messages.success(request, f'La tarjeta “{name}” fue eliminada.')
+        return redirect("dashboard:showcase_list")
+
+    return render(
+        request,
+        "backend/showcase/item_confirm_delete.html",
+        {"showcase_item": showcase_item},
     )

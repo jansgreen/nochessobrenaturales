@@ -28,6 +28,38 @@
     revealElements.forEach((element) => revealObserver.observe(element));
   }
 
+  document.querySelectorAll("[data-guest-carousel]").forEach((carousel) => {
+    const rail = carousel.querySelector("[data-guest-rail]");
+    const section = carousel.closest(".special-guests");
+    const previousButton = section?.querySelector("[data-guest-previous]");
+    const nextButton = section?.querySelector("[data-guest-next]");
+    if (!rail || !previousButton || !nextButton) return;
+
+    const getScrollStep = () => {
+      const card = rail.querySelector(".special-guest-card");
+      const styles = window.getComputedStyle(rail);
+      return card
+        ? card.getBoundingClientRect().width + parseFloat(styles.columnGap || 0)
+        : rail.clientWidth;
+    };
+
+    const updateControls = () => {
+      const maximumScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      previousButton.disabled = rail.scrollLeft <= 2;
+      nextButton.disabled = rail.scrollLeft >= maximumScroll - 2;
+    };
+
+    previousButton.addEventListener("click", () => {
+      rail.scrollBy({ left: -getScrollStep(), behavior: "smooth" });
+    });
+    nextButton.addEventListener("click", () => {
+      rail.scrollBy({ left: getScrollStep(), behavior: "smooth" });
+    });
+    rail.addEventListener("scroll", updateControls, { passive: true });
+    window.addEventListener("resize", updateControls, { passive: true });
+    updateControls();
+  });
+
   const heroEffects = document.querySelector("[data-hero-effects]");
   if (heroEffects && !reduceMotion) {
     const startSource = heroEffects.dataset.startSrc;
