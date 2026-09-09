@@ -1059,3 +1059,51 @@ msgstr "Convidado especial"
 
 msgid "Líder ministerial"
 msgstr "Líder ministerial"
+
+msgid "Solicitud no válida"
+msgstr "Pedido inválido"
+
+msgid "No pudimos procesar esta solicitud."
+msgstr "Não foi possível processar este pedido."
+
+msgid "Revisa la información e inténtalo nuevamente."
+msgstr "Reveja as informações e tente novamente."
+
+msgid "Acceso restringido"
+msgstr "Acesso restrito"
+
+msgid "No tienes permiso para entrar aquí."
+msgstr "Não tem permissão para entrar aqui."
+
+msgid "Si crees que deberías tener acceso, inicia sesión con una cuenta autorizada."
+msgstr "Se considera que deveria ter acesso, inicie sessão com uma conta autorizada."
+
+msgid "Página no encontrada"
+msgstr "Página não encontrada"
+
+msgid "Este camino no lleva a ninguna página."
+msgstr "Este caminho não leva a nenhuma página."
+
+msgid "Es posible que el enlace haya cambiado o que la dirección no sea correcta."
+msgstr "É possível que a ligação tenha mudado ou que o endereço não esteja correto."
+
+msgid "Ver próximos eventos"
+msgstr "Ver próximos eventos"
+
+msgid "Algo salió mal"
+msgstr "Algo correu mal"
+
+msgid "El sitio necesita un momento."
+msgstr "O site precisa de um momento."
+
+msgid "No pudimos completar la operación. Inténtalo nuevamente dentro de unos minutos."
+msgstr "Não foi possível concluir a operação. Tente novamente dentro de alguns minutos."
+
+msgid "Noches Sobrenaturales, inicio"
+msgstr "Noches Sobrenaturales, início"
+
+msgid "Centro de ayuda"
+msgstr "Centro de ajuda"
+
+msgid "Volver al inicio"
+msgstr "Voltar ao início"

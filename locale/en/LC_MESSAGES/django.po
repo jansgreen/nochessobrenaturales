@@ -1002,3 +1002,51 @@ msgstr "Special guest"
 
 msgid "Líder ministerial"
 msgstr "Ministry leader"
+
+msgid "Solicitud no válida"
+msgstr "Invalid request"
+
+msgid "No pudimos procesar esta solicitud."
+msgstr "We couldn't process this request."
+
+msgid "Revisa la información e inténtalo nuevamente."
+msgstr "Review the information and try again."
+
+msgid "Acceso restringido"
+msgstr "Restricted access"
+
+msgid "No tienes permiso para entrar aquí."
+msgstr "You don't have permission to enter here."
+
+msgid "Si crees que deberías tener acceso, inicia sesión con una cuenta autorizada."
+msgstr "If you think you should have access, sign in with an authorized account."
+
+msgid "Página no encontrada"
+msgstr "Page not found"
+
+msgid "Este camino no lleva a ninguna página."
+msgstr "This path does not lead to any page."
+
+msgid "Es posible que el enlace haya cambiado o que la dirección no sea correcta."
+msgstr "The link may have changed or the address may be incorrect."
+
+msgid "Ver próximos eventos"
+msgstr "View upcoming events"
+
+msgid "Algo salió mal"
+msgstr "Something went wrong"
+
+msgid "El sitio necesita un momento."
+msgstr "The site needs a moment."
+
+msgid "No pudimos completar la operación. Inténtalo nuevamente dentro de unos minutos."
+msgstr "We couldn't complete the operation. Try again in a few minutes."
+
+msgid "Noches Sobrenaturales, inicio"
+msgstr "Noches Sobrenaturales, home"
+
+msgid "Centro de ayuda"
+msgstr "Help center"
+
+msgid "Volver al inicio"
+msgstr "Back to home"

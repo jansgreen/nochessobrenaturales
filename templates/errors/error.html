@@ -1,0 +1,64 @@
+{% load static i18n %}
+<!doctype html>
+<html lang="{{ request.LANGUAGE_CODE|default:'es' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07090d">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{{ status_code }} · {{ eyebrow }} | Noches Sobrenaturales</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'errors.css' %}">
+</head>
+<body class="site-error-page">
+  <a class="error-skip-link" href="#errorContent">{% translate "Saltar al contenido" %}</a>
+
+  <div class="error-orbit error-orbit-one" aria-hidden="true"></div>
+  <div class="error-orbit error-orbit-two" aria-hidden="true"></div>
+
+  <header class="error-header">
+    <a href="{{ home_url }}" aria-label="{% translate 'Noches Sobrenaturales, inicio' %}">
+      <img src="{% static 'assets/logo.jpeg' %}" alt="">
+      <span>
+        <strong>Noches Sobrenaturales</strong>
+        <small>Iglesia Milagros Hoy</small>
+      </span>
+    </a>
+    <span>{% translate "Centro de ayuda" %}</span>
+  </header>
+
+  <main id="errorContent" class="error-main">
+    <section class="error-card" aria-labelledby="errorTitle">
+      <div class="error-number" aria-hidden="true">{{ status_code }}</div>
+      <div class="error-copy">
+        <p class="error-overline"><span></span>{{ eyebrow }}</p>
+        <h1 id="errorTitle">{{ title }}</h1>
+        <p>{{ message }}</p>
+
+        <div class="error-actions">
+          <a class="error-primary-action" href="{{ home_url }}">
+            {% translate "Volver al inicio" %} <span aria-hidden="true">→</span>
+          </a>
+          {% if secondary_url %}
+            <a class="error-secondary-action" href="{{ secondary_url }}">
+              {{ secondary_label }}
+            </a>
+          {% else %}
+            <a class="error-secondary-action" href="{{ home_url }}#contacto">
+              {% translate "Conectar con nosotros" %}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="error-footer">
+    <span>© {% now "Y" %} Iglesia Milagros Hoy</span>
+    <span>{% translate "Amar a Dios. Amar a las personas. Alcanzar al mundo." %}</span>
+  </footer>
+</body>
+</html>

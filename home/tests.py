@@ -1,9 +1,15 @@
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core import mail
-from django.test import TestCase, override_settings
+from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
+from django.utils import translation
 
 from banners.models import Banner
+from home import error_views
+
+
+User = get_user_model()
 
 
 @override_settings(
@@ -139,6 +145,75 @@ class ContactEmailTests(TestCase):
         html_body = mail.outbox[0].alternatives[0].content
         self.assertNotIn("<script>", html_body)
         self.assertIn("&lt;script&gt;", html_body)
+
+
+@override_settings(DEBUG=False)
+class ErrorPageTests(TestCase):
+    def setUp(self):
+        self.request_factory = RequestFactory()
+
+    def test_unknown_url_uses_custom_404_page(self):
+        response = self.client.get("/esta-ruta-no-existe/")
+
+        self.assertEqual(response.status_code, 404)
+        self.assertContains(response, "Página no encontrada", status_code=404)
+        self.assertContains(response, "Este camino no lleva", status_code=404)
+        self.assertContains(response, "errors.css", status_code=404)
+        self.assertNotContains(response, "Traceback", status_code=404)
+
+    def test_forbidden_dashboard_route_uses_custom_403_page(self):
+        member = User.objects.create_user(
+            username="miembro-sin-permisos",
+            password="ClaveSegura-2026!",
+        )
+        self.client.force_login(member)
+
+        response = self.client.get(reverse("dashboard:banner_list"))
+
+        self.assertEqual(response.status_code, 403)
+        self.assertContains(response, "Acceso restringido", status_code=403)
+        self.assertContains(response, "Iniciar sesión", status_code=403)
+        self.assertNotContains(response, "Traceback", status_code=403)
+
+    def test_all_error_handlers_return_safe_branded_pages(self):
+        request = self.request_factory.get("/ruta-con-error/")
+        handlers = (
+            (error_views.bad_request, 400, "Solicitud no válida"),
+            (error_views.permission_denied, 403, "Acceso restringido"),
+            (error_views.page_not_found, 404, "Página no encontrada"),
+            (error_views.server_error, 500, "Algo salió mal"),
+        )
+
+        for handler, status_code, expected in handlers:
+            with self.subTest(status_code=status_code):
+                if status_code == 500:
+                    response = handler(request)
+                else:
+                    response = handler(request, Exception("detalle privado"))
+
+                self.assertEqual(response.status_code, status_code)
+                self.assertIn(expected.encode(), response.content)
+                self.assertIn(b"Noches Sobrenaturales", response.content)
+                self.assertNotIn(b"detalle privado", response.content)
+                self.assertNotIn(b"Traceback", response.content)
+
+    def test_error_messages_follow_selected_language(self):
+        request = self.request_factory.get("/missing/")
+        expectations = (
+            ("en", "Page not found"),
+            ("pt", "Página não encontrada"),
+        )
+
+        for language_code, expected in expectations:
+            with self.subTest(language=language_code):
+                request.LANGUAGE_CODE = language_code
+                with translation.override(language_code):
+                    response = error_views.page_not_found(
+                        request,
+                        Exception("private"),
+                    )
+
+                self.assertContains(response, expected, status_code=404)
 
 
 class AboutPageTests(TestCase):
