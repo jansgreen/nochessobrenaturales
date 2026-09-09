@@ -33,7 +33,7 @@ DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',
-    '.nochesdemilagros.com',
+    '.nochessobrenaturales.com',
     'localhost',
     '.localhost',
     '127.0.0.1',
